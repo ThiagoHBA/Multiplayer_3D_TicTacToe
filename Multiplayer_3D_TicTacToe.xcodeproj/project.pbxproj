@@ -1,0 +1,717 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		001B70B62A8161A800C16B23 /* TicTacToeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70B52A8161A800C16B23 /* TicTacToeClient.swift */; };
+		001B70B92A8161B900C16B23 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70B82A8161B900C16B23 /* Client.swift */; };
+		001B70BC2A81637700C16B23 /* TransferMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70BB2A81637700C16B23 /* TransferMessage.swift */; };
+		001B70BE2A8170DF00C16B23 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70BD2A8170DF00C16B23 /* GameViewModel.swift */; };
+		0034032A2A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403292A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift */; };
+		0034032C2A7D7CA500265AF3 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034032B2A7D7CA500265AF3 /* GameView.swift */; };
+		0034032E2A7D7CA500265AF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0034032D2A7D7CA500265AF3 /* Assets.xcassets */; };
+		003403322A7D7CA500265AF3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 003403312A7D7CA500265AF3 /* Preview Assets.xcassets */; };
+		0034033C2A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034033B2A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests.swift */; };
+		003403462A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403452A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.swift */; };
+		003403482A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403472A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITestsLaunchTests.swift */; };
+		0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034035B2A7D7DCB00265AF3 /* Server.swift */; };
+		0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034035E2A7D7E1500265AF3 /* ServerOutput.swift */; };
+		003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */; };
+		003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403632A7D81DD00265AF3 /* WebSocketError.swift */; };
+		003403662A7D863C00265AF3 /* GameViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403652A7D863C00265AF3 /* GameViewAssembler.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		003403382A7D7CA600265AF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0034031E2A7D7CA500265AF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 003403252A7D7CA500265AF3;
+			remoteInfo = Multiplayer_3D_TicTacToe;
+		};
+		003403422A7D7CA600265AF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0034031E2A7D7CA500265AF3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 003403252A7D7CA500265AF3;
+			remoteInfo = Multiplayer_3D_TicTacToe;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		001B70B52A8161A800C16B23 /* TicTacToeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeClient.swift; sourceTree = "<group>"; };
+		001B70B82A8161B900C16B23 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		001B70BB2A81637700C16B23 /* TransferMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMessage.swift; sourceTree = "<group>"; };
+		001B70BD2A8170DF00C16B23 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		003403262A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Multiplayer_3D_TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		003403292A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer_3D_TicTacToeApp.swift; sourceTree = "<group>"; };
+		0034032B2A7D7CA500265AF3 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		0034032D2A7D7CA500265AF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0034032F2A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Multiplayer_3D_TicTacToe.entitlements; sourceTree = "<group>"; };
+		003403312A7D7CA500265AF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		003403372A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Multiplayer_3D_TicTacToeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0034033B2A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer_3D_TicTacToeTests.swift; sourceTree = "<group>"; };
+		003403412A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Multiplayer_3D_TicTacToeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		003403452A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer_3D_TicTacToeUITests.swift; sourceTree = "<group>"; };
+		003403472A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer_3D_TicTacToeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0034035B2A7D7DCB00265AF3 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		0034035E2A7D7E1500265AF3 /* ServerOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerOutput.swift; sourceTree = "<group>"; };
+		003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeServer.swift; sourceTree = "<group>"; };
+		003403632A7D81DD00265AF3 /* WebSocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketError.swift; sourceTree = "<group>"; };
+		003403652A7D863C00265AF3 /* GameViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewAssembler.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		003403232A7D7CA500265AF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		003403342A7D7CA600265AF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0034033E2A7D7CA600265AF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		001B70B42A81619300C16B23 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				001B70BA2A81636400C16B23 /* Entities */,
+				001B70B72A8161B300C16B23 /* Protocol */,
+				001B70B52A8161A800C16B23 /* TicTacToeClient.swift */,
+				003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		001B70B72A8161B300C16B23 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				0034035B2A7D7DCB00265AF3 /* Server.swift */,
+				001B70B82A8161B900C16B23 /* Client.swift */,
+				0034035E2A7D7E1500265AF3 /* ServerOutput.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		001B70BA2A81636400C16B23 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				003403632A7D81DD00265AF3 /* WebSocketError.swift */,
+				001B70BB2A81637700C16B23 /* TransferMessage.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		0034031D2A7D7CA500265AF3 = {
+			isa = PBXGroup;
+			children = (
+				003403282A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe */,
+				0034033A2A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests */,
+				003403442A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests */,
+				003403272A7D7CA500265AF3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		003403272A7D7CA500265AF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				003403262A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe.app */,
+				003403372A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests.xctest */,
+				003403412A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		003403282A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe */ = {
+			isa = PBXGroup;
+			children = (
+				003403562A7D7CE100265AF3 /* Source */,
+				003403552A7D7CD600265AF3 /* Resource */,
+				003403542A7D7CB800265AF3 /* Application */,
+				0034032F2A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe.entitlements */,
+				003403302A7D7CA500265AF3 /* Preview Content */,
+			);
+			path = Multiplayer_3D_TicTacToe;
+			sourceTree = "<group>";
+		};
+		003403302A7D7CA500265AF3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				003403312A7D7CA500265AF3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0034033A2A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests */ = {
+			isa = PBXGroup;
+			children = (
+				0034033B2A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests.swift */,
+			);
+			path = Multiplayer_3D_TicTacToeTests;
+			sourceTree = "<group>";
+		};
+		003403442A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				003403452A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.swift */,
+				003403472A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITestsLaunchTests.swift */,
+			);
+			path = Multiplayer_3D_TicTacToeUITests;
+			sourceTree = "<group>";
+		};
+		003403542A7D7CB800265AF3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				003403292A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift */,
+				003403652A7D863C00265AF3 /* GameViewAssembler.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		003403552A7D7CD600265AF3 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				0034032D2A7D7CA500265AF3 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		003403562A7D7CE100265AF3 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				001B70B42A81619300C16B23 /* Domain */,
+				003403572A7D7CFB00265AF3 /* Presentation */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		003403572A7D7CFB00265AF3 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				003403582A7D7D0500265AF3 /* GameView */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		003403582A7D7D0500265AF3 /* GameView */ = {
+			isa = PBXGroup;
+			children = (
+				0034032B2A7D7CA500265AF3 /* GameView.swift */,
+				001B70BD2A8170DF00C16B23 /* GameViewModel.swift */,
+			);
+			path = GameView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		003403252A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0034034B2A7D7CA600265AF3 /* Build configuration list for PBXNativeTarget "Multiplayer_3D_TicTacToe" */;
+			buildPhases = (
+				003403222A7D7CA500265AF3 /* Sources */,
+				003403232A7D7CA500265AF3 /* Frameworks */,
+				003403242A7D7CA500265AF3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Multiplayer_3D_TicTacToe;
+			productName = Multiplayer_3D_TicTacToe;
+			productReference = 003403262A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		003403362A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0034034E2A7D7CA600265AF3 /* Build configuration list for PBXNativeTarget "Multiplayer_3D_TicTacToeTests" */;
+			buildPhases = (
+				003403332A7D7CA600265AF3 /* Sources */,
+				003403342A7D7CA600265AF3 /* Frameworks */,
+				003403352A7D7CA600265AF3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				003403392A7D7CA600265AF3 /* PBXTargetDependency */,
+			);
+			name = Multiplayer_3D_TicTacToeTests;
+			productName = Multiplayer_3D_TicTacToeTests;
+			productReference = 003403372A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		003403402A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 003403512A7D7CA600265AF3 /* Build configuration list for PBXNativeTarget "Multiplayer_3D_TicTacToeUITests" */;
+			buildPhases = (
+				0034033D2A7D7CA600265AF3 /* Sources */,
+				0034033E2A7D7CA600265AF3 /* Frameworks */,
+				0034033F2A7D7CA600265AF3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				003403432A7D7CA600265AF3 /* PBXTargetDependency */,
+			);
+			name = Multiplayer_3D_TicTacToeUITests;
+			productName = Multiplayer_3D_TicTacToeUITests;
+			productReference = 003403412A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0034031E2A7D7CA500265AF3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					003403252A7D7CA500265AF3 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					003403362A7D7CA600265AF3 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 003403252A7D7CA500265AF3;
+					};
+					003403402A7D7CA600265AF3 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 003403252A7D7CA500265AF3;
+					};
+				};
+			};
+			buildConfigurationList = 003403212A7D7CA500265AF3 /* Build configuration list for PBXProject "Multiplayer_3D_TicTacToe" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0034031D2A7D7CA500265AF3;
+			productRefGroup = 003403272A7D7CA500265AF3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				003403252A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe */,
+				003403362A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests */,
+				003403402A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		003403242A7D7CA500265AF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				003403322A7D7CA500265AF3 /* Preview Assets.xcassets in Resources */,
+				0034032E2A7D7CA500265AF3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		003403352A7D7CA600265AF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0034033F2A7D7CA600265AF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		003403222A7D7CA500265AF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0034032C2A7D7CA500265AF3 /* GameView.swift in Sources */,
+				0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */,
+				003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */,
+				001B70BE2A8170DF00C16B23 /* GameViewModel.swift in Sources */,
+				0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */,
+				003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */,
+				003403662A7D863C00265AF3 /* GameViewAssembler.swift in Sources */,
+				001B70BC2A81637700C16B23 /* TransferMessage.swift in Sources */,
+				0034032A2A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift in Sources */,
+				001B70B62A8161A800C16B23 /* TicTacToeClient.swift in Sources */,
+				001B70B92A8161B900C16B23 /* Client.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		003403332A7D7CA600265AF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0034033C2A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0034033D2A7D7CA600265AF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				003403462A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.swift in Sources */,
+				003403482A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		003403392A7D7CA600265AF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 003403252A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe */;
+			targetProxy = 003403382A7D7CA600265AF3 /* PBXContainerItemProxy */;
+		};
+		003403432A7D7CA600265AF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 003403252A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe */;
+			targetProxy = 003403422A7D7CA600265AF3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		003403492A7D7CA600265AF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0034034A2A7D7CA600265AF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		0034034C2A7D7CA600265AF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Multiplayer_3D_TicTacToe/Multiplayer_3D_TicTacToe.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Multiplayer_3D_TicTacToe/Preview Content\"";
+				DEVELOPMENT_TEAM = 685GVH2XJC;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "thiagohba.com.Multiplayer-3D-TicTacToe";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0034034D2A7D7CA600265AF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Multiplayer_3D_TicTacToe/Multiplayer_3D_TicTacToe.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Multiplayer_3D_TicTacToe/Preview Content\"";
+				DEVELOPMENT_TEAM = 685GVH2XJC;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "thiagohba.com.Multiplayer-3D-TicTacToe";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0034034F2A7D7CA600265AF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 685GVH2XJC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "thiagohba.com.Multiplayer-3D-TicTacToeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Multiplayer_3D_TicTacToe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Multiplayer_3D_TicTacToe";
+			};
+			name = Debug;
+		};
+		003403502A7D7CA600265AF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 685GVH2XJC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "thiagohba.com.Multiplayer-3D-TicTacToeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Multiplayer_3D_TicTacToe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Multiplayer_3D_TicTacToe";
+			};
+			name = Release;
+		};
+		003403522A7D7CA600265AF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 685GVH2XJC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "thiagohba.com.Multiplayer-3D-TicTacToeUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Multiplayer_3D_TicTacToe;
+			};
+			name = Debug;
+		};
+		003403532A7D7CA600265AF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 685GVH2XJC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "thiagohba.com.Multiplayer-3D-TicTacToeUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Multiplayer_3D_TicTacToe;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		003403212A7D7CA500265AF3 /* Build configuration list for PBXProject "Multiplayer_3D_TicTacToe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				003403492A7D7CA600265AF3 /* Debug */,
+				0034034A2A7D7CA600265AF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0034034B2A7D7CA600265AF3 /* Build configuration list for PBXNativeTarget "Multiplayer_3D_TicTacToe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0034034C2A7D7CA600265AF3 /* Debug */,
+				0034034D2A7D7CA600265AF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0034034E2A7D7CA600265AF3 /* Build configuration list for PBXNativeTarget "Multiplayer_3D_TicTacToeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0034034F2A7D7CA600265AF3 /* Debug */,
+				003403502A7D7CA600265AF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		003403512A7D7CA600265AF3 /* Build configuration list for PBXNativeTarget "Multiplayer_3D_TicTacToeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				003403522A7D7CA600265AF3 /* Debug */,
+				003403532A7D7CA600265AF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0034031E2A7D7CA500265AF3 /* Project object */;
+}
