@@ -38,32 +38,20 @@ final class TicTacToeServer: Server {
         let serverQueue = DispatchQueue(label: "ServerQueue")
         
         listener.newConnectionHandler = { newConnection in
-            let jsonObj = "{ \"hi\": \"oi\" }"
-            let data = try! JSONEncoder().encode(jsonObj)
             self.connectedClients.append(newConnection)
             newConnection.receiveMessage { completeContent, contentContext, isComplete, error in
                 print("RECEIVE MESSAGE CALLBACK")
             }
             newConnection.stateUpdateHandler = { state in
                 switch state {
-                    case .setup:
-                        break
                     case .waiting(_):
-                        break
-                    case .preparing:
-                        break
+                        completion(.connectTimeWasTooLong)
                     case .ready:
                         self.output?.didConnectAPlayer()
-                        self.sendMessageToClient(
-                            message: TransferMessage(type: .connection, data: data),
-                            client: newConnection,
-                            completion: { _ in }
-                        )
+                        completion(nil)
                     case .failed(_):
-                        break
-                    case .cancelled:
-                        break
-                    @unknown default:
+                        completion(.cantConnectWithClient)
+                    default:
                         break
                 }
             }

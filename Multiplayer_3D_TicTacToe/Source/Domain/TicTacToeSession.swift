@@ -8,5 +8,6 @@
 import Foundation
 
 final class TicTacToeSession: Session {
+    var players: [Player] = []
     
 }

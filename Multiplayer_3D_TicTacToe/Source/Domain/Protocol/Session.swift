@@ -7,5 +7,7 @@
 
 import Foundation
 
-protocol Session {}
+protocol Session {
+    var players: [Player] { get set }
+}
 
