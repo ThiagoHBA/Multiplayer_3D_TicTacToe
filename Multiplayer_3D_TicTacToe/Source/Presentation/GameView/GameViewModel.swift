@@ -8,7 +8,7 @@
 import Foundation
 
 final class GameViewModel: ObservableObject {
-    @Published var clientStatus = ""
+    @Published var serverStatus = "Esperando jogador!"
     @Published var playerIdentifier: Player?
     @Published var boardTiles: [Tile] = []
     @Published var players: [Player] = []
@@ -22,7 +22,7 @@ extension GameViewModel: ServerOutput {
     }
     
     func didConnectAPlayer(_ player: Player) {
-        clientStatus = "Connected a player: \(player.name)"
+        serverStatus = "Jogadores conectados, aguardando inicio!"
         self.players.append(player)
     }
 }

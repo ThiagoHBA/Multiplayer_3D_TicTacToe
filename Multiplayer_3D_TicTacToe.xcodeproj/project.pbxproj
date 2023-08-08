@@ -35,7 +35,6 @@
 		0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034035E2A7D7E1500265AF3 /* ServerOutput.swift */; };
 		003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */; };
 		003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403632A7D81DD00265AF3 /* WebSocketError.swift */; };
-		003403662A7D863C00265AF3 /* GameViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403652A7D863C00265AF3 /* GameViewAssembler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +87,6 @@
 		0034035E2A7D7E1500265AF3 /* ServerOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerOutput.swift; sourceTree = "<group>"; };
 		003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeServer.swift; sourceTree = "<group>"; };
 		003403632A7D81DD00265AF3 /* WebSocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketError.swift; sourceTree = "<group>"; };
-		003403652A7D863C00265AF3 /* GameViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewAssembler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +173,6 @@
 		001B70C52A81AC7F00C16B23 /* Assembler */ = {
 			isa = PBXGroup;
 			children = (
-				003403652A7D863C00265AF3 /* GameViewAssembler.swift */,
 				001B70C62A81AC9000C16B23 /* StartViewAssembler.swift */,
 			);
 			path = Assembler;
@@ -444,7 +441,6 @@
 				001B70CD2A81B25500C16B23 /* TicTacToeBoard.swift in Sources */,
 				001B70C42A81A94100C16B23 /* LargeColoredButton.swift in Sources */,
 				003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */,
-				003403662A7D863C00265AF3 /* GameViewAssembler.swift in Sources */,
 				001B70D82A82A7C900C16B23 /* Session.swift in Sources */,
 				001B70BC2A81637700C16B23 /* TransferMessage.swift in Sources */,
 				001B70C72A81AC9000C16B23 /* StartViewAssembler.swift in Sources */,

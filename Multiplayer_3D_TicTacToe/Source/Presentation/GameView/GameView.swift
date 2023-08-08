@@ -47,13 +47,25 @@ struct GameView: View {
                     ProgressView()
                         .padding(16)
                     
-                    Text("Esperando jogador!")
-                        .multilineTextAlignment(.center)
-                        .font(.title2)
+                    VStack(spacing: 24) {
+                        Text("Código da sessão: \(ProcessInfo().hostName)")
+                            .multilineTextAlignment(.center)
+                            .font(.title)
+                            .bold()
+                        
+                        Text(vm.serverStatus)
+                            .multilineTextAlignment(.center)
+                            .font(.title2)
+                    }
+                    .padding(18)
+                    
+                    if vm.players.count >= 2 {
+                        Button("Iniciar Jogo") {
+                            
+                        }
                         .bold()
+                    }
                 }
-                .frame(width: 150, height: 150)
-                .backgroundStyle(.blue.opacity(0.1))
                 
             }
         }

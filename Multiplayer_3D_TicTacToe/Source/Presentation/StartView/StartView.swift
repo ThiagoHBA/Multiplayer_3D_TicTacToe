@@ -28,7 +28,7 @@ struct StartView: View {
                     .bold()
                 
                 LargeColoredButton(
-                    title: "Iniciar jogo",
+                    title: "Iniciar Sessão",
                     color: .red,
                     onPressed: {
                         server.startServer { error in
