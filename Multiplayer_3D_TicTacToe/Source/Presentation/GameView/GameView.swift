@@ -16,7 +16,6 @@ struct GameView: View {
     init(server: any Server, client: any Client) {
         self.server = server
         self.client = client
-        
         self.server.output = vm
     }
     
@@ -39,6 +38,23 @@ struct GameView: View {
                     }
                 )
                 .padding([.top], 120 * CGFloat(index))
+            }
+        }
+        .opacity(vm.gameStarted ? 1 : 0.05)
+        .overlay {
+            if !vm.gameStarted {
+                VStack {
+                    ProgressView()
+                        .padding(16)
+                    
+                    Text("Esperando jogador!")
+                        .multilineTextAlignment(.center)
+                        .font(.title2)
+                        .bold()
+                }
+                .frame(width: 150, height: 150)
+                .backgroundStyle(.blue.opacity(0.1))
+                
             }
         }
         .navigationBarBackButtonHidden(true)

@@ -11,6 +11,7 @@ struct StartView: View {
     @State private var errorAlert: AlertError = AlertError()
     @State private var showJoinGameSheet: Bool = false
     @State private var goToGameView: Bool = false
+    @State private var gameSessionCode: String = ""
     var server: any Server
     var client: any Client
     
@@ -27,7 +28,7 @@ struct StartView: View {
                     .bold()
                 
                 LargeColoredButton(
-                    title: "Start Game",
+                    title: "Iniciar jogo",
                     color: .red,
                     onPressed: {
                         server.startServer { error in
@@ -44,7 +45,7 @@ struct StartView: View {
                 )
                 
                 LargeColoredButton(
-                    title: "Join Game",
+                    title: "Entrar",
                     color: .blue,
                     onPressed: {
                         showJoinGameSheet = true
@@ -64,9 +65,18 @@ struct StartView: View {
                 )
             }
             .sheet(isPresented: $showJoinGameSheet) {
-                TextField(
-                    "Hostname da sessão",
-                    text: .constant("Digite aqui")
+                JoinGameSheet(
+                    sessionCode: gameSessionCode,
+                    connectButtonTapped: {
+                        guard let serverURL = URL(
+                            string: "ws://\(gameSessionCode):8080"
+                        ) else {
+                            errorAlert.errorMessage = "Não foi possível localizar a sessão. Tente novamente"
+                            errorAlert.showAlert = true
+                            return
+                        }
+                        client.connectToServer(url: serverURL)
+                    }
                 )
             }
         }

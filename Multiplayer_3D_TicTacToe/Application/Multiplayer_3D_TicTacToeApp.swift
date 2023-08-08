@@ -11,8 +11,8 @@ import SwiftUI
 struct Multiplayer_3D_TicTacToeApp: App {
     var body: some Scene {
         WindowGroup {
-            GameViewAssembler.make()
-//            StartViewAssembler.make()
+//            GameViewAssembler.make()
+            StartViewAssembler.make()
         }
     }
 }

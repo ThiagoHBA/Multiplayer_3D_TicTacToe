@@ -47,7 +47,17 @@ final class TicTacToeServer: Server {
                     case .waiting(_):
                         completion(.connectTimeWasTooLong)
                     case .ready:
-                        self.output?.didConnectAPlayer()
+                        var newPlayerStyle = TileStyle.circle
+                        let hasPlayerWithCircle = self.gameSession.players.contains(where: { $0.tileStyle == .circle }  )
+                        if hasPlayerWithCircle { newPlayerStyle = .cross }
+                        let player = Player(
+                            id: 2,
+                            name: "Player 2",
+                            tileStyle: newPlayerStyle,
+                            tiles: []
+                        )
+                        self.gameSession.players.append(player)
+                        self.output?.didConnectAPlayer(player)
                         completion(nil)
                     case .failed(_):
                         completion(.cantConnectWithClient)
@@ -70,6 +80,14 @@ final class TicTacToeServer: Server {
         }
         
         listener.start(queue: serverQueue)
+        let player = Player(
+            id: 1,
+            name: "Player 1",
+            tileStyle: TileStyle.randomStyle(),
+            tiles: []
+        )
+        gameSession.players.append(player)
+        output?.didStartServer(player)
     }
     
     func sendMessageToClient(

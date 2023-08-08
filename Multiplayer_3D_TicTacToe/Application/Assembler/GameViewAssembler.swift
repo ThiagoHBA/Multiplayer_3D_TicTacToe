@@ -12,11 +12,8 @@ final class GameViewAssembler {
     static func make() -> GameView {
         let server = try! TicTacToeServer()
         let client = TicTacToeClient.shared
+        let gameView = GameView(server: server, client: client)
         
-        let gameView = GameView(
-            server: server,
-            client: client
-        )
         return gameView
     }
 }

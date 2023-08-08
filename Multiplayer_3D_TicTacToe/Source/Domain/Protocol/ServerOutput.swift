@@ -8,6 +8,7 @@
 import Foundation
 
 protocol ServerOutput: AnyObject {
-    func didConnectAPlayer()
+    func didStartServer(_ playerIdentifier: Player)
+    func didConnectAPlayer(_ player: Player)
 }
 
