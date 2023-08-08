@@ -11,6 +11,13 @@
 		001B70B92A8161B900C16B23 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70B82A8161B900C16B23 /* Client.swift */; };
 		001B70BC2A81637700C16B23 /* TransferMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70BB2A81637700C16B23 /* TransferMessage.swift */; };
 		001B70BE2A8170DF00C16B23 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70BD2A8170DF00C16B23 /* GameViewModel.swift */; };
+		001B70C12A81A7F300C16B23 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70C02A81A7F300C16B23 /* StartView.swift */; };
+		001B70C42A81A94100C16B23 /* LargeColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70C32A81A94100C16B23 /* LargeColoredButton.swift */; };
+		001B70C72A81AC9000C16B23 /* StartViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70C62A81AC9000C16B23 /* StartViewAssembler.swift */; };
+		001B70CA2A81B02700C16B23 /* AlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70C92A81B02700C16B23 /* AlertError.swift */; };
+		001B70CD2A81B25500C16B23 /* TicTacToeBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70CC2A81B25500C16B23 /* TicTacToeBoard.swift */; };
+		001B70D02A81B7BF00C16B23 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70CF2A81B7BF00C16B23 /* Board.swift */; };
+		001B70D22A81B93100C16B23 /* TileTappedPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70D12A81B93100C16B23 /* TileTappedPosition.swift */; };
 		0034032A2A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403292A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift */; };
 		0034032C2A7D7CA500265AF3 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034032B2A7D7CA500265AF3 /* GameView.swift */; };
 		0034032E2A7D7CA500265AF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0034032D2A7D7CA500265AF3 /* Assets.xcassets */; };
@@ -47,6 +54,13 @@
 		001B70B82A8161B900C16B23 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		001B70BB2A81637700C16B23 /* TransferMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMessage.swift; sourceTree = "<group>"; };
 		001B70BD2A8170DF00C16B23 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		001B70C02A81A7F300C16B23 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		001B70C32A81A94100C16B23 /* LargeColoredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeColoredButton.swift; sourceTree = "<group>"; };
+		001B70C62A81AC9000C16B23 /* StartViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewAssembler.swift; sourceTree = "<group>"; };
+		001B70C92A81B02700C16B23 /* AlertError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertError.swift; sourceTree = "<group>"; };
+		001B70CC2A81B25500C16B23 /* TicTacToeBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeBoard.swift; sourceTree = "<group>"; };
+		001B70CF2A81B7BF00C16B23 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		001B70D12A81B93100C16B23 /* TileTappedPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileTappedPosition.swift; sourceTree = "<group>"; };
 		003403262A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Multiplayer_3D_TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		003403292A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer_3D_TicTacToeApp.swift; sourceTree = "<group>"; };
 		0034032B2A7D7CA500265AF3 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -120,6 +134,58 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		001B70BF2A81A7EA00C16B23 /* StartView */ = {
+			isa = PBXGroup;
+			children = (
+				001B70C82A81B01100C16B23 /* Model */,
+				001B70C22A81A92200C16B23 /* Components */,
+				001B70C02A81A7F300C16B23 /* StartView.swift */,
+			);
+			path = StartView;
+			sourceTree = "<group>";
+		};
+		001B70C22A81A92200C16B23 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				001B70C32A81A94100C16B23 /* LargeColoredButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		001B70C52A81AC7F00C16B23 /* Assembler */ = {
+			isa = PBXGroup;
+			children = (
+				003403652A7D863C00265AF3 /* GameViewAssembler.swift */,
+				001B70C62A81AC9000C16B23 /* StartViewAssembler.swift */,
+			);
+			path = Assembler;
+			sourceTree = "<group>";
+		};
+		001B70C82A81B01100C16B23 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				001B70C92A81B02700C16B23 /* AlertError.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		001B70CB2A81B24A00C16B23 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				001B70CC2A81B25500C16B23 /* TicTacToeBoard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		001B70CE2A81B7B900C16B23 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				001B70CF2A81B7BF00C16B23 /* Board.swift */,
+				001B70D12A81B93100C16B23 /* TileTappedPosition.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0034031D2A7D7CA500265AF3 = {
 			isa = PBXGroup;
 			children = (
@@ -180,8 +246,8 @@
 		003403542A7D7CB800265AF3 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				001B70C52A81AC7F00C16B23 /* Assembler */,
 				003403292A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift */,
-				003403652A7D863C00265AF3 /* GameViewAssembler.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -206,6 +272,7 @@
 		003403572A7D7CFB00265AF3 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				001B70BF2A81A7EA00C16B23 /* StartView */,
 				003403582A7D7D0500265AF3 /* GameView */,
 			);
 			path = Presentation;
@@ -214,6 +281,8 @@
 		003403582A7D7D0500265AF3 /* GameView */ = {
 			isa = PBXGroup;
 			children = (
+				001B70CE2A81B7B900C16B23 /* Model */,
+				001B70CB2A81B24A00C16B23 /* Components */,
 				0034032B2A7D7CA500265AF3 /* GameView.swift */,
 				001B70BD2A8170DF00C16B23 /* GameViewModel.swift */,
 			);
@@ -353,11 +422,18 @@
 				0034032C2A7D7CA500265AF3 /* GameView.swift in Sources */,
 				0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */,
 				003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */,
+				001B70C12A81A7F300C16B23 /* StartView.swift in Sources */,
+				001B70D02A81B7BF00C16B23 /* Board.swift in Sources */,
 				001B70BE2A8170DF00C16B23 /* GameViewModel.swift in Sources */,
+				001B70CA2A81B02700C16B23 /* AlertError.swift in Sources */,
 				0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */,
+				001B70D22A81B93100C16B23 /* TileTappedPosition.swift in Sources */,
+				001B70CD2A81B25500C16B23 /* TicTacToeBoard.swift in Sources */,
+				001B70C42A81A94100C16B23 /* LargeColoredButton.swift in Sources */,
 				003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */,
 				003403662A7D863C00265AF3 /* GameViewAssembler.swift in Sources */,
 				001B70BC2A81637700C16B23 /* TransferMessage.swift in Sources */,
+				001B70C72A81AC9000C16B23 /* StartViewAssembler.swift in Sources */,
 				0034032A2A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift in Sources */,
 				001B70B62A8161A800C16B23 /* TicTacToeClient.swift in Sources */,
 				001B70B92A8161B900C16B23 /* Client.swift in Sources */,

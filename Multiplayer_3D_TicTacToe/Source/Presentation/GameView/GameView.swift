@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     @ObservedObject var vm = GameViewModel()
+    var boards: [Board] = Board.generateBoards()
     var server: any Server
     var client: any Client
     
@@ -20,31 +21,21 @@ struct GameView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("Server Status: \(vm.serverStatus)")
-            Text("Client Status: \(vm.clientStatus)")
-            
-            HStack {
-                Button("Start Server") {
-                    server.startServer { error in
-                        if let error = error {
-                            print("Error: \(error.localizedDescription)")
-                            vm.serverStatus = "Error connecting in server"
-                        } else {
-                            vm.serverStatus = "Connect successfuly in server"
-                        }
+        HStack(alignment: .top, spacing: 8) {
+            ForEach(0..<3) { index in
+                TicTacToeBoard(
+                    tiles: vm.boardTiles,
+                    tileStyle: .circle,
+                    boardId: boards[index].id,
+                    backgroundColor: .red,
+                    tileTapped: { position in
+                        vm.boardTiles.append(position)
                     }
-                }
-                
-                Button("Connect Server") {
-                    client.connectToServer(
-                        url: URL(
-                            string: "ws://\(ProcessInfo().hostName):8080"
-                        )!
-                    )
-                }
+                )
+                .padding([.top], 120 * CGFloat(index))
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
