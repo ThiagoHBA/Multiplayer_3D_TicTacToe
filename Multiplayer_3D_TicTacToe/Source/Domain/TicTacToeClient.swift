@@ -11,6 +11,7 @@ final class TicTacToeClient: Client {
     private(set) var opened: Bool = false
     private(set) var webSocket: URLSessionWebSocketTask?
     static let shared = TicTacToeClient()
+    weak var output: ClientOutput?
     
     func connectToServer(url: URL) {
         if !opened { openWebSocket(url) }
@@ -42,16 +43,14 @@ final class TicTacToeClient: Client {
     
     private func decodeServerMessage(_ serverMessage: URLSessionWebSocketTask.Message) {
         switch serverMessage {
-            case .string:
-                print("String result: \(serverMessage)")
             case .data(let data):
                 do {
-                    let message = try JSONSerialization.jsonObject(with: data)
-                    print(message)
+                    let message = try JSONDecoder().decode(TransferMessage.self, from: data)
+                    handleMessageFromServer(message)
                 } catch {
-                    print(error.localizedDescription)
+                    output?.errorWhileReceivingMessage(error)
                 }
-            @unknown default:
+            default:
                 break
         }
     }
@@ -62,5 +61,9 @@ final class TicTacToeClient: Client {
     
     func sendMessage(_ message: TransferMessage) {
         
-    }    
+    }
+    
+    func handleMessageFromServer(_ message: TransferMessage) {
+        
+    }
 }

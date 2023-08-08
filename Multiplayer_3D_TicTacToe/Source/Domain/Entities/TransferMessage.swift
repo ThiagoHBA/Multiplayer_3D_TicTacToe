@@ -19,3 +19,12 @@ struct TransferMessage: Codable {
         return try JSONEncoder().encode(self)
     }
 }
+
+extension TransferMessage {
+    static var connectedMessage: TransferMessage {
+        return TransferMessage(
+            type: .connection,
+            data: try! JSONEncoder().encode(ConnectedDTO(connected: true))
+        )
+    }
+}

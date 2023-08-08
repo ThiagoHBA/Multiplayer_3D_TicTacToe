@@ -58,6 +58,11 @@ final class TicTacToeServer: Server {
                         )
                         self.gameSession.players.append(player)
                         self.output?.didConnectAPlayer(player)
+                        self.sendMessageToClient(
+                            message: TransferMessage.connectedMessage,
+                            client: newConnection,
+                            completion: { _ in }
+                        )
                         completion(nil)
                     case .failed(_):
                         completion(.cantConnectWithClient)
