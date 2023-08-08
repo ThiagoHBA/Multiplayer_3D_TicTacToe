@@ -11,6 +11,7 @@ import Network
 final class TicTacToeServer: Server {
     var listener: NWListener
     var connectedClients: [NWConnection] = []
+    var gameSession: Session = TicTacToeSession()
     weak var output: ServerOutput?
     
     init(port: UInt16 = 8080) throws {
