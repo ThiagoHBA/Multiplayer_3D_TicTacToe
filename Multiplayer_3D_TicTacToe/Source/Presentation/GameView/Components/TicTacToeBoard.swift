@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TicTacToeBoard: View {
-    var tiles: [TilePosition]
-    var tileStyle: TileStyle
+    var tiles: [Tile]
     var boardId: Int
+    var inputedStyle: TileStyle
     var backgroundColor: Color
     var tileTapped: ((TilePosition) -> ())?
     
@@ -24,16 +24,11 @@ struct TicTacToeBoard: View {
                 ForEach(0...2, id: \.self) { row in
                     HStack(spacing: 10.0) {
                         ForEach(0...2, id: \.self) { column in
-                            let tileAvailable = tiles.contains(
-                                where: {
-                                    $0 == TilePosition(
-                                        boardId: boardId,
-                                        style: tileStyle,
-                                        position: (row, column)
-                                    )
-                                }
-                            )
-                            Text(tileAvailable ? tileStyle.rawValue : "")
+                            let tileAvailable = tiles.contains(where: {
+                                $0.position == TilePosition(row: row, column: column) &&
+                                $0.boardId == boardId
+                            })
+                            Text(tileAvailable ? inputedStyle.rawValue : "")
                                 .font(.system(size: 24))
                                 .foregroundColor(.blue)
                                 .bold()
@@ -43,11 +38,7 @@ struct TicTacToeBoard: View {
                                 .onTapGesture {
                                     if !tileAvailable {
                                         tileTapped?(
-                                            TilePosition(
-                                                boardId: boardId,
-                                                style: tileStyle,
-                                                position: (row, column)
-                                            )
+                                            TilePosition(row: row, column: column)
                                         )
                                     }
                                 }

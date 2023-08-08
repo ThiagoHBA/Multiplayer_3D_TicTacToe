@@ -10,7 +10,7 @@ import Foundation
 final class GameViewModel: ObservableObject {
     @Published var serverStatus = ""
     @Published var clientStatus = ""
-    @Published var boardTiles: [TilePosition] = []
+    @Published var boardTiles: [Tile] = []
 }
 
 extension GameViewModel: ServerOutput {

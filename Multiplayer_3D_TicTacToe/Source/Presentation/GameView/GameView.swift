@@ -25,11 +25,17 @@ struct GameView: View {
             ForEach(0..<3) { index in
                 TicTacToeBoard(
                     tiles: vm.boardTiles,
-                    tileStyle: .circle,
                     boardId: boards[index].id,
+                    inputedStyle: .cross,
                     backgroundColor: .red,
                     tileTapped: { position in
-                        vm.boardTiles.append(position)
+                        vm.boardTiles.append(
+                            Tile(
+                                boardId: boards[index].id,
+                                style: .cross,
+                                position: position
+                            )
+                        )
                     }
                 )
                 .padding([.top], 120 * CGFloat(index))
