@@ -22,7 +22,9 @@ extension GameViewModel: ServerOutput {
     }
     
     func didConnectAPlayer(_ player: Player) {
-        serverStatus = "Jogadores conectados, aguardando inicio!"
-        self.players.append(player)
+        DispatchQueue.main.async { [weak self] in
+            self?.serverStatus = "Jogadores conectados, aguardando inicio!"
+            self?.players.append(player)
+        }
     }
 }

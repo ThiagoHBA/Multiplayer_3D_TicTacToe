@@ -37,6 +37,7 @@
 		0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034035E2A7D7E1500265AF3 /* ServerOutput.swift */; };
 		003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */; };
 		003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403632A7D81DD00265AF3 /* WebSocketError.swift */; };
+		0093242C2A87DCB100DD2DA6 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0093242B2A87DCB100DD2DA6 /* StartViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		0034035E2A7D7E1500265AF3 /* ServerOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerOutput.swift; sourceTree = "<group>"; };
 		003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeServer.swift; sourceTree = "<group>"; };
 		003403632A7D81DD00265AF3 /* WebSocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketError.swift; sourceTree = "<group>"; };
+		0093242B2A87DCB100DD2DA6 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				001B70C82A81B01100C16B23 /* Model */,
 				001B70C22A81A92200C16B23 /* Components */,
 				001B70C02A81A7F300C16B23 /* StartView.swift */,
+				0093242B2A87DCB100DD2DA6 /* StartViewModel.swift */,
 			);
 			path = StartView;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */,
 				001B70D22A81B93100C16B23 /* TilePosition.swift in Sources */,
 				001B70CD2A81B25500C16B23 /* TicTacToeBoard.swift in Sources */,
+				0093242C2A87DCB100DD2DA6 /* StartViewModel.swift in Sources */,
 				001B70C42A81A94100C16B23 /* LargeColoredButton.swift in Sources */,
 				003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */,
 				001B70E32A82D9B600C16B23 /* ConnectedDTO.swift in Sources */,

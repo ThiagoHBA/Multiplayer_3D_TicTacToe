@@ -9,4 +9,6 @@ import Foundation
 
 protocol ClientOutput: AnyObject {
     func errorWhileReceivingMessage(_ error: Error)
+    func didConnectInServer()
+    func gameDidStart()
 }

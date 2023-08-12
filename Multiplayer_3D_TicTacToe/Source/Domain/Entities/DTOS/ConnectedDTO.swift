@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ConnectedDTO: Encodable {
+struct ConnectedDTO: Codable {
     var connected: Bool
 }

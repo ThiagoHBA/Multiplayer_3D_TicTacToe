@@ -9,5 +9,7 @@ import Foundation
 
 protocol Session {
     var players: [Player] { get set }
+    
+    func createPlayer() -> Player
 }
 

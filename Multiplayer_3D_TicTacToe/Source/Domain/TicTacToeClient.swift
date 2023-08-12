@@ -64,6 +64,16 @@ final class TicTacToeClient: Client {
     }
     
     func handleMessageFromServer(_ message: TransferMessage) {
-        
+        switch message.type {
+            case .connection:
+                guard let messageDataValue = try? JSONDecoder().decode(
+                    ConnectedDTO.self,
+                    from: message.data
+                ) else {
+                    output?.errorWhileReceivingMessage(WebSocketError.unableToEncodeMessage)
+                    break
+                }
+                if messageDataValue.connected { output?.didConnectInServer() }
+        }
     }
 }
