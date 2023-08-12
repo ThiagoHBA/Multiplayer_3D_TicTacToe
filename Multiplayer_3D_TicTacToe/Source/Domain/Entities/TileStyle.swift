@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TileStyle: String {
+enum TileStyle: String, Codable {
     case cross = "X"
     case circle = "O"
     

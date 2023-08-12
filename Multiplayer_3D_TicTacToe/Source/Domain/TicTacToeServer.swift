@@ -110,8 +110,22 @@ final class TicTacToeServer: Server {
         }
     }
     
-    func sendMessageToAllClients(_ message: Data) {
-        
+    func sendMessageToAllClients(_ message: TransferMessage) {
+        for client in connectedClients {
+            sendMessageToClient(message: message, client: client) { _ in }
+        }
+    }
+    
+    func startGame() {
+        let allPlayers = gameSession.players
+        guard let secondPlayerIdentifier = gameSession.players.last else { return }
+        sendMessageToAllClients(
+            TransferMessage.getGameStartedMessage(
+                identifier: secondPlayerIdentifier,
+                allPlayers: allPlayers
+            )
+        )
+        output?.didStartGame()
     }
 }
 

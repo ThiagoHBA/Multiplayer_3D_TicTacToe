@@ -37,10 +37,16 @@ extension TransferMessage {
         )
     }
     
-    static var gameStartedMessage: TransferMessage {
+    static func getGameStartedMessage(identifier: Player, allPlayers: [Player]) -> TransferMessage {
         return TransferMessage(
             type: .gameFlow(.gameStarted),
-            data: try! JSONEncoder().encode(BooleanMessageDTO(value: true))
+            data: try! JSONEncoder().encode(
+                StartGameMessageDTO(
+                    gameHasStarted: true,
+                    playerIdentifier: identifier,
+                    allPlayers: allPlayers
+                )
+            )
         )
     }
 }

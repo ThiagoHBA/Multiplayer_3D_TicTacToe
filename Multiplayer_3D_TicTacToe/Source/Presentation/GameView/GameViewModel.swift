@@ -16,6 +16,12 @@ final class GameViewModel: ObservableObject {
 }
 
 extension GameViewModel: ServerOutput {
+    func didStartGame() {
+        DispatchQueue.main.async { [weak self] in
+            self?.gameStarted = true
+        }
+    }
+    
     func didStartServer(_ playerIdentifier: Player) {
         self.playerIdentifier = playerIdentifier
         self.players.append(playerIdentifier)

@@ -60,13 +60,14 @@ struct GameView: View {
                     .padding(18)
                     
                     if vm.players.count >= 2 {
-                        Button("Iniciar Jogo") {
-                            
+                        Button {
+                            server.startGame()
+                        } label: {
+                            Text("Iniciar Jogo")
+                                .bold()
                         }
-                        .bold()
                     }
                 }
-                
             }
         }
         .navigationBarBackButtonHidden(true)

@@ -17,12 +17,12 @@ extension StartViewModel: ClientOutput {
     }
     
     func didConnectInServer() {
-        DispatchQueue.main.async {
-            self.connectedInServer = true
+        DispatchQueue.main.async { [weak self] in
+            self?.connectedInServer = true
         }
     }
     
-    func gameDidStart() {
-        
+    func gameDidStart(with players: [Player], identifier: Player) {
+
     }
 }

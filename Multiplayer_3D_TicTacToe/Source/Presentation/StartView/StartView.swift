@@ -60,10 +60,7 @@ struct StartView: View {
                 )
             }
             .navigationDestination(isPresented: $goToGameView) {
-                GameView(
-                    server: server,
-                    client: client
-                )
+                GameView(server: server, client: client)
             }
             .alert(isPresented: $errorAlert.showAlert) {
                 Alert(
@@ -88,7 +85,6 @@ struct StartView: View {
                 )
             }
         }
-        
     }
 }
 

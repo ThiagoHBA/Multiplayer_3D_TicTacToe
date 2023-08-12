@@ -85,8 +85,13 @@ extension TicTacToeClient {
     func handleGameFlowMessages(_ message: TransferMessage, _ messageValue: MessageType.GameFlow) {
         switch messageValue {
             case .gameStarted:
-                guard let dto: BooleanMessageDTO = decodeDTO(message.data) else { break }
-                if dto.value { output?.gameDidStart() }
+                guard let dto: StartGameMessageDTO = decodeDTO(message.data) else { break }
+                if dto.gameHasStarted {
+                    output?.gameDidStart(
+                        with: dto.allPlayers,
+                        identifier: dto.playerIdentifier
+                    )
+                }
                 break
         }
     }

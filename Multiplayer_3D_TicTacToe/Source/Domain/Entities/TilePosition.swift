@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct TilePosition: Equatable {
+struct TilePosition: Equatable, Codable {
     var row: Int
     var column: Int
 }
