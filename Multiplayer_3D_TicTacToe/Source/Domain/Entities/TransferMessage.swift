@@ -7,8 +7,17 @@
 
 import Foundation
 
-enum MessageType: String, Codable{
-    case connection = "#connection"
+enum MessageType: Codable {
+    case connection(Connection)
+    case gameFlow(GameFlow)
+    
+    enum Connection: String, Codable {
+        case connected = "#connected"
+    }
+    
+    enum GameFlow: String, Codable {
+        case gameStarted = "#gameStarted"
+    }
 }
 
 struct TransferMessage: Codable {
@@ -23,8 +32,15 @@ struct TransferMessage: Codable {
 extension TransferMessage {
     static var connectedMessage: TransferMessage {
         return TransferMessage(
-            type: .connection,
-            data: try! JSONEncoder().encode(ConnectedDTO(connected: true))
+            type: .connection(.connected),
+            data: try! JSONEncoder().encode(BooleanMessageDTO(value: true))
+        )
+    }
+    
+    static var gameStartedMessage: TransferMessage {
+        return TransferMessage(
+            type: .gameFlow(.gameStarted),
+            data: try! JSONEncoder().encode(BooleanMessageDTO(value: true))
         )
     }
 }

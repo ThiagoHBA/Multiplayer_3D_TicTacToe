@@ -65,15 +65,42 @@ final class TicTacToeClient: Client {
     
     func handleMessageFromServer(_ message: TransferMessage) {
         switch message.type {
-            case .connection:
-                guard let messageDataValue = try? JSONDecoder().decode(
-                    ConnectedDTO.self,
-                    from: message.data
-                ) else {
-                    output?.errorWhileReceivingMessage(WebSocketError.unableToEncodeMessage)
-                    break
-                }
-                if messageDataValue.connected { output?.didConnectInServer() }
+            case .connection(_):
+                handleConnectionMessages(message)
+                break
+            case .gameFlow(let value):
+                handleGameFlowMessages(message, value)
+                break
         }
+    }
+}
+
+// MARK: - Message Handlers
+extension TicTacToeClient {
+    func handleConnectionMessages(_ message: TransferMessage) {
+        guard let dto: BooleanMessageDTO = decodeDTO(message.data) else { return }
+        if dto.value { output?.didConnectInServer() }
+    }
+    
+    func handleGameFlowMessages(_ message: TransferMessage, _ messageValue: MessageType.GameFlow) {
+        switch messageValue {
+            case .gameStarted:
+                guard let dto: BooleanMessageDTO = decodeDTO(message.data) else { break }
+                if dto.value { output?.gameDidStart() }
+                break
+        }
+    }
+}
+
+// MARK: - Utilities
+extension TicTacToeClient {
+    private func decodeDTO<T: Decodable>(_ data: Data) -> T? {
+        do {
+            let data = try JSONDecoder().decode(T.self, from: data)
+            return data
+        } catch {
+            output?.errorWhileReceivingMessage(WebSocketError.unableToEncodeMessage)
+        }
+        return nil
     }
 }
