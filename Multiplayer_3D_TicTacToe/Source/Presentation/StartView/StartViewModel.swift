@@ -9,6 +9,8 @@ import Foundation
 
 final class StartViewModel: ObservableObject {
     @Published var connectedInServer: Bool = false
+    @Published var goToGameView: Bool = false
+    @Published var showJoinGameSheet: Bool = false
 }
 
 extension StartViewModel: ClientOutput {
@@ -23,6 +25,9 @@ extension StartViewModel: ClientOutput {
     }
     
     func gameDidStart(with players: [Player], identifier: Player) {
-
+        DispatchQueue.main.async {
+            self.showJoinGameSheet = false
+            self.goToGameView = true
+        }
     }
 }

@@ -7,15 +7,15 @@
 
 import Foundation
 
-final class StartViewAssembler {
-    static func make() -> StartView {
+final class MainViewAssembler {
+    static func make() -> MainView {
         let server = try! TicTacToeServer()
         let client = TicTacToeClient.shared
         
-        let startView = StartView(
-            client: client,
-            server: server
+        let view = MainView(
+            server: server,
+            client: client
         )
-        return startView
+        return view
     }
 }

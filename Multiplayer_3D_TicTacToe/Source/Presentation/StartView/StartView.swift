@@ -8,19 +8,12 @@
 import SwiftUI
 
 struct StartView: View {
-    @ObservedObject private var viewModel = StartViewModel()
+    @StateObject var viewModel = StartViewModel()
     @State private var errorAlert: AlertError = AlertError()
-    @State private var showJoinGameSheet: Bool = false
-    @State private var goToGameView: Bool = false
     @State private var gameSessionCode: String = ""
+    @State private var isHost = false
+    @State var client: any Client
     var server: any Server
-    var client: any Client
-    
-    init(server: any Server, client: any Client) {
-        self.server = server
-        self.client = client
-        self.client.output = viewModel
-    }
     
     var body: some View {
         NavigationStack {
@@ -38,16 +31,8 @@ struct StartView: View {
                     title: "Iniciar Sessão",
                     color: .red,
                     onPressed: {
-                        server.startServer { error in
-                            if let error = error {
-                                errorAlert = AlertError(
-                                    showAlert: true,
-                                    errorMessage: "Não foi possível inicializar o servidor: \(error.localizedDescription)"
-                                )
-                                return
-                            }
-                            goToGameView = true
-                        }
+                        isHost = true
+                        viewModel.goToGameView = true
                     }
                 )
                 
@@ -55,12 +40,17 @@ struct StartView: View {
                     title: "Entrar",
                     color: .blue,
                     onPressed: {
-                        showJoinGameSheet = true
+                        viewModel.showJoinGameSheet = true
                     }
                 )
             }
-            .navigationDestination(isPresented: $goToGameView) {
-                GameView(server: server, client: client)
+            .onAppear{ client.output = viewModel }
+            .navigationDestination(isPresented: $viewModel.goToGameView) {
+                GameView(
+                    server: server,
+                    client: client,
+                    isHost: isHost
+                )
             }
             .alert(isPresented: $errorAlert.showAlert) {
                 Alert(
@@ -68,7 +58,7 @@ struct StartView: View {
                     message: Text(errorAlert.errorMessage)
                 )
             }
-            .sheet(isPresented: $showJoinGameSheet) {
+            .sheet(isPresented: $viewModel.showJoinGameSheet) {
                 JoinGameSheet(
                     sessionCode: gameSessionCode,
                     connected: $viewModel.connectedInServer,

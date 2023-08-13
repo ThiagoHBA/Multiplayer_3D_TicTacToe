@@ -8,29 +8,24 @@
 import SwiftUI
 
 struct GameView: View {
-    @ObservedObject var vm = GameViewModel()
-    var boards: [Board] = Board.generateBoards()
-    var server: any Server
+    @StateObject var vm = GameViewModel()
+    @State private var errorAlert: AlertError = AlertError()
+    @State var server: any Server
     var client: any Client
-    
-    init(server: any Server, client: any Client) {
-        self.server = server
-        self.client = client
-        self.server.output = vm
-    }
+    var isHost: Bool = false
     
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             ForEach(0..<3) { index in
                 TicTacToeBoard(
                     tiles: vm.boardTiles,
-                    boardId: boards[index].id,
+                    boardId: vm.boards[index].id,
                     inputedStyle: .cross,
                     backgroundColor: .red,
                     tileTapped: { position in
                         vm.boardTiles.append(
                             Tile(
-                                boardId: boards[index].id,
+                                boardId: vm.boards[index].id,
                                 style: .cross,
                                 position: position
                             )
@@ -40,9 +35,29 @@ struct GameView: View {
                 .padding([.top], 120 * CGFloat(index))
             }
         }
-        .opacity(vm.gameStarted ? 1 : 0.05)
+        .onAppear {
+            if isHost {
+                server.output = vm
+                server.startServer { error in
+                    if let error = error {
+                        errorAlert = AlertError(
+                            showAlert: true,
+                            errorMessage: "Não foi possível inicializar o servidor: \(error.localizedDescription)"
+                        )
+                        return
+                    }
+                }
+            }
+        }
+        .alert(isPresented: $errorAlert.showAlert) {
+            Alert(
+                title: Text("Erro!"),
+                message: Text(errorAlert.errorMessage)
+            )
+        }
+        .opacity(isHost && !vm.gameStarted ? 0.05 : 1)
         .overlay {
-            if !vm.gameStarted {
+            if isHost && !vm.gameStarted {
                 VStack {
                     ProgressView()
                         .padding(16)

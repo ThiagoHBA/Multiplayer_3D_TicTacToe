@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0019A5942A87F7AD008A2930 /* StartGameMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5932A87F7AD008A2930 /* StartGameMessageDTO.swift */; };
+		0019A59E2A8932EE008A2930 /* GameViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */; };
 		001B70B62A8161A800C16B23 /* TicTacToeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70B52A8161A800C16B23 /* TicTacToeClient.swift */; };
 		001B70B92A8161B900C16B23 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70B82A8161B900C16B23 /* Client.swift */; };
 		001B70BC2A81637700C16B23 /* TransferMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70BB2A81637700C16B23 /* TransferMessage.swift */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		0019A5932A87F7AD008A2930 /* StartGameMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameMessageDTO.swift; sourceTree = "<group>"; };
+		0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewAssembler.swift; sourceTree = "<group>"; };
 		001B70B52A8161A800C16B23 /* TicTacToeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeClient.swift; sourceTree = "<group>"; };
 		001B70B82A8161B900C16B23 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		001B70BB2A81637700C16B23 /* TransferMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMessage.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				001B70C62A81AC9000C16B23 /* StartViewAssembler.swift */,
+				0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */,
 			);
 			path = Assembler;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */,
 				0019A5942A87F7AD008A2930 /* StartGameMessageDTO.swift in Sources */,
 				003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */,
+				0019A59E2A8932EE008A2930 /* GameViewAssembler.swift in Sources */,
 				001B70DE2A82A85100C16B23 /* Player.swift in Sources */,
 				001B70C12A81A7F300C16B23 /* StartView.swift in Sources */,
 				001B70D02A81B7BF00C16B23 /* Board.swift in Sources */,

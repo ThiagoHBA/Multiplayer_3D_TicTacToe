@@ -13,6 +13,7 @@ final class GameViewModel: ObservableObject {
     @Published var boardTiles: [Tile] = []
     @Published var players: [Player] = []
     @Published var gameStarted: Bool = false
+    @Published var boards: [Board] = Board.generateBoards()
 }
 
 extension GameViewModel: ServerOutput {
