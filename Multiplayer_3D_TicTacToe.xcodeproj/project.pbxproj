@@ -36,7 +36,6 @@
 		003403462A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403452A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.swift */; };
 		003403482A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403472A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITestsLaunchTests.swift */; };
 		0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034035B2A7D7DCB00265AF3 /* Server.swift */; };
-		0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034035E2A7D7E1500265AF3 /* ServerOutput.swift */; };
 		003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */; };
 		003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403632A7D81DD00265AF3 /* WebSocketError.swift */; };
 		0093242E2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */; };
@@ -93,7 +92,6 @@
 		003403452A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer_3D_TicTacToeUITests.swift; sourceTree = "<group>"; };
 		003403472A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplayer_3D_TicTacToeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0034035B2A7D7DCB00265AF3 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		0034035E2A7D7E1500265AF3 /* ServerOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerOutput.swift; sourceTree = "<group>"; };
 		003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeServer.swift; sourceTree = "<group>"; };
 		003403632A7D81DD00265AF3 /* WebSocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketError.swift; sourceTree = "<group>"; };
 		0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanMessageDTO.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 			children = (
 				0034035B2A7D7DCB00265AF3 /* Server.swift */,
 				001B70B82A8161B900C16B23 /* Client.swift */,
-				0034035E2A7D7E1500265AF3 /* ServerOutput.swift */,
 				001B70E42A82DB1B00C16B23 /* ClientOutput.swift */,
 				001B70D72A82A7C900C16B23 /* Session.swift */,
 			);
@@ -468,7 +465,6 @@
 				0034032C2A7D7CA500265AF3 /* GameView.swift in Sources */,
 				0019A5A32A8B0CD2008A2930 /* SessionViewModel.swift in Sources */,
 				001B70D42A82A25000C16B23 /* Tile.swift in Sources */,
-				0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */,
 				003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */,
 				0019A59E2A8932EE008A2930 /* GameViewAssembler.swift in Sources */,
 				001B70DE2A82A85100C16B23 /* Player.swift in Sources */,

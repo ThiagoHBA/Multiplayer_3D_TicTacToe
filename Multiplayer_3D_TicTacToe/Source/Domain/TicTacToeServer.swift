@@ -16,7 +16,6 @@ final class TicTacToeServer: Server {
         let processInfo = ProcessInfo()
         return URL(string: "ws://\(processInfo.hostName):8080")!
     }
-//    var output: [ServerOutput]? = []
     
     init(port: UInt16 = 8080) throws {
         /// An object that stores the protocols to use for connections, options for sending data, and network path constraints.
@@ -133,15 +132,6 @@ final class TicTacToeServer: Server {
                 newState: self.gameSession.sessionParameters
             )
         )
-//        sendMessageToAllClients(
-//            TransferMessage.getGameStartedMessage(
-//                identifier: secondPlayerIdentifier,
-//                allPlayers: allPlayers,
-//                starterId: gameSession.starterPlayerId
-//            )
-//        )
-//        
-//        output?.forEach { $0.didStartGame() }
     }
 }
 
