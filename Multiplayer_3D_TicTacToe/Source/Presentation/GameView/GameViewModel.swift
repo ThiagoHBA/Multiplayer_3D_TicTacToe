@@ -8,22 +8,6 @@
 import Foundation
 
 final class GameViewModel: ObservableObject {
-    @Published var serverStatus = "Esperando jogador!"
     @Published var boardTiles: [Tile] = []
     @Published var boards: [Board] = Board.generateBoards()
-}
-
-extension GameViewModel: ServerOutput {
-    func didStartGame() {
-    }
-    
-    func didStartServer(_ playerIdentifier: Player) {
-  
-    }
-    
-    func didConnectAPlayer(_ player: Player) {
-        DispatchQueue.main.async { [weak self] in
-            self?.serverStatus = "Jogadores conectados, aguardando inicio!"
-        }
-    }
 }

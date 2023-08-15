@@ -15,29 +15,37 @@ struct GameView: View {
     var client: any Client
     
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
-            ForEach(0..<3) { index in
-                TicTacToeBoard(
-                    tiles: vm.boardTiles,
-                    boardId: vm.boards[index].id,
-                    inputedStyle: .cross,
-                    backgroundColor: .red,
-                    tileTapped: { position in
-                        vm.boardTiles.append(
-                            Tile(
-                                boardId: vm.boards[index].id,
-                                style: .cross,
-                                position: position
+        VStack {
+            if sessionVM.gameStarted {
+                Text(sessionVM.serverStatus)
+                    .font(.largeTitle)
+                    .bold()
+                    .multilineTextAlignment(.center)
+                    .padding([.bottom], 62)
+            }
+            HStack(alignment: .top, spacing: 8) {
+                ForEach(0..<3) { index in
+                    TicTacToeBoard(
+                        tiles: vm.boardTiles,
+                        boardId: vm.boards[index].id,
+                        inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
+                        backgroundColor: .red,
+                        tileTapped: { position in
+                            vm.boardTiles.append(
+                                Tile(
+                                    boardId: vm.boards[index].id,
+                                    style: .cross,
+                                    position: position
+                                )
                             )
-                        )
-                    }
-                )
-                .padding([.top], 120 * CGFloat(index))
+                        }
+                    )
+                    .padding([.top], 120 * CGFloat(index))
+                }
             }
         }
         .onAppear {
             if sessionVM.isHost {
-                server.output?.append(Weak(vm))
                 server.output?.append(Weak(sessionVM))
                 server.startServer { error in
                     if let error = error {
@@ -69,7 +77,7 @@ struct GameView: View {
                             .font(.title)
                             .bold()
                         
-                        Text(vm.serverStatus)
+                        Text(sessionVM.serverStatus)
                             .multilineTextAlignment(.center)
                             .font(.title2)
                     }
