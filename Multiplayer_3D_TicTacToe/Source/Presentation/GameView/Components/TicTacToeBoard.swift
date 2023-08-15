@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TicTacToeBoard: View {
-    var tiles: [Tile]
+    @State var tiles: [Tile]
     var boardId: Int
     var inputedStyle: TileStyle
     var backgroundColor: Color

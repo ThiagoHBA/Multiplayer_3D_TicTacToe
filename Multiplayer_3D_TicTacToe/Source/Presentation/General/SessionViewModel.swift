@@ -21,23 +21,19 @@ final class SessionViewModel: ObservableObject {
     var showConnectionSheet: Bool {
         return isHost && !parameters.gameStarted
     }
-    var boards: [Board] {
-        return parameters.boards
-    }
-    var isPlayerShift: Bool {
-        return parameters.shiftPlayerId == playerIdentifier?.id
-    }
 }
 // MARK: - Client
 extension SessionViewModel: ClientOutput {
-    func didFinishPlayerMove(on boardId: Int, in tile: Tile) { }
+    func didFinishPlayerMove(on boardId: Int, in tile: Tile) {
+        
+    }
     
     func didChangeShift(_ newShiftPlayer: Int) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             guard let player = self.parameters.players.first(where: { $0.id == newShiftPlayer }) else { return }
             if let playerIdentifier = self.playerIdentifier {
-                if self.isPlayerShift {
+                if newShiftPlayer == playerIdentifier.id {
                     self.serverStatus = "Seu turno! Seus pontos são: \(playerIdentifier.tileStyle.rawValue)"
                 } else {
                     self.serverStatus = "Vez de \(player.name)"
@@ -51,13 +47,6 @@ extension SessionViewModel: ClientOutput {
             guard let self = self else { return }
             self.goToGameView = true
             self.showJoinGameSheet = false
-            if let playerIdentifier = self.playerIdentifier {
-                if self.isPlayerShift {
-                    self.serverStatus = "Seu turno! Seus pontos são: \(playerIdentifier.tileStyle.rawValue)"
-                } else {
-                    self.serverStatus = "Vez de \(playerIdentifier.name)"
-                }
-            }
         }
     }
     

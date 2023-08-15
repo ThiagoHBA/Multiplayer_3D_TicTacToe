@@ -26,33 +26,29 @@ struct GameView: View {
             HStack(alignment: .top, spacing: 8) {
                 ForEach(0..<3) { index in
                     TicTacToeBoard(
-                        tiles: sessionVM.boards[index].tiles,
-                        boardId: sessionVM.boards[index].id,
+                        tiles: sessionVM.parameters.boards[index].tiles,
+                        boardId: sessionVM.parameters.boards[index].id,
                         inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
                         backgroundColor: .red,
                         tileTapped: { position in
-                            if !sessionVM.isPlayerShift { return }
+                            let isPlayerShift = sessionVM.parameters.shiftPlayerId == sessionVM.playerIdentifier?.id
+                            
+                            if !isPlayerShift { return }
+                                
                             confirmationAlert = ConfirmationAlert(
                                 showAlert: true,
                                 description: "Você confirma a colocação do ponto?",
                                 action: {
                                     client.sendMessage(
                                         TransferMessage.getPlayerDidEndTheMoveMessage(
-                                            on: sessionVM.boards[index].id,
+                                            on: sessionVM.parameters.boards[index].id,
                                             Tile(
-                                                boardId: sessionVM.boards[index].id,
+                                                boardId: sessionVM.parameters.boards[index].id,
                                                 style: .cross,
                                                 position: position
                                             )
                                         )
                                     )
-//                                    sessionVM.parameters.boards[index].tiles.append(
-//                                        Tile(
-//                                            boardId: sessionVM.boards[index].id,
-//                                            style: .cross,
-//                                            position: position
-//                                        )
-//                                    )
                                 }
                             )
                         }

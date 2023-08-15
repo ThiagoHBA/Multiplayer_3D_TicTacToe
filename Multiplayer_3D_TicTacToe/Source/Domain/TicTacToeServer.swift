@@ -128,6 +128,11 @@ final class TicTacToeServer: Server {
             TransferMessage.getGameStartedMessage(value: true)
         )
         self.sendMessageToAllClients(
+            TransferMessage.getChangeShiftMessage(
+                gameSession.sessionParameters.shiftPlayerId
+            )
+        )
+        self.sendMessageToAllClients(
             TransferMessage.updateSessionParametersMessage(
                 newState: self.gameSession.sessionParameters
             )
