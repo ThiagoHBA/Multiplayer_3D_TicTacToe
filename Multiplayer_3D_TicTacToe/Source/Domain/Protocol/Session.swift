@@ -8,8 +8,9 @@
 import Foundation
 
 protocol Session {
-    var players: [Player] { get set }
-    
-    func createPlayer() -> Player
+    var sessionParameters: SessionParameters { get }
+    func addPlayerInSession() -> Player
+    func selectStarterPlayer()
+    func startGame()
 }
 

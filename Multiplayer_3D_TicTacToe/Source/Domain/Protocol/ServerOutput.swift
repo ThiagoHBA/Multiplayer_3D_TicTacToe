@@ -7,9 +7,9 @@
 
 import Foundation
 
-protocol ServerOutput: AnyObject {
-    func didStartServer(_ playerIdentifier: Player)
-    func didConnectAPlayer(_ player: Player)
-    func didStartGame()
-}
+//protocol ServerOutput: AnyObject {
+//    func didStartServer(_ playerIdentifier: Player)
+//    func didConnectAPlayer(_ player: Player)
+//    func didStartGame()
+//}
 

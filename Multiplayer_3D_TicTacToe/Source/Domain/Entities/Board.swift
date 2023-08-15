@@ -8,15 +8,22 @@
 import Foundation
 import SwiftUI
 
-struct Board: Identifiable {
+enum BoardColor: Codable {
+    case blue
+    case red
+    case green
+}
+
+struct Board: Identifiable, Codable {
     let id: Int
-    let color: Color
+    let color: BoardColor
+    var tiles: [Tile]
     
     static func generateBoards() -> [Board] {
         return [
-            Board(id: 1, color: .red),
-            Board(id: 2, color: .green),
-            Board(id: 3, color: .blue)
+            Board(id: 1, color: .red, tiles: []),
+            Board(id: 2, color: .green, tiles: []),
+            Board(id: 3, color: .blue, tiles: [])
         ]
     }
 }

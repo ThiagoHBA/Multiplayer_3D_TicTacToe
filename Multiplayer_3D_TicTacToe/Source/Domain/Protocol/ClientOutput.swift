@@ -9,4 +9,7 @@ import Foundation
 
 protocol ClientOutput: AnyObject {
     func errorWhileReceivingMessage(_ error: Error)
+    func didUpdateSessionParameters(_ newState: SessionParameters)
+    func didConnectInServer(_ identifier: Player)
+    func gameDidStart()
 }

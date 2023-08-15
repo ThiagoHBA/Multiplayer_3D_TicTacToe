@@ -9,14 +9,13 @@ import SwiftUI
 
 struct GameView: View {
     @EnvironmentObject var sessionVM: SessionViewModel
-    @StateObject var vm = GameViewModel()
     @State private var errorAlert: AlertError = AlertError()
     @State var server: any Server
     var client: any Client
     
     var body: some View {
         VStack {
-            if sessionVM.gameStarted {
+            if sessionVM.parameters.gameStarted {
                 Text(sessionVM.serverStatus)
                     .font(.largeTitle)
                     .bold()
@@ -26,14 +25,14 @@ struct GameView: View {
             HStack(alignment: .top, spacing: 8) {
                 ForEach(0..<3) { index in
                     TicTacToeBoard(
-                        tiles: vm.boardTiles,
-                        boardId: vm.boards[index].id,
+                        tiles: sessionVM.parameters.boards[index].tiles,
+                        boardId: sessionVM.parameters.boards[index].id,
                         inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
                         backgroundColor: .red,
                         tileTapped: { position in
-                            vm.boardTiles.append(
+                            sessionVM.parameters.boards[index].tiles.append(
                                 Tile(
-                                    boardId: vm.boards[index].id,
+                                    boardId: sessionVM.parameters.boards[index].id,
                                     style: .cross,
                                     position: position
                                 )
@@ -46,7 +45,6 @@ struct GameView: View {
         }
         .onAppear {
             if sessionVM.isHost {
-                server.output?.append(Weak(sessionVM))
                 server.startServer { error in
                     if let error = error {
                         errorAlert = AlertError(
@@ -56,6 +54,7 @@ struct GameView: View {
                         return
                     }
                 }
+                client.connectToServer(url: server.serverURL)
             }
         }
         .alert(isPresented: $errorAlert.showAlert) {
@@ -83,7 +82,7 @@ struct GameView: View {
                     }
                     .padding(18)
                     
-                    if sessionVM.players.count >= 2 {
+                    if sessionVM.parameters.players.count >= 2 {
                         Button {
                             server.startGame()
                         } label: {

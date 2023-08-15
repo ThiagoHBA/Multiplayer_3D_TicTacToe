@@ -17,6 +17,7 @@ enum MessageType: Codable {
     
     enum GameFlow: String, Codable {
         case gameStarted = "#gameStarted"
+        case newState = "#newState"
     }
 }
 
@@ -30,23 +31,29 @@ struct TransferMessage: Codable {
 }
 
 extension TransferMessage {
-    static var connectedMessage: TransferMessage {
+    static func getConnectedMessage(identifier: Player) -> TransferMessage {
         return TransferMessage(
             type: .connection(.connected),
-            data: try! JSONEncoder().encode(BooleanMessageDTO(value: true))
+            data: try! JSONEncoder().encode(
+                ConnectedMessageDTO(
+                    connected: true,
+                    identifier: identifier
+                )
+            )
         )
     }
     
-    static func getGameStartedMessage(identifier: Player, allPlayers: [Player]) -> TransferMessage {
+    static func getGameStartedMessage(value: Bool) -> TransferMessage {
         return TransferMessage(
             type: .gameFlow(.gameStarted),
-            data: try! JSONEncoder().encode(
-                StartGameMessageDTO(
-                    gameHasStarted: true,
-                    playerIdentifier: identifier,
-                    allPlayers: allPlayers
-                )
-            )
+            data: try! JSONEncoder().encode(BooleanMessageDTO(value: value))
+        )
+    }
+    
+    static func updateSessionParametersMessage(newState: SessionParameters) -> TransferMessage {
+        return TransferMessage(
+            type: .gameFlow(.newState),
+            data: try! JSONEncoder().encode(newState)
         )
     }
 }

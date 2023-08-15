@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Tile: Equatable {
+struct Tile: Equatable, Codable {
     var boardId: Int
     var style: TileStyle
     var position: TilePosition?

@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0019A5942A87F7AD008A2930 /* StartGameMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5932A87F7AD008A2930 /* StartGameMessageDTO.swift */; };
 		0019A59E2A8932EE008A2930 /* GameViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */; };
-		0019A5A02A8B0B15008A2930 /* ConnectionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A59F2A8B0B15008A2930 /* ConnectionOutput.swift */; };
 		0019A5A32A8B0CD2008A2930 /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5A22A8B0CD2008A2930 /* SessionViewModel.swift */; };
-		0019A5A92A8B12EC008A2930 /* WeakReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5A82A8B12EC008A2930 /* WeakReference.swift */; };
+		0019A5AB2A8BF858008A2930 /* SessionParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5AA2A8BF858008A2930 /* SessionParameters.swift */; };
+		0019A5AD2A8BFF3F008A2930 /* ConnectedMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5AC2A8BFF3F008A2930 /* ConnectedMessageDTO.swift */; };
 		001B70B62A8161A800C16B23 /* TicTacToeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70B52A8161A800C16B23 /* TicTacToeClient.swift */; };
 		001B70B92A8161B900C16B23 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70B82A8161B900C16B23 /* Client.swift */; };
 		001B70BC2A81637700C16B23 /* TransferMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70BB2A81637700C16B23 /* TransferMessage.swift */; };
-		001B70BE2A8170DF00C16B23 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70BD2A8170DF00C16B23 /* GameViewModel.swift */; };
 		001B70C12A81A7F300C16B23 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70C02A81A7F300C16B23 /* StartView.swift */; };
 		001B70C42A81A94100C16B23 /* LargeColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70C32A81A94100C16B23 /* LargeColoredButton.swift */; };
 		001B70C72A81AC9000C16B23 /* StartViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001B70C62A81AC9000C16B23 /* StartViewAssembler.swift */; };
@@ -41,7 +39,6 @@
 		0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0034035E2A7D7E1500265AF3 /* ServerOutput.swift */; };
 		003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */; };
 		003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403632A7D81DD00265AF3 /* WebSocketError.swift */; };
-		0093242C2A87DCB100DD2DA6 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0093242B2A87DCB100DD2DA6 /* StartViewModel.swift */; };
 		0093242E2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,15 +60,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0019A5932A87F7AD008A2930 /* StartGameMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameMessageDTO.swift; sourceTree = "<group>"; };
 		0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewAssembler.swift; sourceTree = "<group>"; };
-		0019A59F2A8B0B15008A2930 /* ConnectionOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionOutput.swift; sourceTree = "<group>"; };
 		0019A5A22A8B0CD2008A2930 /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
-		0019A5A82A8B12EC008A2930 /* WeakReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakReference.swift; sourceTree = "<group>"; };
+		0019A5AA2A8BF858008A2930 /* SessionParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionParameters.swift; sourceTree = "<group>"; };
+		0019A5AC2A8BFF3F008A2930 /* ConnectedMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedMessageDTO.swift; sourceTree = "<group>"; };
 		001B70B52A8161A800C16B23 /* TicTacToeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeClient.swift; sourceTree = "<group>"; };
 		001B70B82A8161B900C16B23 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		001B70BB2A81637700C16B23 /* TransferMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferMessage.swift; sourceTree = "<group>"; };
-		001B70BD2A8170DF00C16B23 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		001B70C02A81A7F300C16B23 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		001B70C32A81A94100C16B23 /* LargeColoredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeColoredButton.swift; sourceTree = "<group>"; };
 		001B70C62A81AC9000C16B23 /* StartViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewAssembler.swift; sourceTree = "<group>"; };
@@ -101,7 +96,6 @@
 		0034035E2A7D7E1500265AF3 /* ServerOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerOutput.swift; sourceTree = "<group>"; };
 		003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeServer.swift; sourceTree = "<group>"; };
 		003403632A7D81DD00265AF3 /* WebSocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketError.swift; sourceTree = "<group>"; };
-		0093242B2A87DCB100DD2DA6 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanMessageDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,7 +135,6 @@
 		0019A5A72A8B12E5008A2930 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				0019A5A82A8B12EC008A2930 /* WeakReference.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -166,7 +159,6 @@
 				0034035E2A7D7E1500265AF3 /* ServerOutput.swift */,
 				001B70E42A82DB1B00C16B23 /* ClientOutput.swift */,
 				001B70D72A82A7C900C16B23 /* Session.swift */,
-				0019A59F2A8B0B15008A2930 /* ConnectionOutput.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -182,6 +174,7 @@
 				001B70CF2A81B7BF00C16B23 /* Board.swift */,
 				001B70D32A82A25000C16B23 /* Tile.swift */,
 				001B70D12A81B93100C16B23 /* TilePosition.swift */,
+				0019A5AA2A8BF858008A2930 /* SessionParameters.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -192,7 +185,6 @@
 				001B70C82A81B01100C16B23 /* Model */,
 				001B70C22A81A92200C16B23 /* Components */,
 				001B70C02A81A7F300C16B23 /* StartView.swift */,
-				0093242B2A87DCB100DD2DA6 /* StartViewModel.swift */,
 			);
 			path = StartView;
 			sourceTree = "<group>";
@@ -235,7 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */,
-				0019A5932A87F7AD008A2930 /* StartGameMessageDTO.swift */,
+				0019A5AC2A8BFF3F008A2930 /* ConnectedMessageDTO.swift */,
 			);
 			path = DTOS;
 			sourceTree = "<group>";
@@ -339,7 +331,6 @@
 			children = (
 				001B70CB2A81B24A00C16B23 /* Components */,
 				0034032B2A7D7CA500265AF3 /* GameView.swift */,
-				001B70BD2A8170DF00C16B23 /* GameViewModel.swift */,
 			);
 			path = GameView;
 			sourceTree = "<group>";
@@ -478,21 +469,19 @@
 				0019A5A32A8B0CD2008A2930 /* SessionViewModel.swift in Sources */,
 				001B70D42A82A25000C16B23 /* Tile.swift in Sources */,
 				0034035F2A7D7E1500265AF3 /* ServerOutput.swift in Sources */,
-				0019A5942A87F7AD008A2930 /* StartGameMessageDTO.swift in Sources */,
 				003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */,
 				0019A59E2A8932EE008A2930 /* GameViewAssembler.swift in Sources */,
 				001B70DE2A82A85100C16B23 /* Player.swift in Sources */,
 				001B70C12A81A7F300C16B23 /* StartView.swift in Sources */,
 				001B70D02A81B7BF00C16B23 /* Board.swift in Sources */,
-				001B70BE2A8170DF00C16B23 /* GameViewModel.swift in Sources */,
-				0019A5A02A8B0B15008A2930 /* ConnectionOutput.swift in Sources */,
+				0019A5AB2A8BF858008A2930 /* SessionParameters.swift in Sources */,
 				001B70CA2A81B02700C16B23 /* AlertError.swift in Sources */,
 				001B70E02A82CD1B00C16B23 /* JoinGameSheet.swift in Sources */,
 				0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */,
 				001B70D22A81B93100C16B23 /* TilePosition.swift in Sources */,
 				001B70CD2A81B25500C16B23 /* TicTacToeBoard.swift in Sources */,
-				0093242C2A87DCB100DD2DA6 /* StartViewModel.swift in Sources */,
 				001B70C42A81A94100C16B23 /* LargeColoredButton.swift in Sources */,
+				0019A5AD2A8BFF3F008A2930 /* ConnectedMessageDTO.swift in Sources */,
 				003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */,
 				001B70D82A82A7C900C16B23 /* Session.swift in Sources */,
 				001B70BC2A81637700C16B23 /* TransferMessage.swift in Sources */,
@@ -504,7 +493,6 @@
 				001B70DA2A82A80400C16B23 /* TicTacToeSession.swift in Sources */,
 				001B70B62A8161A800C16B23 /* TicTacToeClient.swift in Sources */,
 				001B70B92A8161B900C16B23 /* Client.swift in Sources */,
-				0019A5A92A8B12EC008A2930 /* WeakReference.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

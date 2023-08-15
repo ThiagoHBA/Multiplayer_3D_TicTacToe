@@ -12,7 +12,11 @@ final class TicTacToeServer: Server {
     var listener: NWListener
     var connectedClients: [NWConnection] = []
     var gameSession: Session = TicTacToeSession()
-    var output: [ServerOutput]? = []
+    var serverURL: URL {
+        let processInfo = ProcessInfo()
+        return URL(string: "ws://\(processInfo.hostName):8080")!
+    }
+//    var output: [ServerOutput]? = []
     
     init(port: UInt16 = 8080) throws {
         /// An object that stores the protocols to use for connections, options for sending data, and network path constraints.
@@ -47,13 +51,16 @@ final class TicTacToeServer: Server {
                     case .waiting(_):
                         completion(.connectTimeWasTooLong)
                     case .ready:
-                        let newPlayer = self.gameSession.createPlayer()
-                        self.gameSession.players.append(newPlayer)
-                        self.output?.forEach { $0.didConnectAPlayer(newPlayer) }
+                        let newPlayer = self.gameSession.addPlayerInSession()
                         self.sendMessageToClient(
-                            message: TransferMessage.connectedMessage,
+                            message: TransferMessage.getConnectedMessage(identifier: newPlayer),
                             client: newConnection,
                             completion: { _ in }
+                        )
+                        self.sendMessageToAllClients(
+                            TransferMessage.updateSessionParametersMessage(
+                                newState: self.gameSession.sessionParameters
+                            )
                         )
                         completion(nil)
                     case .failed(_):
@@ -78,9 +85,8 @@ final class TicTacToeServer: Server {
         }
         
         listener.start(queue: serverQueue)
-        let player = gameSession.createPlayer()
-        gameSession.players.append(player)
-        output?.forEach { $0.didStartServer(player) }
+//        let hostPlayer = gameSession.addPlayerInSession()
+//        output?.forEach { $0.didStartServer(hostPlayer) }
     }
     
     func sendMessageToClient(
@@ -117,15 +123,25 @@ final class TicTacToeServer: Server {
     }
     
     func startGame() {
-        let allPlayers = gameSession.players
-        guard let secondPlayerIdentifier = gameSession.players.last else { return }
-        sendMessageToAllClients(
-            TransferMessage.getGameStartedMessage(
-                identifier: secondPlayerIdentifier,
-                allPlayers: allPlayers
+        gameSession.selectStarterPlayer()
+        gameSession.startGame()
+        self.sendMessageToAllClients(
+            TransferMessage.getGameStartedMessage(value: true)
+        )
+        self.sendMessageToAllClients(
+            TransferMessage.updateSessionParametersMessage(
+                newState: self.gameSession.sessionParameters
             )
         )
-        output?.forEach { $0.didStartGame() }
+//        sendMessageToAllClients(
+//            TransferMessage.getGameStartedMessage(
+//                identifier: secondPlayerIdentifier,
+//                allPlayers: allPlayers,
+//                starterId: gameSession.starterPlayerId
+//            )
+//        )
+//        
+//        output?.forEach { $0.didStartGame() }
     }
 }
 

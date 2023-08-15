@@ -10,7 +10,8 @@ import Foundation
 protocol Server {
     associatedtype Connection
     var connectedClients: [Connection] { get set }
-    var output: [ServerOutput]? { get set }
+    var serverURL: URL { get }
+//    var output: [ServerOutput]? { get set }
     var gameSession: Session { get set }
     
     func sendMessageToClient(
