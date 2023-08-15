@@ -12,7 +12,7 @@ final class TicTacToeServer: Server {
     var listener: NWListener
     var connectedClients: [NWConnection] = []
     var gameSession: Session = TicTacToeSession()
-    weak var output: ServerOutput?
+    var output: [ServerOutput]? = []
     
     init(port: UInt16 = 8080) throws {
         /// An object that stores the protocols to use for connections, options for sending data, and network path constraints.
@@ -49,7 +49,7 @@ final class TicTacToeServer: Server {
                     case .ready:
                         let newPlayer = self.gameSession.createPlayer()
                         self.gameSession.players.append(newPlayer)
-                        self.output?.didConnectAPlayer(newPlayer)
+                        self.output?.forEach { $0.didConnectAPlayer(newPlayer) }
                         self.sendMessageToClient(
                             message: TransferMessage.connectedMessage,
                             client: newConnection,
@@ -80,7 +80,7 @@ final class TicTacToeServer: Server {
         listener.start(queue: serverQueue)
         let player = gameSession.createPlayer()
         gameSession.players.append(player)
-        output?.didStartServer(player)
+        output?.forEach { $0.didStartServer(player) }
     }
     
     func sendMessageToClient(
@@ -125,7 +125,7 @@ final class TicTacToeServer: Server {
                 allPlayers: allPlayers
             )
         )
-        output?.didStartGame()
+        output?.forEach { $0.didStartGame() }
     }
 }
 

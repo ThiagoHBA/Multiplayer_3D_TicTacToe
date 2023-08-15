@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct GameView: View {
+    @EnvironmentObject var sessionVM: SessionViewModel
     @StateObject var vm = GameViewModel()
     @State private var errorAlert: AlertError = AlertError()
     @State var server: any Server
     var client: any Client
-    var isHost: Bool = false
     
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
@@ -36,8 +36,9 @@ struct GameView: View {
             }
         }
         .onAppear {
-            if isHost {
-                server.output = vm
+            if sessionVM.isHost {
+                server.output?.append(Weak(vm))
+                server.output?.append(Weak(sessionVM))
                 server.startServer { error in
                     if let error = error {
                         errorAlert = AlertError(
@@ -55,9 +56,9 @@ struct GameView: View {
                 message: Text(errorAlert.errorMessage)
             )
         }
-        .opacity(isHost && !vm.gameStarted ? 0.05 : 1)
+        .opacity(sessionVM.showConnectionSheet ? 0.05 : 1)
         .overlay {
-            if isHost && !vm.gameStarted {
+            if sessionVM.showConnectionSheet {
                 VStack {
                     ProgressView()
                         .padding(16)
@@ -74,7 +75,7 @@ struct GameView: View {
                     }
                     .padding(18)
                     
-                    if vm.players.count >= 2 {
+                    if sessionVM.players.count >= 2 {
                         Button {
                             server.startGame()
                         } label: {

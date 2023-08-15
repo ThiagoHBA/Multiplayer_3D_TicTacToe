@@ -8,21 +8,13 @@
 import Foundation
 
 final class StartViewModel: ObservableObject {
-    @Published var connectedInServer: Bool = false
     @Published var goToGameView: Bool = false
     @Published var showJoinGameSheet: Bool = false
+    @Published var gameSessionCode: String = ""
 }
 
-extension StartViewModel: ClientOutput {
-    func errorWhileReceivingMessage(_ error: Error) {
-        
-    }
-    
-    func didConnectInServer() {
-        DispatchQueue.main.async { [weak self] in
-            self?.connectedInServer = true
-        }
-    }
+extension StartViewModel: ConnectionOutput {
+    func didConnectInServer() { }
     
     func gameDidStart(with players: [Player], identifier: Player) {
         DispatchQueue.main.async {

@@ -9,10 +9,12 @@ import SwiftUI
 
 @main
 struct Multiplayer_3D_TicTacToeApp: App {
+    @StateObject var sessionViewModel = SessionViewModel()
+
     var body: some Scene {
         WindowGroup {
-//            GameViewAssembler.make()
             StartViewAssembler.make()
+                .environmentObject(sessionViewModel)
         }
     }
 }

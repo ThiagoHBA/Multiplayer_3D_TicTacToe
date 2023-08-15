@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct StartView: View {
+    @EnvironmentObject var sessionVM: SessionViewModel
     @StateObject var viewModel = StartViewModel()
     @State private var errorAlert: AlertError = AlertError()
-    @State private var gameSessionCode: String = ""
-    @State private var isHost = false
     @State var client: any Client
     var server: any Server
     
@@ -31,7 +30,7 @@ struct StartView: View {
                     title: "Iniciar Sessão",
                     color: .red,
                     onPressed: {
-                        isHost = true
+                        sessionVM.isHost = true
                         viewModel.goToGameView = true
                     }
                 )
@@ -40,16 +39,20 @@ struct StartView: View {
                     title: "Entrar",
                     color: .blue,
                     onPressed: {
+                        sessionVM.isHost = false
                         viewModel.showJoinGameSheet = true
                     }
                 )
             }
-            .onAppear{ client.output = viewModel }
+            .onAppear{
+                client.connectionOutput?.append(Weak(viewModel))
+                client.connectionOutput?.append(Weak(sessionVM))
+                client.clientOutput?.append(Weak(sessionVM))
+            }
             .navigationDestination(isPresented: $viewModel.goToGameView) {
                 GameView(
                     server: server,
-                    client: client,
-                    isHost: isHost
+                    client: client
                 )
             }
             .alert(isPresented: $errorAlert.showAlert) {
@@ -60,11 +63,11 @@ struct StartView: View {
             }
             .sheet(isPresented: $viewModel.showJoinGameSheet) {
                 JoinGameSheet(
-                    sessionCode: gameSessionCode,
-                    connected: $viewModel.connectedInServer,
+                    sessionCode: viewModel.gameSessionCode,
+                    connected: $sessionVM.isConnected,
                     connectButtonTapped: {
                         guard let serverURL = URL(
-                            string: "ws://\(gameSessionCode):8080"
+                            string: "ws://\(viewModel.gameSessionCode):8080"
                         ) else {
                             errorAlert.errorMessage = "Não foi possível localizar a sessão. Tente novamente"
                             errorAlert.showAlert = true

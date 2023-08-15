@@ -11,7 +11,9 @@ final class TicTacToeClient: Client {
     private(set) var opened: Bool = false
     private(set) var webSocket: URLSessionWebSocketTask?
     static let shared = TicTacToeClient()
-    weak var output: ClientOutput?
+    
+    var clientOutput: [ClientOutput]? = []
+    var connectionOutput: [ConnectionOutput]? = []
     
     func connectToServer(url: URL) {
         if !opened { openWebSocket(url) }
@@ -20,12 +22,12 @@ final class TicTacToeClient: Client {
         webSocket.receive(
             completionHandler: { [weak self] result in
                 switch result {
-                    case .failure(_):
-                        self?.opened = false
-                        return
-                    case .success(let message):
-                        self?.decodeServerMessage(message)
-                        break
+                case .failure(_):
+                    self?.opened = false
+                    return
+                case .success(let message):
+                    self?.decodeServerMessage(message)
+                    break
                 }
                 self?.connectToServer(url: url)
             }
@@ -43,15 +45,15 @@ final class TicTacToeClient: Client {
     
     private func decodeServerMessage(_ serverMessage: URLSessionWebSocketTask.Message) {
         switch serverMessage {
-            case .data(let data):
-                do {
-                    let message = try JSONDecoder().decode(TransferMessage.self, from: data)
-                    handleMessageFromServer(message)
-                } catch {
-                    output?.errorWhileReceivingMessage(error)
-                }
-            default:
-                break
+        case .data(let data):
+            do {
+                let message = try JSONDecoder().decode(TransferMessage.self, from: data)
+                handleMessageFromServer(message)
+            } catch {
+                clientOutput?.forEach{ $0.errorWhileReceivingMessage(error) }
+            }
+        default:
+            break
         }
     }
     
@@ -65,12 +67,12 @@ final class TicTacToeClient: Client {
     
     func handleMessageFromServer(_ message: TransferMessage) {
         switch message.type {
-            case .connection(_):
-                handleConnectionMessages(message)
-                break
-            case .gameFlow(let value):
-                handleGameFlowMessages(message, value)
-                break
+        case .connection(_):
+            handleConnectionMessages(message)
+            break
+        case .gameFlow(let value):
+            handleGameFlowMessages(message, value)
+            break
         }
     }
 }
@@ -79,20 +81,26 @@ final class TicTacToeClient: Client {
 extension TicTacToeClient {
     func handleConnectionMessages(_ message: TransferMessage) {
         guard let dto: BooleanMessageDTO = decodeDTO(message.data) else { return }
-        if dto.value { output?.didConnectInServer() }
+        if dto.value {
+            connectionOutput?.forEach {
+                $0.didConnectInServer()
+            }
+        }
     }
     
     func handleGameFlowMessages(_ message: TransferMessage, _ messageValue: MessageType.GameFlow) {
         switch messageValue {
-            case .gameStarted:
-                guard let dto: StartGameMessageDTO = decodeDTO(message.data) else { break }
-                if dto.gameHasStarted {
-                    output?.gameDidStart(
-                        with: dto.allPlayers,
-                        identifier: dto.playerIdentifier
-                    )
+        case .gameStarted:
+            guard let dto: StartGameMessageDTO = decodeDTO(message.data) else { break }
+            if dto.gameHasStarted {
+                connectionOutput?.forEach { $0.gameDidStart(
+                    with: dto.allPlayers,
+                    identifier: dto.playerIdentifier
+                )
+                    
                 }
-                break
+            }
+            break
         }
     }
 }
@@ -104,7 +112,7 @@ extension TicTacToeClient {
             let data = try JSONDecoder().decode(T.self, from: data)
             return data
         } catch {
-            output?.errorWhileReceivingMessage(WebSocketError.unableToEncodeMessage)
+            clientOutput?.forEach { $0.errorWhileReceivingMessage(WebSocketError.unableToEncodeMessage) }
         }
         return nil
     }

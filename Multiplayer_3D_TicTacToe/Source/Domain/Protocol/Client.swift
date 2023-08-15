@@ -8,7 +8,8 @@
 import Foundation
 
 protocol Client {
-    var output: ClientOutput? { get set }
+    var connectionOutput: [ConnectionOutput]? { get set }
+    var clientOutput: [ClientOutput]? { get set }
     
     func connectToServer(url: URL)
     func disconnectToServer()
