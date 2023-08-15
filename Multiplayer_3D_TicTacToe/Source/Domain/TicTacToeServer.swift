@@ -42,8 +42,10 @@ final class TicTacToeServer: Server {
         
         listener.newConnectionHandler = { newConnection in
             self.connectedClients.append(newConnection)
-            newConnection.receiveMessage { completeContent, contentContext, isComplete, error in
-                print("RECEIVE MESSAGE CALLBACK")
+            
+            newConnection.receiveMessage { [weak self] completeContent, contentContext, isComplete, error in
+                guard let data = completeContent else { return }
+                self?.handleMessageFromClient(data: data, connection: newConnection)
             }
             newConnection.stateUpdateHandler = { state in
                 switch state {
@@ -84,8 +86,6 @@ final class TicTacToeServer: Server {
         }
         
         listener.start(queue: serverQueue)
-//        let hostPlayer = gameSession.addPlayerInSession()
-//        output?.forEach { $0.didStartServer(hostPlayer) }
     }
     
     func sendMessageToClient(
@@ -132,6 +132,51 @@ final class TicTacToeServer: Server {
                 newState: self.gameSession.sessionParameters
             )
         )
+    }
+    
+    func handleMessageFromClient(data: Data, connection: NWConnection) {
+        guard let transferMessage = try? JSONDecoder().decode(TransferMessage.self, from: data) else {
+            return
+        }
+        switch transferMessage.type{
+            case .server(_): break
+            case .client(let clientMessage):
+                switch clientMessage {
+                    case .gameFlow(let gameFlowMessage):
+                        handleGameFlowMessages(transferMessage, gameFlowMessage)
+                }
+        }
+    }
+    
+    func handleGameFlowMessages(
+        _ message: TransferMessage,
+        _ source: MessageType.ClientMessages.ClientGameFlow
+    ) {
+        switch source {
+            case .playerMove:
+                    let playerMovementMessage = try! JSONDecoder().decode(
+                        PlayerMoveDTO.self,
+                        from: message.data
+                    )
+                    let boardId = playerMovementMessage.boardId
+                    let tile = playerMovementMessage.addedTile
+            
+                    gameSession.addTileOnBoard(with: boardId, tile: tile)
+                    gameSession.changePlayerShift()
+                    sendMessageToAllClients(
+                        TransferMessage.getEndPlayerMoveMessage(boardId: boardId, tile: tile)
+                    )
+                    sendMessageToAllClients(
+                        TransferMessage.getChangeShiftMessage(
+                            gameSession.sessionParameters.shiftPlayerId
+                        )
+                    )
+                    sendMessageToAllClients(
+                        TransferMessage.updateSessionParametersMessage(
+                            newState: gameSession.sessionParameters
+                        )
+                    )
+        }
     }
 }
 

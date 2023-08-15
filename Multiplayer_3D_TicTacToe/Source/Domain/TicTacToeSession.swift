@@ -31,10 +31,20 @@ final class TicTacToeSession: Session {
     
     func selectStarterPlayer() {
         guard let starterPlayer = sessionParameters.players.randomElement() else { return }
-        sessionParameters.starterPlayerId = starterPlayer.id
+        sessionParameters.shiftPlayerId = starterPlayer.id
     }
     
     func startGame() {
         sessionParameters.gameStarted = true
+    }
+    
+    func addTileOnBoard(with id: Int, tile: Tile) {
+        sessionParameters.boards[id].tiles.append(tile)
+    }
+    
+    func changePlayerShift() {
+        let currentPlayerId = sessionParameters.shiftPlayerId
+        guard let nextPlayer = sessionParameters.players.first(where: { $0.id != currentPlayerId } ) else { return }
+        sessionParameters.shiftPlayerId = nextPlayer.id
     }
 }

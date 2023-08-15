@@ -9,12 +9,12 @@ import Foundation
 
 struct SessionParameters: Codable {
     var players: [Player]
-    var starterPlayerId: Int
+    var shiftPlayerId: Int
     var gameStarted: Bool
     var boards: [Board] = Board.generateBoards()
     
     static let initialState: SessionParameters = {
-        let parameters = SessionParameters(players: [], starterPlayerId: 0, gameStarted: false)
+        let parameters = SessionParameters(players: [], shiftPlayerId: 0, gameStarted: false)
         return parameters
     }()
 }

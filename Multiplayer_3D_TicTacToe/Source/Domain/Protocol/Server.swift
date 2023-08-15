@@ -21,4 +21,5 @@ protocol Server {
     func startServer(completion: @escaping (WebSocketError?) -> Void )
     func startGame()
     func sendMessageToAllClients(_ message: TransferMessage)
+    func handleMessageFromClient(data: Data, connection: Connection)
 }

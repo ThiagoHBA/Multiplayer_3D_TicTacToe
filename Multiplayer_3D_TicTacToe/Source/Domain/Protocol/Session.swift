@@ -12,5 +12,7 @@ protocol Session {
     func addPlayerInSession() -> Player
     func selectStarterPlayer()
     func startGame()
+    func addTileOnBoard(with id: Int, tile: Tile)
+    func changePlayerShift()
 }
 

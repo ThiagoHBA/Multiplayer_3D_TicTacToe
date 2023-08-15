@@ -61,18 +61,28 @@ final class TicTacToeClient: Client {
     }
     
     func sendMessage(_ message: TransferMessage) {
-        
+        guard let webSocket = webSocket else { return }
+        let encondedData = try! JSONEncoder().encode(message)
+        webSocket.send(URLSessionWebSocketTask.Message.data(encondedData)) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func handleMessageFromServer(_ message: TransferMessage) {
         switch message.type {
-        case .connection(_):
-            handleConnectionMessages(message)
-            break
-        case .gameFlow(let value):
-            handleGameFlowMessages(message, value)
-            break
-        }
+            case .client(_): break
+            case .server(let serverMessage):
+                switch serverMessage {
+                    case .connection(_):
+                        handleConnectionMessages(message)
+                        break
+                    case .gameFlow(let value):
+                        handleGameFlowMessages(message, value)
+                        break
+                }
+            }
     }
 }
 
@@ -85,14 +95,20 @@ extension TicTacToeClient {
         }
     }
     
-    func handleGameFlowMessages(_ message: TransferMessage, _ messageValue: MessageType.GameFlow) {
+    func handleGameFlowMessages(_ message: TransferMessage, _ messageValue: MessageType.ServerMessages.ServerGameFlow) {
         switch messageValue {
-        case .gameStarted:
-            guard let dto: BooleanMessageDTO = decodeDTO(message.data) else { break }
-            if dto.value { clientOutput?.gameDidStart() }
-        case .newState:
-            guard let dto: SessionParameters = decodeDTO(message.data) else { break }
-            clientOutput?.didUpdateSessionParameters(dto)
+            case .gameStarted:
+                guard let dto: BooleanMessageDTO = decodeDTO(message.data) else { break }
+                if dto.value { clientOutput?.didGameStart() }
+            case .newState:
+                guard let dto: SessionParameters = decodeDTO(message.data) else { break }
+                clientOutput?.didUpdateSessionParameters(dto)
+            case .playerMove:
+                guard let dto: PlayerMoveDTO = decodeDTO(message.data) else { break }
+                clientOutput?.didFinishPlayerMove(on: dto.boardId, in: dto.addedTile)
+            case .changeShift:
+                guard let dto: ChangeShiftDTO = decodeDTO(message.data) else { break }
+                clientOutput?.didChangeShift(dto.shiftPlayerId)
         }
     }
 }

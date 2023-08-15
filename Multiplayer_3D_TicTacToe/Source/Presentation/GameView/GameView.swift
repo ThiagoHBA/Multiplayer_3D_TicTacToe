@@ -10,6 +10,7 @@ import SwiftUI
 struct GameView: View {
     @EnvironmentObject var sessionVM: SessionViewModel
     @State private var errorAlert: AlertError = AlertError()
+    @State private var confirmationAlert: ConfirmationAlert = ConfirmationAlert()
     @State var server: any Server
     var client: any Client
     
@@ -25,17 +26,34 @@ struct GameView: View {
             HStack(alignment: .top, spacing: 8) {
                 ForEach(0..<3) { index in
                     TicTacToeBoard(
-                        tiles: sessionVM.parameters.boards[index].tiles,
-                        boardId: sessionVM.parameters.boards[index].id,
+                        tiles: sessionVM.boards[index].tiles,
+                        boardId: sessionVM.boards[index].id,
                         inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
                         backgroundColor: .red,
                         tileTapped: { position in
-                            sessionVM.parameters.boards[index].tiles.append(
-                                Tile(
-                                    boardId: sessionVM.parameters.boards[index].id,
-                                    style: .cross,
-                                    position: position
-                                )
+                            if !sessionVM.isPlayerShift { return }
+                            confirmationAlert = ConfirmationAlert(
+                                showAlert: true,
+                                description: "Você confirma a colocação do ponto?",
+                                action: {
+                                    client.sendMessage(
+                                        TransferMessage.getPlayerDidEndTheMoveMessage(
+                                            on: sessionVM.boards[index].id,
+                                            Tile(
+                                                boardId: sessionVM.boards[index].id,
+                                                style: .cross,
+                                                position: position
+                                            )
+                                        )
+                                    )
+//                                    sessionVM.parameters.boards[index].tiles.append(
+//                                        Tile(
+//                                            boardId: sessionVM.boards[index].id,
+//                                            style: .cross,
+//                                            position: position
+//                                        )
+//                                    )
+                                }
                             )
                         }
                     )
@@ -57,10 +75,12 @@ struct GameView: View {
                 client.connectToServer(url: server.serverURL)
             }
         }
-        .alert(isPresented: $errorAlert.showAlert) {
+        .alert(isPresented: $confirmationAlert.showAlert) {
             Alert(
-                title: Text("Erro!"),
-                message: Text(errorAlert.errorMessage)
+                title: Text("Ação"),
+                message: Text(confirmationAlert.description),
+                primaryButton: .default(Text("Confirmar"), action: confirmationAlert.action),
+                secondaryButton: .cancel()
             )
         }
         .opacity(sessionVM.showConnectionSheet ? 0.05 : 1)
