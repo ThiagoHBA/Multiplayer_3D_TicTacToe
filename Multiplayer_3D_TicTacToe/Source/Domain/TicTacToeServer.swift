@@ -43,11 +43,7 @@ final class TicTacToeServer: Server {
         
         listener.newConnectionHandler = { newConnection in
             self.connectedClients.append(newConnection)
-            
-            newConnection.receiveMessage { [weak self] completeContent, contentContext, isComplete, error in
-                guard let data = completeContent else { return }
-                self?.handleMessageFromClient(data: data, connection: newConnection)
-            }
+            self.didReceiveAConnection(newConnection, completion: { _ in })
             newConnection.stateUpdateHandler = { state in
                 switch state {
                     case .waiting(_):
@@ -113,6 +109,21 @@ final class TicTacToeServer: Server {
             completion(nil)
         } catch {
             completion(.unableToEncodeMessage)
+        }
+    }
+    
+    private func didReceiveAConnection(
+        _ connection: NWConnection,
+        completion: @escaping (WebSocketError?) -> Void
+    ) {
+        connection.receiveMessage { [weak self] (data, context, isComplete, error) in
+            if let data = data {
+                self?.handleMessageFromClient(
+                    data: data,
+                    connection: connection
+                )
+                self?.didReceiveAConnection(connection, completion: completion)
+            }
         }
     }
     

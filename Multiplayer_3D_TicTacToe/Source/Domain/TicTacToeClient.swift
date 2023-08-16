@@ -31,7 +31,6 @@ final class TicTacToeClient: NSObject, Client {
                     return
                 case .success(let message):
                     self?.decodeServerMessage(message)
-                    break
                 }
                 self?.connectToServer(url: url)
             }
