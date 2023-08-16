@@ -10,6 +10,7 @@
 		000509E82A8D7C94008AA0EB /* ServerStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509E72A8D7C94008AA0EB /* ServerStatusLabel.swift */; };
 		000509EA2A8D7E7A008AA0EB /* ScreenPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509E92A8D7E7A008AA0EB /* ScreenPosition.swift */; };
 		000509EC2A8D7F10008AA0EB /* StatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509EB2A8D7F10008AA0EB /* StatusLabel.swift */; };
+		000509EF2A8D83A7008AA0EB /* ServerMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509EE2A8D83A7008AA0EB /* ServerMessages.swift */; };
 		0019A59E2A8932EE008A2930 /* GameViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */; };
 		0019A5A32A8B0CD2008A2930 /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5A22A8B0CD2008A2930 /* SessionViewModel.swift */; };
 		0019A5AB2A8BF858008A2930 /* SessionParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5AA2A8BF858008A2930 /* SessionParameters.swift */; };
@@ -69,6 +70,7 @@
 		000509E72A8D7C94008AA0EB /* ServerStatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerStatusLabel.swift; sourceTree = "<group>"; };
 		000509E92A8D7E7A008AA0EB /* ScreenPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenPosition.swift; sourceTree = "<group>"; };
 		000509EB2A8D7F10008AA0EB /* StatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLabel.swift; sourceTree = "<group>"; };
+		000509EE2A8D83A7008AA0EB /* ServerMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMessages.swift; sourceTree = "<group>"; };
 		0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewAssembler.swift; sourceTree = "<group>"; };
 		0019A5A22A8B0CD2008A2930 /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
 		0019A5AA2A8BF858008A2930 /* SessionParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionParameters.swift; sourceTree = "<group>"; };
@@ -136,9 +138,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000509ED2A8D8399008AA0EB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				000509EE2A8D83A7008AA0EB /* ServerMessages.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0019A5A12A8B0CBD008A2930 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				000509ED2A8D8399008AA0EB /* Model */,
 				0019A5A22A8B0CD2008A2930 /* SessionViewModel.swift */,
 			);
 			path = General;
@@ -505,6 +516,7 @@
 				001B70CA2A81B02700C16B23 /* AlertError.swift in Sources */,
 				001B70E02A82CD1B00C16B23 /* JoinGameSheet.swift in Sources */,
 				0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */,
+				000509EF2A8D83A7008AA0EB /* ServerMessages.swift in Sources */,
 				000509E82A8D7C94008AA0EB /* ServerStatusLabel.swift in Sources */,
 				001B70D22A81B93100C16B23 /* TilePosition.swift in Sources */,
 				001B70CD2A81B25500C16B23 /* TicTacToeBoard.swift in Sources */,

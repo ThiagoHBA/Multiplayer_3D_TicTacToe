@@ -19,7 +19,7 @@ struct GameView: View {
             if sessionVM.parameters.gameStarted {
                 ServerStatusLabel(
                     label: StatusLabel(
-                        text: sessionVM.serverStatus,
+                        text: sessionVM.serverStatus.rawValue,
                         position: .top
                     )
                 )
@@ -87,7 +87,7 @@ struct GameView: View {
                             .font(.title)
                             .bold()
                         
-                        Text(sessionVM.serverStatus)
+                        Text(sessionVM.serverStatus.rawValue)
                             .multilineTextAlignment(.center)
                             .font(.title2)
                     }

@@ -13,7 +13,7 @@ final class SessionViewModel: ObservableObject {
     @Published var goToGameView: Bool = false
     @Published var showJoinGameSheet: Bool = false
     
-    @Published var serverStatus = "Esperando jogador!"
+    @Published var serverStatus: ServerMessages = .waitingPlayer
     @Published var isHost = false
     @Published var playerIdentifier: Player? = nil
     @Published var isConnected = false
@@ -35,12 +35,11 @@ extension SessionViewModel: ClientOutput {
     func didChangeShift(_ newShiftPlayer: Int) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            guard let player = self.parameters.players.first(where: { $0.id == newShiftPlayer }) else { return }
             if let playerIdentifier = self.playerIdentifier {
                 if newShiftPlayer == playerIdentifier.id {
-                    self.serverStatus = "Seu turno! Seus pontos são: \(playerIdentifier.tileStyle.rawValue)"
+                    self.serverStatus = .playersTurn
                 } else {
-                    self.serverStatus = "Vez de \(player.name)"
+                    self.serverStatus = .otherPlayerTurn
                 }
             }
         }
