@@ -7,10 +7,15 @@
 
 import Foundation
 
-final class TicTacToeClient: Client {
+final class TicTacToeClient: NSObject, Client {
     private(set) var opened: Bool = false
     private(set) var webSocket: URLSessionWebSocketTask?
     static let shared = TicTacToeClient()
+    lazy var session: URLSession = URLSession(
+        configuration: .default,
+        delegate: self,
+        delegateQueue: nil
+    )
     
     weak var clientOutput: ClientOutput?
     
@@ -35,8 +40,6 @@ final class TicTacToeClient: Client {
     
     private func openWebSocket(_ baseURL: URL) {
         let request = URLRequest(url: baseURL)
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        
         webSocket  = session.webSocketTask(with: request)
         opened = true
         webSocket?.resume()
@@ -123,5 +126,16 @@ extension TicTacToeClient {
             clientOutput?.errorWhileReceivingMessage(WebSocketError.unableToEncodeMessage)
         }
         return nil
+    }
+}
+
+extension TicTacToeClient: URLSessionDelegate {
+    func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
+        opened = true
+    }
+    
+    func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
+        self.webSocket = nil
+        self.opened = false
     }
 }

@@ -8,27 +8,24 @@
 import SwiftUI
 
 struct TicTacToeBoard: View {
-    @State var tiles: [Tile]
-    var boardId: Int
+    @Binding var board: Board
     var inputedStyle: TileStyle
-    var backgroundColor: Color
-    var tileTapped: ((TilePosition) -> ())?
+    var tileTapped: ((Tile) -> ())?
     
     var body: some View {
         ZStack {
             Rectangle()
-                .background(backgroundColor)
+                .background(board.color.toSwiftUIColor())
                 .cornerRadius(12)
             
             VStack(spacing: 10.0) {
                 ForEach(0...2, id: \.self) { row in
                     HStack(spacing: 10.0) {
                         ForEach(0...2, id: \.self) { column in
-                            let tileAvailable = tiles.contains(where: {
-                                $0.position == TilePosition(row: row, column: column) &&
-                                $0.boardId == boardId
+                            let tile = board.tiles.first( where: {
+                                $0.position == TilePosition(row: row, column: column)
                             })
-                            Text(tileAvailable ? inputedStyle.rawValue : "")
+                            Text(tile?.style.rawValue ?? "")
                                 .font(.system(size: 24))
                                 .foregroundColor(.blue)
                                 .bold()
@@ -36,9 +33,13 @@ struct TicTacToeBoard: View {
                                 .aspectRatio(1, contentMode: .fit)
                                 .background(.white)
                                 .onTapGesture {
-                                    if !tileAvailable {
+                                    if tile == nil {
                                         tileTapped?(
-                                            TilePosition(row: row, column: column)
+                                            Tile(
+                                                boardId: board.id,
+                                                style: inputedStyle,
+                                                position: TilePosition(row: row, column: column)
+                                            )
                                         )
                                     }
                                 }

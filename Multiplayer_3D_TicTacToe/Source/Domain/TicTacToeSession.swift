@@ -39,7 +39,8 @@ final class TicTacToeSession: Session {
     }
     
     func addTileOnBoard(with id: Int, tile: Tile) {
-        sessionParameters.boards[id].tiles.append(tile)
+        guard let boardIndex = sessionParameters.boards.firstIndex(where: { $0.id == id }) else { return }
+        sessionParameters.boards[boardIndex].tiles.append(tile)
     }
     
     func changePlayerShift() {

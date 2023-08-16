@@ -12,6 +12,17 @@ enum BoardColor: Codable {
     case blue
     case red
     case green
+    
+    func toSwiftUIColor() -> Color {
+        switch self {
+            case .blue:
+                return Color.blue
+            case .red:
+                return Color.red
+            case .green:
+                return Color.green
+        }
+    }
 }
 
 struct Board: Identifiable, Codable {

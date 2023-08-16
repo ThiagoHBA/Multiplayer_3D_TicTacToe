@@ -24,36 +24,29 @@ struct GameView: View {
                     .padding([.bottom], 62)
             }
             HStack(alignment: .top, spacing: 8) {
-                ForEach(0..<3) { index in
+                ForEach($sessionVM.parameters.boards) { board in
                     TicTacToeBoard(
-                        tiles: sessionVM.parameters.boards[index].tiles,
-                        boardId: sessionVM.parameters.boards[index].id,
+                        board: board,
                         inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
-                        backgroundColor: .red,
-                        tileTapped: { position in
+                        tileTapped: { tile in
                             let isPlayerShift = sessionVM.parameters.shiftPlayerId == sessionVM.playerIdentifier?.id
-                            
+
                             if !isPlayerShift { return }
-                                
+
                             confirmationAlert = ConfirmationAlert(
                                 showAlert: true,
                                 description: "Você confirma a colocação do ponto?",
                                 action: {
                                     client.sendMessage(
                                         TransferMessage.getPlayerDidEndTheMoveMessage(
-                                            on: sessionVM.parameters.boards[index].id,
-                                            Tile(
-                                                boardId: sessionVM.parameters.boards[index].id,
-                                                style: .cross,
-                                                position: position
-                                            )
+                                            on: tile.boardId,
+                                            tile
                                         )
                                     )
                                 }
                             )
                         }
                     )
-                    .padding([.top], 120 * CGFloat(index))
                 }
             }
         }

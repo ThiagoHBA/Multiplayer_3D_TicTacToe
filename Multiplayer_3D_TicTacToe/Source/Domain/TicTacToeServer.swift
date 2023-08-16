@@ -20,6 +20,7 @@ final class TicTacToeServer: Server {
     init(port: UInt16 = 8080) throws {
         /// An object that stores the protocols to use for connections, options for sending data, and network path constraints.
         let parameters = NWParameters()
+        parameters.allowLocalEndpointReuse = true
         parameters.defaultProtocolStack.transportProtocol = NWProtocolTCP.Options()
         /// Default WebSocket protocol options
         let webSocketOptions = NWProtocolWebSocket.Options()
@@ -67,7 +68,7 @@ final class TicTacToeServer: Server {
                     case .failed(_):
                         completion(.cantConnectWithClient)
                     default:
-                        break
+                            break
                 }
             }
             
