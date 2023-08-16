@@ -15,7 +15,6 @@ struct TicTacToeBoard: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .background(board.color.toSwiftUIColor())
                 .cornerRadius(12)
             
             VStack(spacing: 10.0) {
@@ -27,11 +26,11 @@ struct TicTacToeBoard: View {
                             })
                             Text(tile?.style.rawValue ?? "")
                                 .font(.system(size: 24))
-                                .foregroundColor(.blue)
+                                .foregroundColor(.black)
                                 .bold()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .aspectRatio(1, contentMode: .fit)
-                                .background(.white)
+                                .background(board.color.toSwiftUIColor())
                                 .onTapGesture {
                                     if tile == nil {
                                         tileTapped?(
@@ -53,3 +52,17 @@ struct TicTacToeBoard: View {
         .frame(width: 180, height: 180)
     }
 }
+
+
+struct TicTacToeBoard_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        TicTacToeBoard(
+            board: .constant(Board(id: 1, color: .blue, tiles: [])),
+            inputedStyle: .circle
+        )
+    }
+}
+
+
+

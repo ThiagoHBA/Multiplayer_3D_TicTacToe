@@ -17,11 +17,13 @@ struct GameView: View {
     var body: some View {
         VStack {
             if sessionVM.parameters.gameStarted {
-                Text(sessionVM.serverStatus)
-                    .font(.largeTitle)
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .padding([.bottom], 62)
+                ServerStatusLabel(
+                    label: StatusLabel(
+                        text: sessionVM.serverStatus,
+                        position: .top
+                    )
+                )
+                .padding([.bottom], 120)
             }
             HStack(alignment: .top, spacing: 8) {
                 ForEach($sessionVM.parameters.boards) { board in
@@ -29,9 +31,7 @@ struct GameView: View {
                         board: board,
                         inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
                         tileTapped: { tile in
-                            let isPlayerShift = sessionVM.parameters.shiftPlayerId == sessionVM.playerIdentifier?.id
-
-                            if !isPlayerShift { return }
+                            if !sessionVM.isPlayerShift { return }
 
                             confirmationAlert = ConfirmationAlert(
                                 showAlert: true,
@@ -48,6 +48,8 @@ struct GameView: View {
                         }
                     )
                 }
+                .opacity(sessionVM.isPlayerShift ? 1 : 0.2)
+                .disabled(!sessionVM.parameters.gameStarted)
             }
         }
         .onAppear {

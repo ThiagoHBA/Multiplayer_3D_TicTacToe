@@ -21,6 +21,10 @@ final class SessionViewModel: ObservableObject {
     var showConnectionSheet: Bool {
         return isHost && !parameters.gameStarted
     }
+    
+    var isPlayerShift: Bool {
+        parameters.shiftPlayerId == playerIdentifier?.id
+    }
 }
 // MARK: - Client
 extension SessionViewModel: ClientOutput {
