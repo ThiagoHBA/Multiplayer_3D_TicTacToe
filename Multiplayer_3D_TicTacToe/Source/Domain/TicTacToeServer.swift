@@ -57,7 +57,7 @@ final class TicTacToeServer: Server {
                         )
                         self.sendMessageToAllClients(
                             TransferMessage.updateSessionParametersMessage(
-                                newState: self.gameSession.sessionParameters
+                                newState: self.gameSession.gameFlowParameters
                             )
                         )
                         completion(nil)
@@ -141,12 +141,12 @@ final class TicTacToeServer: Server {
         )
         self.sendMessageToAllClients(
             TransferMessage.getChangeShiftMessage(
-                gameSession.sessionParameters.shiftPlayerId
+                gameSession.gameFlowParameters.shiftPlayerId
             )
         )
         self.sendMessageToAllClients(
             TransferMessage.updateSessionParametersMessage(
-                newState: self.gameSession.sessionParameters
+                newState: self.gameSession.gameFlowParameters
             )
         )
     }
@@ -185,12 +185,12 @@ final class TicTacToeServer: Server {
                     )
                     sendMessageToAllClients(
                         TransferMessage.getChangeShiftMessage(
-                            gameSession.sessionParameters.shiftPlayerId
+                            gameSession.gameFlowParameters.shiftPlayerId
                         )
                     )
                     sendMessageToAllClients(
                         TransferMessage.updateSessionParametersMessage(
-                            newState: gameSession.sessionParameters
+                            newState: gameSession.gameFlowParameters
                         )
                     )
             case .playerSurrender:
@@ -199,11 +199,11 @@ final class TicTacToeServer: Server {
                     from: message.data
                 )
                 gameSession.playerSurrender(playerSurrenderDTO.player)
-                guard let winner = gameSession.sessionParameters.winner else { return }
+                guard let winner = gameSession.gameFlowParameters.winner else { return }
                 sendMessageToAllClients(TransferMessage.getGameEndMessage(winner))
                 sendMessageToAllClients(
                     TransferMessage.updateSessionParametersMessage(
-                        newState: gameSession.sessionParameters
+                        newState: gameSession.gameFlowParameters
                     )
                 )
         }

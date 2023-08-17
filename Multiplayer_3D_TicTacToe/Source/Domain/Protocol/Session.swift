@@ -8,7 +8,9 @@
 import Foundation
 
 protocol Session {
-    var sessionParameters: GameFlowParameters { get }
+    var gameFlowParameters: GameFlowParameters { get }
+    var chatParameters: ChatParameters { get }
+    
     func addPlayerInSession() -> Player
     func selectStarterPlayer()
     func startGame()
