@@ -12,6 +12,7 @@ struct SessionParameters: Codable {
     var shiftPlayerId: Int
     var gameStarted: Bool
     var boards: [Board] = Board.generateBoards()
+    var winner: Player? = nil
     
     static let initialState: SessionParameters = {
         let parameters = SessionParameters(players: [], shiftPlayerId: 0, gameStarted: false)

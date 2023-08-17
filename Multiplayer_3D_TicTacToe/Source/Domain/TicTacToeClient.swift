@@ -111,6 +111,9 @@ extension TicTacToeClient {
             case .changeShift:
                 guard let dto: ChangeShiftDTO = decodeDTO(message.data) else { break }
                 clientOutput?.didChangeShift(dto.shiftPlayerId)
+            case .gameEnd:
+                guard let dto: GameEndDTO = decodeDTO(message.data) else { break }
+                clientOutput?.didEndGame(dto.winner)
         }
     }
 }

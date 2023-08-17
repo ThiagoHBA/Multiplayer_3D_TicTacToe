@@ -28,9 +28,18 @@ final class SessionViewModel: ObservableObject {
 }
 // MARK: - Client
 extension SessionViewModel: ClientOutput {
-    func didFinishPlayerMove(on boardId: Int, in tile: Tile) {
-        
+    func didEndGame(_ winner: Player) {
+        DispatchQueue.main.async { [weak self] in
+            if let playerIdentifier = self?.playerIdentifier {
+                if playerIdentifier.id == winner.id {
+                    self?.serverStatus = .playerWinner
+                } else {
+                    self?.serverStatus = .playerLoser
+                }
+            }
+        }
     }
+    func didFinishPlayerMove(on boardId: Int, in tile: Tile) { }
     
     func didChangeShift(_ newShiftPlayer: Int) {
         DispatchQueue.main.async { [weak self] in

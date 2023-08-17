@@ -16,6 +16,7 @@ enum MessageType: Codable {
         
         enum ClientGameFlow: String, Codable {
             case playerMove = "#playerMove"
+            case playerSurrender = "#playerSurrender"
         }
     }
     
@@ -32,6 +33,7 @@ enum MessageType: Codable {
             case playerMove = "#playerMove"
             case changeShift = "#changeShift"
             case newState = "#newState"
+            case gameEnd = "#gameEnd"
         }
     }
 }
@@ -90,6 +92,15 @@ extension TransferMessage {
             )
         )
     }
+    
+    static func getGameEndMessage(_ winner: Player) -> TransferMessage {
+        return TransferMessage(
+            type: .server(.gameFlow(.gameEnd)),
+            data: try! JSONEncoder().encode(
+                GameEndDTO(winner: winner)
+            )
+        )
+    }
 }
 
 // MARK: - Client Default Messages
@@ -99,6 +110,13 @@ extension TransferMessage {
         TransferMessage(
             type: .client(.gameFlow(.playerMove)),
             data: try! JSONEncoder().encode(PlayerMoveDTO(boardId: board, addedTile: tile))
+        )
+    }
+    
+    static func getPlayerSurrenderMessage(_ player: Player) -> TransferMessage {
+        TransferMessage(
+            type: .client(.gameFlow(.playerSurrender)),
+            data: try! JSONEncoder().encode(PlayerSurrenderDTO(player: player))
         )
     }
 }

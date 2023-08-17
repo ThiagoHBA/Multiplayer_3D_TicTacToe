@@ -193,6 +193,19 @@ final class TicTacToeServer: Server {
                             newState: gameSession.sessionParameters
                         )
                     )
+            case .playerSurrender:
+                let playerSurrenderDTO = try! JSONDecoder().decode(
+                    PlayerSurrenderDTO.self,
+                    from: message.data
+                )
+                gameSession.playerSurrender(playerSurrenderDTO.player)
+                guard let winner = gameSession.sessionParameters.winner else { return }
+                sendMessageToAllClients(TransferMessage.getGameEndMessage(winner))
+                sendMessageToAllClients(
+                    TransferMessage.updateSessionParametersMessage(
+                        newState: gameSession.sessionParameters
+                    )
+                )
         }
     }
 }

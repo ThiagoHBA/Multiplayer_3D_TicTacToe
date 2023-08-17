@@ -48,4 +48,13 @@ final class TicTacToeSession: Session {
         guard let nextPlayer = sessionParameters.players.first(where: { $0.id != currentPlayerId } ) else { return }
         sessionParameters.shiftPlayerId = nextPlayer.id
     }
+    
+    func playerSurrender(_ player: Player) {
+        for sessionPlayer in sessionParameters.players {
+            if sessionPlayer.id != player.id {
+                sessionParameters.winner = sessionPlayer
+                break
+            }
+        }
+    }
 }

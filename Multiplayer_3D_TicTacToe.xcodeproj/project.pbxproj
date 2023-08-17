@@ -11,6 +11,8 @@
 		000509EA2A8D7E7A008AA0EB /* ScreenPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509E92A8D7E7A008AA0EB /* ScreenPosition.swift */; };
 		000509EC2A8D7F10008AA0EB /* StatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509EB2A8D7F10008AA0EB /* StatusLabel.swift */; };
 		000509EF2A8D83A7008AA0EB /* ServerMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509EE2A8D83A7008AA0EB /* ServerMessages.swift */; };
+		000509F12A8D8A72008AA0EB /* PlayerSurrenderDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509F02A8D8A72008AA0EB /* PlayerSurrenderDTO.swift */; };
+		000509F32A8D8BAE008AA0EB /* GameEndDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509F22A8D8BAE008AA0EB /* GameEndDTO.swift */; };
 		0019A59E2A8932EE008A2930 /* GameViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */; };
 		0019A5A32A8B0CD2008A2930 /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5A22A8B0CD2008A2930 /* SessionViewModel.swift */; };
 		0019A5AB2A8BF858008A2930 /* SessionParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5AA2A8BF858008A2930 /* SessionParameters.swift */; };
@@ -71,6 +73,8 @@
 		000509E92A8D7E7A008AA0EB /* ScreenPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenPosition.swift; sourceTree = "<group>"; };
 		000509EB2A8D7F10008AA0EB /* StatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusLabel.swift; sourceTree = "<group>"; };
 		000509EE2A8D83A7008AA0EB /* ServerMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMessages.swift; sourceTree = "<group>"; };
+		000509F02A8D8A72008AA0EB /* PlayerSurrenderDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSurrenderDTO.swift; sourceTree = "<group>"; };
+		000509F22A8D8BAE008AA0EB /* GameEndDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndDTO.swift; sourceTree = "<group>"; };
 		0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewAssembler.swift; sourceTree = "<group>"; };
 		0019A5A22A8B0CD2008A2930 /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
 		0019A5AA2A8BF858008A2930 /* SessionParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionParameters.swift; sourceTree = "<group>"; };
@@ -189,8 +193,8 @@
 			children = (
 				0034035B2A7D7DCB00265AF3 /* Server.swift */,
 				001B70B82A8161B900C16B23 /* Client.swift */,
-				001B70E42A82DB1B00C16B23 /* ClientOutput.swift */,
 				001B70D72A82A7C900C16B23 /* Session.swift */,
+				001B70E42A82DB1B00C16B23 /* ClientOutput.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -264,6 +268,8 @@
 				0019A5AC2A8BFF3F008A2930 /* ConnectedMessageDTO.swift */,
 				0019A5B32A8C2F78008A2930 /* PlayerMoveDTO.swift */,
 				0019A5B82A8C399D008A2930 /* ChangeShiftDTO.swift */,
+				000509F02A8D8A72008AA0EB /* PlayerSurrenderDTO.swift */,
+				000509F22A8D8BAE008AA0EB /* GameEndDTO.swift */,
 			);
 			path = DTOS;
 			sourceTree = "<group>";
@@ -511,6 +517,7 @@
 				0019A59E2A8932EE008A2930 /* GameViewAssembler.swift in Sources */,
 				001B70DE2A82A85100C16B23 /* Player.swift in Sources */,
 				001B70C12A81A7F300C16B23 /* StartView.swift in Sources */,
+				000509F12A8D8A72008AA0EB /* PlayerSurrenderDTO.swift in Sources */,
 				001B70D02A81B7BF00C16B23 /* Board.swift in Sources */,
 				0019A5AB2A8BF858008A2930 /* SessionParameters.swift in Sources */,
 				001B70CA2A81B02700C16B23 /* AlertError.swift in Sources */,
@@ -529,6 +536,7 @@
 				001B70E52A82DB1B00C16B23 /* ClientOutput.swift in Sources */,
 				0093242E2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift in Sources */,
 				001B70C72A81AC9000C16B23 /* StartViewAssembler.swift in Sources */,
+				000509F32A8D8BAE008AA0EB /* GameEndDTO.swift in Sources */,
 				0034032A2A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift in Sources */,
 				0019A5B02A8C2AEA008A2930 /* ConfirmationAlert.swift in Sources */,
 				0019A5B92A8C399D008A2930 /* ChangeShiftDTO.swift in Sources */,

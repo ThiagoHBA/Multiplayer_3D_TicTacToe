@@ -14,4 +14,5 @@ protocol ClientOutput: AnyObject {
     func didGameStart()
     func didFinishPlayerMove(on boardId: Int, in tile: Tile)
     func didChangeShift(_ newShiftPlayer: Int)
+    func didEndGame(_ winner: Player)
 }

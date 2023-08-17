@@ -48,10 +48,11 @@ struct GameView: View {
                         }
                     )
                 }
-                .opacity(sessionVM.isPlayerShift ? 1 : 0.2)
-                .disabled(!sessionVM.parameters.gameStarted)
+                .opacity(sessionVM.isPlayerShift || sessionVM.parameters.winner != nil ? 1 : 0.2)
+                .disabled(!sessionVM.parameters.gameStarted || sessionVM.parameters.winner != nil)
             }
         }
+        .padding([.horizontal], 64)
         .onAppear {
             if sessionVM.isHost {
                 server.startServer { error in
@@ -101,6 +102,18 @@ struct GameView: View {
                                 .bold()
                         }
                     }
+                }
+            }
+        }
+        .toolbar {
+            if sessionVM.parameters.gameStarted {
+                Button("Chat") {
+                    
+                }
+                
+                Button("Desistir") {
+                    guard let player = sessionVM.playerIdentifier else { return }
+                    client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
                 }
             }
         }
