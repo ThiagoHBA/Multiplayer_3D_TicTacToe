@@ -30,7 +30,9 @@ final class SessionViewModel: ObservableObject {
 // MARK: - Client
 extension SessionViewModel: ClientOutput {
     func didReceiveAChatMessage(_ message: ChatMessage) {
-        chatParameters.messages.append(message)
+        DispatchQueue.main.async { [weak self] in
+            self?.chatParameters.messages.append(message)
+        }
     }
     
     func didEndGame(_ winner: Player) {

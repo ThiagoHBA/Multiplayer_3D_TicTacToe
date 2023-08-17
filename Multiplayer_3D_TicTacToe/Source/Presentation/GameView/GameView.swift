@@ -11,6 +11,7 @@ struct GameView: View {
     @EnvironmentObject var sessionVM: SessionViewModel
     @State private var errorAlert: AlertError = AlertError()
     @State private var confirmationAlert: ConfirmationAlert = ConfirmationAlert()
+    @State private var showChatSheet: Bool = false
     @State var server: any Server
     var client: any Client
     
@@ -32,7 +33,7 @@ struct GameView: View {
                         inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
                         tileTapped: { tile in
                             if !sessionVM.isPlayerShift { return }
-
+                            
                             confirmationAlert = ConfirmationAlert(
                                 showAlert: true,
                                 description: "Você confirma a colocação do ponto?",
@@ -108,13 +109,33 @@ struct GameView: View {
         .toolbar {
             if sessionVM.gameFlowParameters.gameStarted {
                 Button("Chat") {
-                    
+                    showChatSheet.toggle()
                 }
                 
                 Button("Desistir") {
                     guard let player = sessionVM.playerIdentifier else { return }
                     client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
                 }
+            }
+        }
+        .sheet(isPresented: $showChatSheet) {
+            if let playerIdentifier = sessionVM.playerIdentifier {
+                ChatSheet(
+                    identifier: playerIdentifier,
+                    messages: sessionVM.chatParameters.messages,
+                    sendMessageOnTap: { message in
+                        client.sendMessage(
+                            TransferMessage.getSendChatMessage_Message(
+                                ChatMessage(
+                                    sender: playerIdentifier,
+                                    message: message,
+                                    sendedDate: Date.now
+                                )
+                            )
+                        )
+                    }
+                )
+                
             }
         }
         .navigationBarBackButtonHidden(true)
