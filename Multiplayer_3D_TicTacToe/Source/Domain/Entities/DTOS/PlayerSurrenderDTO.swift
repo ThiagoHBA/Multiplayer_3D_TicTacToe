@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct PlayerSurrenderDTO: Codable {
+struct PlayerSurrenderDTO: DTO {
     let player: Player
 }

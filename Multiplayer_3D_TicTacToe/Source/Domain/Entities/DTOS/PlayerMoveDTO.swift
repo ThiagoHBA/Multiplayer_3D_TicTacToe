@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PlayerMoveDTO: Codable {
+struct PlayerMoveDTO: DTO {
     var boardId: Int
     var addedTile: Tile
 }

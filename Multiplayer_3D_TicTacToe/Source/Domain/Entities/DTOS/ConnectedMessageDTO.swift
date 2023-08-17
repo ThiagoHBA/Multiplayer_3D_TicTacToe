@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ConnectedMessageDTO: Codable {
+struct ConnectedMessageDTO: DTO {
     let connected: Bool
     let identifier: Player
 }

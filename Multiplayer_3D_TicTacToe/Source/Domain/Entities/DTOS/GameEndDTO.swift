@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct GameEndDTO: Codable {
+struct GameEndDTO: DTO {
     var winner: Player
 }

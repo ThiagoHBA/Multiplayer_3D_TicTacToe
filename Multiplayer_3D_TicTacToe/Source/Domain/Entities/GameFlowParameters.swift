@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GameFlowParameters: Codable {
+struct GameFlowParameters: DTO {
     var players: [Player]
     var shiftPlayerId: Int
     var gameStarted: Bool

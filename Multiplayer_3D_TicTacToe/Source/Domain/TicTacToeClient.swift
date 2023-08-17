@@ -91,7 +91,7 @@ final class TicTacToeClient: NSObject, Client {
 // MARK: - Message Handlers
 extension TicTacToeClient {
     func handleConnectionMessages(_ message: TransferMessage) {
-        guard let dto: ConnectedMessageDTO = decodeDTO(message.data) else { return }
+        let dto = ConnectedMessageDTO.decodeFromMessage(message.data)
         if dto.connected {
             clientOutput?.didConnectInServer(dto.identifier)
         }
@@ -100,34 +100,21 @@ extension TicTacToeClient {
     func handleGameFlowMessages(_ message: TransferMessage, _ messageValue: MessageType.ServerMessages.ServerGameFlow) {
         switch messageValue {
             case .gameStarted:
-                guard let dto: BooleanMessageDTO = decodeDTO(message.data) else { break }
+                let dto = BooleanMessageDTO.decodeFromMessage(message.data)
                 if dto.value { clientOutput?.didGameStart() }
             case .newState:
-                guard let dto: GameFlowParameters = decodeDTO(message.data) else { break }
+                let dto = GameFlowParameters.decodeFromMessage(message.data)
                 clientOutput?.didUpdateSessionParameters(dto)
             case .playerMove:
-                guard let dto: PlayerMoveDTO = decodeDTO(message.data) else { break }
+                let dto = PlayerMoveDTO.decodeFromMessage(message.data)
                 clientOutput?.didFinishPlayerMove(on: dto.boardId, in: dto.addedTile)
             case .changeShift:
-                guard let dto: ChangeShiftDTO = decodeDTO(message.data) else { break }
+                let dto = ChangeShiftDTO.decodeFromMessage(message.data)
                 clientOutput?.didChangeShift(dto.shiftPlayerId)
             case .gameEnd:
-                guard let dto: GameEndDTO = decodeDTO(message.data) else { break }
+                let dto = GameEndDTO.decodeFromMessage(message.data)
                 clientOutput?.didEndGame(dto.winner)
         }
-    }
-}
-
-// MARK: - Utilities
-extension TicTacToeClient {
-    private func decodeDTO<T: Decodable>(_ data: Data) -> T? {
-        do {
-            let data = try JSONDecoder().decode(T.self, from: data)
-            return data
-        } catch {
-            clientOutput?.errorWhileReceivingMessage(WebSocketError.unableToEncodeMessage)
-        }
-        return nil
     }
 }
 

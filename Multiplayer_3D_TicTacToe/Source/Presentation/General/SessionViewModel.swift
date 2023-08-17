@@ -29,6 +29,10 @@ final class SessionViewModel: ObservableObject {
 }
 // MARK: - Client
 extension SessionViewModel: ClientOutput {
+    func didReceiveAChatMessage(_ message: ChatMessage) {
+        
+    }
+    
     func didEndGame(_ winner: Player) {
         DispatchQueue.main.async { [weak self] in
             if let playerIdentifier = self?.playerIdentifier {

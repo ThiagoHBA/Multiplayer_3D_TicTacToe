@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct BooleanMessageDTO: Codable {
+struct BooleanMessageDTO: DTO {
     var value: Bool
 }

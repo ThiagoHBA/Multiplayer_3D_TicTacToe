@@ -14,6 +14,8 @@
 		000509F12A8D8A72008AA0EB /* PlayerSurrenderDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509F02A8D8A72008AA0EB /* PlayerSurrenderDTO.swift */; };
 		000509F32A8D8BAE008AA0EB /* GameEndDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509F22A8D8BAE008AA0EB /* GameEndDTO.swift */; };
 		000509F52A8E79AF008AA0EB /* ChatParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509F42A8E79AF008AA0EB /* ChatParameters.swift */; };
+		000509FA2A8E800C008AA0EB /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509F92A8E800C008AA0EB /* MessageType.swift */; };
+		000509FD2A8E816C008AA0EB /* DTOProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000509FC2A8E816C008AA0EB /* DTOProtocol.swift */; };
 		0019A59E2A8932EE008A2930 /* GameViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */; };
 		0019A5A32A8B0CD2008A2930 /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5A22A8B0CD2008A2930 /* SessionViewModel.swift */; };
 		0019A5AB2A8BF858008A2930 /* GameFlowParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0019A5AA2A8BF858008A2930 /* GameFlowParameters.swift */; };
@@ -77,6 +79,8 @@
 		000509F02A8D8A72008AA0EB /* PlayerSurrenderDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSurrenderDTO.swift; sourceTree = "<group>"; };
 		000509F22A8D8BAE008AA0EB /* GameEndDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndDTO.swift; sourceTree = "<group>"; };
 		000509F42A8E79AF008AA0EB /* ChatParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatParameters.swift; sourceTree = "<group>"; };
+		000509F92A8E800C008AA0EB /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
+		000509FC2A8E816C008AA0EB /* DTOProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOProtocol.swift; sourceTree = "<group>"; };
 		0019A59D2A8932EE008A2930 /* GameViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewAssembler.swift; sourceTree = "<group>"; };
 		0019A5A22A8B0CD2008A2930 /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
 		0019A5AA2A8BF858008A2930 /* GameFlowParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFlowParameters.swift; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			children = (
 				001B70BB2A81637700C16B23 /* TransferMessage.swift */,
 				0019A5B12A8C2E23008A2930 /* MessageSource.swift */,
+				000509F92A8E800C008AA0EB /* MessageType.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -179,6 +184,14 @@
 				003403632A7D81DD00265AF3 /* WebSocketError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		000509FB2A8E8166008AA0EB /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				000509FC2A8E816C008AA0EB /* DTOProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		0019A5A12A8B0CBD008A2930 /* General */ = {
@@ -291,6 +304,7 @@
 		001B70E12A82D99500C16B23 /* DTOS */ = {
 			isa = PBXGroup;
 			children = (
+				000509FB2A8E8166008AA0EB /* Protocol */,
 				0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */,
 				0019A5AC2A8BFF3F008A2930 /* ConnectedMessageDTO.swift */,
 				0019A5B32A8C2F78008A2930 /* PlayerMoveDTO.swift */,
@@ -548,6 +562,7 @@
 				001B70D02A81B7BF00C16B23 /* Board.swift in Sources */,
 				0019A5AB2A8BF858008A2930 /* GameFlowParameters.swift in Sources */,
 				001B70CA2A81B02700C16B23 /* AlertError.swift in Sources */,
+				000509FD2A8E816C008AA0EB /* DTOProtocol.swift in Sources */,
 				001B70E02A82CD1B00C16B23 /* JoinGameSheet.swift in Sources */,
 				0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */,
 				000509EF2A8D83A7008AA0EB /* ServerMessages.swift in Sources */,
@@ -568,6 +583,7 @@
 				0019A5B02A8C2AEA008A2930 /* ConfirmationAlert.swift in Sources */,
 				0019A5B92A8C399D008A2930 /* ChangeShiftDTO.swift in Sources */,
 				001B70D62A82A46900C16B23 /* TileStyle.swift in Sources */,
+				000509FA2A8E800C008AA0EB /* MessageType.swift in Sources */,
 				001B70DA2A82A80400C16B23 /* TicTacToeSession.swift in Sources */,
 				001B70B62A8161A800C16B23 /* TicTacToeClient.swift in Sources */,
 				0019A5B22A8C2E23008A2930 /* MessageSource.swift in Sources */,

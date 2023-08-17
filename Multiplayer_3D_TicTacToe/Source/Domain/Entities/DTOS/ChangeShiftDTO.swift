@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct ChangeShiftDTO: Codable {
+struct ChangeShiftDTO: DTO {
     var shiftPlayerId: Int
 }

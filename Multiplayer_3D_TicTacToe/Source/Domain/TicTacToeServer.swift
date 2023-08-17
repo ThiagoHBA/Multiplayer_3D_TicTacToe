@@ -161,7 +161,9 @@ final class TicTacToeServer: Server {
                 switch clientMessage {
                     case .gameFlow(let gameFlowMessage):
                         handleGameFlowMessages(transferMessage, gameFlowMessage)
-                }
+            case .chat(_):
+                break
+            }
         }
     }
     
@@ -171,10 +173,7 @@ final class TicTacToeServer: Server {
     ) {
         switch source {
             case .playerMove:
-                    let playerMovementMessage = try! JSONDecoder().decode(
-                        PlayerMoveDTO.self,
-                        from: message.data
-                    )
+                    let playerMovementMessage = PlayerMoveDTO.decodeFromMessage(message.data)
                     let boardId = playerMovementMessage.boardId
                     let tile = playerMovementMessage.addedTile
             
@@ -194,10 +193,7 @@ final class TicTacToeServer: Server {
                         )
                     )
             case .playerSurrender:
-                let playerSurrenderDTO = try! JSONDecoder().decode(
-                    PlayerSurrenderDTO.self,
-                    from: message.data
-                )
+                let playerSurrenderDTO = PlayerSurrenderDTO.decodeFromMessage(message.data)
                 gameSession.playerSurrender(playerSurrenderDTO.player)
                 guard let winner = gameSession.gameFlowParameters.winner else { return }
                 sendMessageToAllClients(TransferMessage.getGameEndMessage(winner))

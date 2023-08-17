@@ -7,38 +7,6 @@
 
 import Foundation
 
-enum MessageType: Codable {
-    case client(ClientMessages)
-    case server(ServerMessages)
-    
-    enum ClientMessages: Codable {
-        case gameFlow(ClientGameFlow)
-        
-        enum ClientGameFlow: String, Codable {
-            case playerMove = "#playerMove"
-            case playerSurrender = "#playerSurrender"
-        }
-    }
-    
-    enum ServerMessages: Codable {
-        case connection(ServerConnection)
-        case gameFlow(ServerGameFlow)
-        
-        enum ServerConnection: String, Codable {
-            case connected = "#connected"
-        }
-        
-        enum ServerGameFlow: String, Codable {
-            case gameStarted = "#gameStarted"
-            case playerMove = "#playerMove"
-            case changeShift = "#changeShift"
-            case newState = "#newState"
-            case gameEnd = "#gameEnd"
-        }
-    }
-}
-
-// MARK: - Server Default Messages
 struct TransferMessage: Codable {
     var type: MessageType
     var data: Data
@@ -48,57 +16,47 @@ struct TransferMessage: Codable {
     }
 }
 
+// MARK: Server Default Messages
 extension TransferMessage {
     static func getConnectedMessage(identifier: Player) -> TransferMessage {
         return TransferMessage(
             type: .server(.connection(.connected)),
-            data: try! JSONEncoder().encode(
-                ConnectedMessageDTO(
-                    connected: true,
-                    identifier: identifier
-                )
-            )
+            data: ConnectedMessageDTO(connected: true, identifier: identifier).encodeToTransfer()
         )
     }
     
     static func getGameStartedMessage(value: Bool) -> TransferMessage {
         return TransferMessage(
             type: .server(.gameFlow(.gameStarted)),
-            data: try! JSONEncoder().encode(BooleanMessageDTO(value: value))
+            data: BooleanMessageDTO(value: value).encodeToTransfer()
         )
     }
     
     static func updateSessionParametersMessage(newState: GameFlowParameters) -> TransferMessage {
         return TransferMessage(
             type: .server(.gameFlow(.newState)),
-            data: try! JSONEncoder().encode(newState)
+            data: newState.encodeToTransfer()
         )
     }
     
     static func getEndPlayerMoveMessage(boardId: Int, tile: Tile) -> TransferMessage {
         return TransferMessage(
             type: .server(.gameFlow(.playerMove)),
-            data: try! JSONEncoder().encode(
-                PlayerMoveDTO(boardId: boardId, addedTile: tile)
-            )
+            data: PlayerMoveDTO(boardId: boardId, addedTile: tile).encodeToTransfer()
         )
     }
     
     static func getChangeShiftMessage(_ newShiftPlayerId: Int) -> TransferMessage {
         return TransferMessage(
             type: .server(.gameFlow(.changeShift)),
-            data: try! JSONEncoder().encode(
-                ChangeShiftDTO(shiftPlayerId: newShiftPlayerId)
-            )
+            data: ChangeShiftDTO(shiftPlayerId: newShiftPlayerId).encodeToTransfer()
         )
     }
     
     static func getGameEndMessage(_ winner: Player) -> TransferMessage {
         return TransferMessage(
             type: .server(.gameFlow(.gameEnd)),
-            data: try! JSONEncoder().encode(
-                GameEndDTO(winner: winner)
-            )
+            data: GameEndDTO(winner: winner).encodeToTransfer()
         )
     }
 }
@@ -107,16 +65,23 @@ extension TransferMessage {
 
 extension TransferMessage {
     static func getPlayerDidEndTheMoveMessage(on board: Int, _ tile: Tile) -> TransferMessage {
-        TransferMessage(
+        return TransferMessage(
             type: .client(.gameFlow(.playerMove)),
-            data: try! JSONEncoder().encode(PlayerMoveDTO(boardId: board, addedTile: tile))
+            data: PlayerMoveDTO(boardId: board, addedTile: tile).encodeToTransfer()
         )
     }
     
     static func getPlayerSurrenderMessage(_ player: Player) -> TransferMessage {
-        TransferMessage(
+        return TransferMessage(
             type: .client(.gameFlow(.playerSurrender)),
-            data: try! JSONEncoder().encode(PlayerSurrenderDTO(player: player))
+            data: PlayerSurrenderDTO(player: player).encodeToTransfer()
         )
     }
+    
+//    static func getSendChatMessage_Message() -> TransferMessage {
+//        return TransferMessage(
+//            type: .client(.chat(.sendChatMessage)),
+//            data:
+//        )
+//    }
 }
