@@ -161,10 +161,18 @@ final class TicTacToeServer: Server {
                 switch clientMessage {
                     case .gameFlow(let gameFlowMessage):
                         handleGameFlowMessages(transferMessage, gameFlowMessage)
-            case .chat(_):
-                break
-            }
+                    case .chat(_):
+                        handleChatMessages(transferMessage)
+                }
         }
+    }
+    
+    func handleChatMessages(_ message: TransferMessage) {
+        let dto = ChatMessageDTO.decodeFromMessage(message.data)
+        gameSession.addChatMessage(dto.message)
+        sendMessageToAllClients(
+            TransferMessage.getReceiveChatMessage_Message(dto.message)
+        )
     }
     
     func handleGameFlowMessages(

@@ -79,10 +79,10 @@ final class TicTacToeClient: NSObject, Client {
                 switch serverMessage {
                     case .connection(_):
                         handleConnectionMessages(message)
-                        break
                     case .gameFlow(let value):
                         handleGameFlowMessages(message, value)
-                        break
+                    case .chat(_):
+                        handleChatMessages(message)
                 }
             }
     }
@@ -115,6 +115,11 @@ extension TicTacToeClient {
                 let dto = GameEndDTO.decodeFromMessage(message.data)
                 clientOutput?.didEndGame(dto.winner)
         }
+    }
+    
+    func handleChatMessages(_ message: TransferMessage) {
+        let dto = ChatMessageDTO.decodeFromMessage(message.data)
+        clientOutput?.didReceiveAChatMessage(dto.message)
     }
 }
 

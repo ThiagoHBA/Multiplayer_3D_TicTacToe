@@ -59,6 +59,13 @@ extension TransferMessage {
             data: GameEndDTO(winner: winner).encodeToTransfer()
         )
     }
+    
+    static func getReceiveChatMessage_Message(_ message: ChatMessage) -> TransferMessage {
+        return TransferMessage(
+            type: .server(.chat(.receiveChatMessage)),
+            data: ChatMessageDTO(message: message).encodeToTransfer()
+        )
+    }
 }
 
 // MARK: - Client Default Messages
@@ -78,10 +85,10 @@ extension TransferMessage {
         )
     }
     
-//    static func getSendChatMessage_Message() -> TransferMessage {
-//        return TransferMessage(
-//            type: .client(.chat(.sendChatMessage)),
-//            data:
-//        )
-//    }
+    static func getSendChatMessage_Message(_ messageToSend: ChatMessage) -> TransferMessage {
+        return TransferMessage(
+            type: .client(.chat(.sendChatMessage)),
+            data: ChatMessageDTO(message: messageToSend).encodeToTransfer()
+        )
+    }
 }

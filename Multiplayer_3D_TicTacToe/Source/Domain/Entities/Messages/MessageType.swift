@@ -29,6 +29,7 @@ enum MessageType: Codable {
     enum ServerMessages: Codable {
         case connection(ServerConnection)
         case gameFlow(ServerGameFlow)
+        case chat(ServerChat)
         
         enum ServerConnection: String, Codable {
             case connected = "#connected"
@@ -40,6 +41,10 @@ enum MessageType: Codable {
             case changeShift = "#changeShift"
             case newState = "#newState"
             case gameEnd = "#gameEnd"
+        }
+        
+        enum ServerChat: String, Codable {
+            case receiveChatMessage = "#receiveChatMessage"
         }
     }
 }
