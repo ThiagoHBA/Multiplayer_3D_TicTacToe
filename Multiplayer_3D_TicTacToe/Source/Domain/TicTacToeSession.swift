@@ -8,8 +8,8 @@
 import Foundation
 
 final class TicTacToeSession: Session {
-    var chatParameters: ChatParameters = ChatParameters(messages: [])
-    var gameFlowParameters: GameFlowParameters = GameFlowParameters.initialState
+    private(set) var chatParameters: ChatParameters = ChatParameters(messages: [])
+    private(set) var gameFlowParameters: GameFlowParameters = GameFlowParameters.initialState
      
     func addPlayerInSession() -> Player {
         var newPlayerStyle = TileStyle.randomStyle()
@@ -57,5 +57,9 @@ final class TicTacToeSession: Session {
                 break
             }
         }
+    }
+    
+    func addChatMessage(_ message: ChatMessage) {
+        chatParameters.messages.append(message)
     }
 }

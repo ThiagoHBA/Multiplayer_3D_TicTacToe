@@ -17,5 +17,6 @@ protocol Session {
     func addTileOnBoard(with id: Int, tile: Tile)
     func changePlayerShift()
     func playerSurrender(_ player: Player)
+    func addChatMessage(_ message: ChatMessage)
 }
 
