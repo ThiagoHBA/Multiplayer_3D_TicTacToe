@@ -8,7 +8,7 @@
 import Foundation
 
 final class SessionViewModel: ObservableObject {
-    @Published var parameters: GameFlowParameters = GameFlowParameters.initialState
+    @Published var gameFlowParameters: GameFlowParameters = GameFlowParameters.initialState
     
     @Published var goToGameView: Bool = false
     @Published var showJoinGameSheet: Bool = false
@@ -19,11 +19,11 @@ final class SessionViewModel: ObservableObject {
     @Published var isConnected = false
     
     var showConnectionSheet: Bool {
-        return isHost && !parameters.gameStarted
+        return isHost && !gameFlowParameters.gameStarted
     }
     
     var isPlayerShift: Bool {
-        parameters.shiftPlayerId == playerIdentifier?.id
+        gameFlowParameters.shiftPlayerId == playerIdentifier?.id
     }
 }
 // MARK: - Client
@@ -64,7 +64,7 @@ extension SessionViewModel: ClientOutput {
     
     func didUpdateSessionParameters(_ newState: GameFlowParameters) {
         DispatchQueue.main.async { [weak self] in
-            self?.parameters = newState
+            self?.gameFlowParameters = newState
         }
     }
     

@@ -16,7 +16,7 @@ struct GameView: View {
     
     var body: some View {
         VStack {
-            if sessionVM.parameters.gameStarted {
+            if sessionVM.gameFlowParameters.gameStarted {
                 ServerStatusLabel(
                     label: StatusLabel(
                         text: sessionVM.serverStatus.rawValue,
@@ -26,7 +26,7 @@ struct GameView: View {
                 .padding([.bottom], 120)
             }
             HStack(alignment: .top, spacing: 8) {
-                ForEach($sessionVM.parameters.boards) { board in
+                ForEach($sessionVM.gameFlowParameters.boards) { board in
                     TicTacToeBoard(
                         board: board,
                         inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
@@ -48,8 +48,8 @@ struct GameView: View {
                         }
                     )
                 }
-                .opacity(sessionVM.isPlayerShift || sessionVM.parameters.winner != nil ? 1 : 0.2)
-                .disabled(!sessionVM.parameters.gameStarted || sessionVM.parameters.winner != nil)
+                .opacity(sessionVM.isPlayerShift || sessionVM.gameFlowParameters.winner != nil ? 1 : 0.2)
+                .disabled(!sessionVM.gameFlowParameters.gameStarted || sessionVM.gameFlowParameters.winner != nil)
             }
         }
         .padding([.horizontal], 64)
@@ -94,7 +94,7 @@ struct GameView: View {
                     }
                     .padding(18)
                     
-                    if sessionVM.parameters.players.count >= 2 {
+                    if sessionVM.gameFlowParameters.players.count >= 2 {
                         Button {
                             server.startGame()
                         } label: {
@@ -106,7 +106,7 @@ struct GameView: View {
             }
         }
         .toolbar {
-            if sessionVM.parameters.gameStarted {
+            if sessionVM.gameFlowParameters.gameStarted {
                 Button("Chat") {
                     
                 }
