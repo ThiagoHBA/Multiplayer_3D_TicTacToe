@@ -8,7 +8,7 @@
 import Foundation
 
 final class TicTacToeSession: Session {
-    var sessionParameters: SessionParameters = SessionParameters.initialState
+    var sessionParameters: GameFlowParameters = GameFlowParameters.initialState
      
     func addPlayerInSession() -> Player {
         var newPlayerStyle = TileStyle.randomStyle()

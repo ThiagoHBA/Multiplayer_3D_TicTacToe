@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct SessionParameters: Codable {
+struct GameFlowParameters: Codable {
     var players: [Player]
     var shiftPlayerId: Int
     var gameStarted: Bool
     var boards: [Board] = Board.generateBoards()
     var winner: Player? = nil
     
-    static let initialState: SessionParameters = {
-        let parameters = SessionParameters(players: [], shiftPlayerId: 0, gameStarted: false)
+    static let initialState: GameFlowParameters = {
+        let parameters = GameFlowParameters(players: [], shiftPlayerId: 0, gameStarted: false)
         return parameters
     }()
 }

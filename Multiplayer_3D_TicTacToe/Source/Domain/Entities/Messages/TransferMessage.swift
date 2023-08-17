@@ -68,7 +68,7 @@ extension TransferMessage {
         )
     }
     
-    static func updateSessionParametersMessage(newState: SessionParameters) -> TransferMessage {
+    static func updateSessionParametersMessage(newState: GameFlowParameters) -> TransferMessage {
         return TransferMessage(
             type: .server(.gameFlow(.newState)),
             data: try! JSONEncoder().encode(newState)

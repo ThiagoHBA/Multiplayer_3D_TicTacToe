@@ -8,7 +8,7 @@
 import Foundation
 
 final class SessionViewModel: ObservableObject {
-    @Published var parameters: SessionParameters = SessionParameters.initialState
+    @Published var parameters: GameFlowParameters = GameFlowParameters.initialState
     
     @Published var goToGameView: Bool = false
     @Published var showJoinGameSheet: Bool = false
@@ -62,7 +62,7 @@ extension SessionViewModel: ClientOutput {
         }
     }
     
-    func didUpdateSessionParameters(_ newState: SessionParameters) {
+    func didUpdateSessionParameters(_ newState: GameFlowParameters) {
         DispatchQueue.main.async { [weak self] in
             self?.parameters = newState
         }

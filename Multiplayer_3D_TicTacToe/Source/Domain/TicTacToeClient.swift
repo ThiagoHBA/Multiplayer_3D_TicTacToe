@@ -103,7 +103,7 @@ extension TicTacToeClient {
                 guard let dto: BooleanMessageDTO = decodeDTO(message.data) else { break }
                 if dto.value { clientOutput?.didGameStart() }
             case .newState:
-                guard let dto: SessionParameters = decodeDTO(message.data) else { break }
+                guard let dto: GameFlowParameters = decodeDTO(message.data) else { break }
                 clientOutput?.didUpdateSessionParameters(dto)
             case .playerMove:
                 guard let dto: PlayerMoveDTO = decodeDTO(message.data) else { break }
