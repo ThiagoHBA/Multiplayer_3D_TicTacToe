@@ -9,6 +9,7 @@ import Foundation
 
 final class SessionViewModel: ObservableObject {
     @Published var gameFlowParameters: GameFlowParameters = GameFlowParameters.initialState
+    @Published var chatParameters: ChatParameters = ChatParameters(messages: [])
     
     @Published var goToGameView: Bool = false
     @Published var showJoinGameSheet: Bool = false
