@@ -41,7 +41,7 @@ struct ChatSheet: View {
                             }
                         }
                     }
-                    .padding([.horizontal], 20)
+                    .padding([.horizontal], 12)
 
                 }
                 .rotationEffect(.radians(.pi))
@@ -53,13 +53,15 @@ struct ChatSheet: View {
             
             HStack {
                 TextField(
-                    "Write a message",
-                    text: $messageText
+                    "Escreva uma mensagem",
+                    text: $messageText,
+                    axis: .vertical
                 )
+                .frame(alignment: .bottom)
                 .padding()
-                .frame(height: 60, alignment: .bottom)
                 .background(.gray.opacity(0.3))
                 .cornerRadius(15)
+                .lineLimit(nil)
                 
                 Button {
                     sendMessageOnTap?(messageText)

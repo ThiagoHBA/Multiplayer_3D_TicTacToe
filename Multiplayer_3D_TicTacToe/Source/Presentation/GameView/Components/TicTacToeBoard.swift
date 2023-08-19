@@ -14,9 +14,6 @@ struct TicTacToeBoard: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .cornerRadius(12)
-            
             VStack(spacing: 10.0) {
                 ForEach(0...2, id: \.self) { row in
                     HStack(spacing: 10.0) {
@@ -46,10 +43,11 @@ struct TicTacToeBoard: View {
                     }
                 }
             }
-            .background(.black)
+            .background(.clear)
             .padding(12)
         }
-        .frame(width: 180, height: 180)
+        .frame(height: 180)
+        .cornerRadius(12)
     }
 }
 

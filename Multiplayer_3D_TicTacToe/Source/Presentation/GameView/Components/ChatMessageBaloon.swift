@@ -11,13 +11,12 @@ struct ChatMessageBaloon: View {
     var message: ChatMessage
     
     var body: some View {
-        HStack(alignment: .bottom, spacing: 24) {
+        HStack(alignment: .top) {
             
             Text(message.message)
                 .multilineTextAlignment(.leading)
                 .lineLimit(nil)
-            
-            Spacer()
+                .padding([.trailing], 16)
             
             VStack(alignment: .trailing) {
                 Image(
@@ -38,10 +37,7 @@ struct ChatMessageBaloon: View {
             }
             .padding(4)
         }
-        .frame(
-            width: 450,
-            alignment: .bottom
-        )
+        .frame(alignment: .bottom)
         .padding(18)
         .background(.blue)
         .cornerRadius(16)
@@ -53,7 +49,7 @@ struct ChatMessageBaloon_Previews: PreviewProvider {
         ChatMessageBaloon(
             message: ChatMessage(
                 sender: Player(id: 0, name: "Player 01", tileStyle: .circle, tiles: []),
-                message: "Message teste Message testeMessage testeMessage testeMessage testeMessage testeMessage testeMessage testeMessage teste",
+                message: "Message teste",
                 sendedDate: Date.now
             )
         )

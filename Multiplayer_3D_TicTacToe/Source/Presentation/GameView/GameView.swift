@@ -53,7 +53,6 @@ struct GameView: View {
                 .disabled(!sessionVM.gameFlowParameters.gameStarted || sessionVM.gameFlowParameters.winner != nil)
             }
         }
-        .padding([.horizontal], 64)
         .onAppear {
             if sessionVM.isHost {
                 server.startServer { error in
@@ -85,9 +84,11 @@ struct GameView: View {
                     
                     VStack(spacing: 24) {
                         Text("Código da sessão: \(ProcessInfo().hostName)")
+                            .lineLimit(nil)
                             .multilineTextAlignment(.center)
                             .font(.title)
                             .bold()
+                            .frame(height: 100)
                         
                         Text(sessionVM.serverStatus.rawValue)
                             .multilineTextAlignment(.center)
@@ -138,6 +139,7 @@ struct GameView: View {
                 
             }
         }
+        .padding([.horizontal], 16)
         .navigationBarBackButtonHidden(true)
     }
 }

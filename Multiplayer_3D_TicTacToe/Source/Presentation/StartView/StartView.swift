@@ -74,6 +74,7 @@ struct StartView: View {
                         client.connectToServer(url: serverURL)
                     }
                 )
+                .padding([.horizontal], 12)
             }
         }
     }
