@@ -62,4 +62,8 @@ final class TicTacToeSession: Session {
     func addChatMessage(_ message: ChatMessage) {
         chatParameters.messages.append(message)
     }
+    
+    func didHaveAWinner() -> Bool {
+        return false
+    }
 }

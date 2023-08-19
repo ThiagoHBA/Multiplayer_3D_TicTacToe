@@ -18,5 +18,6 @@ protocol Session {
     func changePlayerShift()
     func playerSurrender(_ player: Player)
     func addChatMessage(_ message: ChatMessage)
+    func didHaveAWinner() -> Bool
 }
 
