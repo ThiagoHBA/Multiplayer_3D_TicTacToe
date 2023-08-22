@@ -19,3 +19,13 @@ struct GameFlowParameters: DTO {
         return parameters
     }()
 }
+
+extension GameFlowParameters {
+    static let rowWinPatterns: [[TilePosition]] = [
+        [
+            TilePosition(row: 0, column: 0, depth: 0),
+            TilePosition(row: 0, column: 0, depth: 1),
+            TilePosition(row: 0, column: 0, depth: 2),
+        ],
+    ]
+}

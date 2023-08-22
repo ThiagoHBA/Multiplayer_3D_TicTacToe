@@ -63,7 +63,15 @@ final class TicTacToeSession: Session {
         chatParameters.messages.append(message)
     }
     
-    func didHaveAWinner() -> Bool {
+    func didHaveAWinner() -> Bool { 
+        let boards = gameFlowParameters.boards
+        
+        for board in boards {
+            for tile in board.tiles {
+                	
+            }
+        }
+        
         return false
     }
 }

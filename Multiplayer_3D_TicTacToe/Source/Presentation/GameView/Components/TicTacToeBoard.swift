@@ -19,7 +19,11 @@ struct TicTacToeBoard: View {
                     HStack(spacing: 10.0) {
                         ForEach(0...2, id: \.self) { column in
                             let tile = board.tiles.first( where: {
-                                $0.position == TilePosition(row: row, column: column)
+                                $0.position == TilePosition(
+                                    row: row,
+                                    column: column,
+                                    depth: board.id
+                                )
                             })
                             Text(tile?.style.rawValue ?? "")
                                 .font(.system(size: 24))
@@ -34,7 +38,11 @@ struct TicTacToeBoard: View {
                                             Tile(
                                                 boardId: board.id,
                                                 style: inputedStyle,
-                                                position: TilePosition(row: row, column: column)
+                                                position: TilePosition(
+                                                    row: row,
+                                                    column: column,
+                                                    depth: board.id
+                                                )
                                             )
                                         )
                                     }
