@@ -72,6 +72,11 @@ extension SessionViewModel: ClientOutput {
     func didUpdateSessionParameters(_ newState: GameFlowParameters) {
         DispatchQueue.main.async { [weak self] in
             self?.gameFlowParameters = newState
+            guard let playerIndex = newState.players.firstIndex(where: {
+                $0.id == self?.playerIdentifier?.id
+            }) else { return }
+            
+            self?.playerIdentifier = newState.players[playerIndex]
         }
     }
     

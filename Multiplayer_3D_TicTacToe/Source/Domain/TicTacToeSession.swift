@@ -10,7 +10,7 @@ import Foundation
 final class TicTacToeSession: Session {
     private(set) var chatParameters: ChatParameters = ChatParameters(messages: [])
     private(set) var gameFlowParameters: GameFlowParameters = GameFlowParameters.initialState
-     
+    
     func addPlayerInSession() -> Player {
         var newPlayerStyle = TileStyle.randomStyle()
         
@@ -44,6 +44,14 @@ final class TicTacToeSession: Session {
         gameFlowParameters.boards[boardIndex].tiles.append(tile)
     }
     
+    func addTileToPlayer(player: Player, tile: Tile) {
+        guard let position = tile.position else { return }
+        guard let playerIndex = gameFlowParameters.players.firstIndex(where: { $0.id == player.id} ) else { return }
+        
+        gameFlowParameters.players[playerIndex].tiles.append(position)
+        
+    }
+    
     func changePlayerShift() {
         let currentPlayerId = gameFlowParameters.shiftPlayerId
         guard let nextPlayer = gameFlowParameters.players.first(where: { $0.id != currentPlayerId } ) else { return }
@@ -64,14 +72,31 @@ final class TicTacToeSession: Session {
     }
     
     func didHaveAWinner() -> Bool { 
-        let boards = gameFlowParameters.boards
+//        let boards = gameFlowParameters.boards
+        let rowPatterns = GameFlowParameters.rowWinPatterns
+        let colPatterns = GameFlowParameters.colWinPatters
+        var winner: Bool = false
         
-        for board in boards {
-            for tile in board.tiles {
-                	
+        for player in gameFlowParameters.players {
+            print("Player \(player.name) tiles: \(player.tiles)")
+            
+            rowPatterns.forEach {
+                if player.tiles.contains($0) {
+                    winner = true
+                    gameFlowParameters.winner = player
+                }
             }
+            
+            colPatterns.forEach {
+                if player.tiles.contains($0) {
+                    winner = true
+                    gameFlowParameters.winner = player
+                }
+            }
+            
+            if winner { break }
         }
         
-        return false
+        return winner
     }
 }

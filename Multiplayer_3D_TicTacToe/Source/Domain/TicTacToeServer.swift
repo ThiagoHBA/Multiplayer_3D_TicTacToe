@@ -181,14 +181,30 @@ final class TicTacToeServer: Server {
     ) {
         switch source {
             case .playerMove:
-                    let playerMovementMessage = PlayerMoveDTO.decodeFromMessage(message.data)
-                    let boardId = playerMovementMessage.boardId
-                    let tile = playerMovementMessage.addedTile
+                let playerMovementMessage = PlayerMoveDTO.decodeFromMessage(message.data)
+                let player = playerMovementMessage.player
+                let boardId = playerMovementMessage.boardId
+                let tile = playerMovementMessage.addedTile
+        
+                gameSession.addTileOnBoard(with: boardId, tile: tile)
+                gameSession.addTileToPlayer(player: player, tile: tile)
             
-                    gameSession.addTileOnBoard(with: boardId, tile: tile)
+                if gameSession.didHaveAWinner() {
+                    guard let winner = gameSession.gameFlowParameters.winner else { return }
+                    sendMessageToAllClients(TransferMessage.getGameEndMessage(winner))
+                    sendMessageToAllClients(
+                        TransferMessage.updateSessionParametersMessage(
+                            newState: gameSession.gameFlowParameters
+                        )
+                    )
+                } else {
                     gameSession.changePlayerShift()
                     sendMessageToAllClients(
-                        TransferMessage.getEndPlayerMoveMessage(boardId: boardId, tile: tile)
+                        TransferMessage.getEndPlayerMoveMessage(
+                            player: player,
+                            boardId: boardId,
+                            tile: tile
+                        )
                     )
                     sendMessageToAllClients(
                         TransferMessage.getChangeShiftMessage(
@@ -200,6 +216,7 @@ final class TicTacToeServer: Server {
                             newState: gameSession.gameFlowParameters
                         )
                     )
+                }
             case .playerSurrender:
                 let playerSurrenderDTO = PlayerSurrenderDTO.decodeFromMessage(message.data)
                 gameSession.playerSurrender(playerSurrenderDTO.player)

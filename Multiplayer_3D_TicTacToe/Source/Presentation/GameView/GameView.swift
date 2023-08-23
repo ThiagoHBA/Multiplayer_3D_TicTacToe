@@ -40,6 +40,7 @@ struct GameView: View {
                                 action: {
                                     client.sendMessage(
                                         TransferMessage.getPlayerDidEndTheMoveMessage(
+                                            from: sessionVM.playerIdentifier!,
                                             on: tile.boardId,
                                             tile
                                         )
