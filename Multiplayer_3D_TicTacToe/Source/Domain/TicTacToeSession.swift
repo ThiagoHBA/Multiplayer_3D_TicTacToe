@@ -70,33 +70,32 @@ final class TicTacToeSession: Session {
     func addChatMessage(_ message: ChatMessage) {
         chatParameters.messages.append(message)
     }
-    
-    func didHaveAWinner() -> Bool { 
-//        let boards = gameFlowParameters.boards
+
+    func didHaveAWinner() -> [TilePosition] {
         let rowPatterns = GameFlowParameters.rowWinPatterns
         let colPatterns = GameFlowParameters.colWinPatters
-        var winner: Bool = false
+        var winningTiles: [TilePosition] = []
         
         for player in gameFlowParameters.players {
             print("Player \(player.name) tiles: \(player.tiles)")
             
             rowPatterns.forEach {
                 if player.tiles.contains($0) {
-                    winner = true
+                    winningTiles = $0
                     gameFlowParameters.winner = player
                 }
             }
             
             colPatterns.forEach {
                 if player.tiles.contains($0) {
-                    winner = true
+                    winningTiles = $0
                     gameFlowParameters.winner = player
                 }
             }
             
-            if winner { break }
+            if !winningTiles.isEmpty { break }
         }
         
-        return winner
+        return winningTiles
     }
 }

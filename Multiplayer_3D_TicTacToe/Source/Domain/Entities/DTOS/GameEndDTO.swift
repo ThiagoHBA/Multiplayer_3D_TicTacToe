@@ -9,4 +9,6 @@ import Foundation
 
 struct GameEndDTO: DTO {
     var winner: Player
+    var surrender: Bool
+    var winningTiles: [TilePosition]
 }

@@ -15,6 +15,7 @@ final class SessionViewModel: ObservableObject {
     @Published var showJoinGameSheet: Bool = false
     
     @Published var serverStatus: ServerMessages = .waitingPlayer
+    @Published var winningTiles: [TilePosition] = []
     @Published var isHost = false
     @Published var playerIdentifier: Player? = nil
     @Published var isConnected = false
@@ -29,23 +30,34 @@ final class SessionViewModel: ObservableObject {
 }
 // MARK: - Client
 extension SessionViewModel: ClientOutput {
+    func didEndGame(_ winner: Player, surrender: Bool, winningTiles: [TilePosition]) {
+        DispatchQueue.main.async { [weak self] in
+            if let playerIdentifier = self?.playerIdentifier {
+                if playerIdentifier.id == winner.id {
+                    if surrender {
+                        self?.serverStatus = .playerWinningFromSurrender
+                        self?.winningTiles = winningTiles
+                        return
+                    }
+                    self?.serverStatus = .playerWinner
+                } else {
+                    if surrender {
+                        self?.serverStatus = .playerSurrender
+                        self?.winningTiles = winningTiles
+                        return
+                    }
+                    self?.serverStatus = .playerLoser
+                }
+            }
+        }
+    }
+    
     func didReceiveAChatMessage(_ message: ChatMessage) {
         DispatchQueue.main.async { [weak self] in
             self?.chatParameters.messages.append(message)
         }
     }
     
-    func didEndGame(_ winner: Player) {
-        DispatchQueue.main.async { [weak self] in
-            if let playerIdentifier = self?.playerIdentifier {
-                if playerIdentifier.id == winner.id {
-                    self?.serverStatus = .playerWinner
-                } else {
-                    self?.serverStatus = .playerLoser
-                }
-            }
-        }
-    }
     func didFinishPlayerMove(on boardId: Int, in tile: Tile) { }
     
     func didChangeShift(_ newShiftPlayer: Int) {

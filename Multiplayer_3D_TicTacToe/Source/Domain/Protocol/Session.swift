@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias WinningTiles = [TilePosition]
+
 protocol Session {
     var gameFlowParameters: GameFlowParameters { get }
     var chatParameters: ChatParameters { get }
@@ -19,6 +21,6 @@ protocol Session {
     func changePlayerShift()
     func playerSurrender(_ player: Player)
     func addChatMessage(_ message: ChatMessage)
-    func didHaveAWinner() -> Bool
+    func didHaveAWinner() -> WinningTiles
 }
 

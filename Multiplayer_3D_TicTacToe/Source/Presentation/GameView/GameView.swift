@@ -30,6 +30,7 @@ struct GameView: View {
                 ForEach($sessionVM.gameFlowParameters.boards) { board in
                     TicTacToeBoard(
                         board: board,
+                        highlightTiles: sessionVM.winningTiles,
                         inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
                         tileTapped: { tile in
                             if !sessionVM.isPlayerShift { return }

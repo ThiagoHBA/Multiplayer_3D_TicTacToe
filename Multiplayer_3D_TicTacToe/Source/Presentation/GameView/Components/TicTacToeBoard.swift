@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TicTacToeBoard: View {
     @Binding var board: Board
+    var highlightTiles: [TilePosition]
     var inputedStyle: TileStyle
     var tileTapped: ((Tile) -> ())?
     
@@ -64,6 +65,7 @@ struct TicTacToeBoard_Previews: PreviewProvider {
     static var previews: some View {
         TicTacToeBoard(
             board: .constant(Board(id: 1, color: .blue, tiles: [])),
+            highlightTiles: [],
             inputedStyle: .circle
         )
     }

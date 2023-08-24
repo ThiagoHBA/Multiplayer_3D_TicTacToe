@@ -189,9 +189,17 @@ final class TicTacToeServer: Server {
                 gameSession.addTileOnBoard(with: boardId, tile: tile)
                 gameSession.addTileToPlayer(player: player, tile: tile)
             
-                if gameSession.didHaveAWinner() {
+                let winningTiles = gameSession.didHaveAWinner()
+            
+                if !winningTiles.isEmpty {
                     guard let winner = gameSession.gameFlowParameters.winner else { return }
-                    sendMessageToAllClients(TransferMessage.getGameEndMessage(winner))
+                    sendMessageToAllClients(
+                        TransferMessage.getGameEndMessage(
+                            winner: winner,
+                            surrender: false,
+                            winningTiles: winningTiles
+                        )
+                    )
                     sendMessageToAllClients(
                         TransferMessage.updateSessionParametersMessage(
                             newState: gameSession.gameFlowParameters
@@ -221,7 +229,13 @@ final class TicTacToeServer: Server {
                 let playerSurrenderDTO = PlayerSurrenderDTO.decodeFromMessage(message.data)
                 gameSession.playerSurrender(playerSurrenderDTO.player)
                 guard let winner = gameSession.gameFlowParameters.winner else { return }
-                sendMessageToAllClients(TransferMessage.getGameEndMessage(winner))
+                sendMessageToAllClients(
+                    TransferMessage.getGameEndMessage(
+                        winner: winner,
+                        surrender: true,
+                        winningTiles: []
+                    )
+                )
                 sendMessageToAllClients(
                     TransferMessage.updateSessionParametersMessage(
                         newState: gameSession.gameFlowParameters

@@ -57,10 +57,19 @@ extension TransferMessage {
         )
     }
     
-    static func getGameEndMessage(_ winner: Player) -> TransferMessage {
+    static func getGameEndMessage(
+        winner: Player,
+        surrender: Bool = false,
+        winningTiles: [TilePosition]
+    ) -> TransferMessage {
         return TransferMessage(
             type: .server(.gameFlow(.gameEnd)),
-            data: GameEndDTO(winner: winner).encodeToTransfer()
+            data: GameEndDTO(
+                winner: winner,
+                surrender: surrender,
+                winningTiles: winningTiles
+            )
+            .encodeToTransfer()
         )
     }
     
