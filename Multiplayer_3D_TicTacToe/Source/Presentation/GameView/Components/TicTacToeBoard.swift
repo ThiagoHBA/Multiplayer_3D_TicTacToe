@@ -52,7 +52,6 @@ struct TicTacToeBoard: View {
                 }
             }
             .background(.clear)
-            .padding(12)
         }
         .frame(height: 180)
         .cornerRadius(12)

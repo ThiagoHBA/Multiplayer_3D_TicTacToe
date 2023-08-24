@@ -49,6 +49,13 @@ struct GameView: View {
                             )
                         }
                     )
+                    .padding([.top], 75 * CGFloat(board.id - 1))
+                    .padding([.horizontal], 8)
+                    .shadow(
+                        color: .black,
+                        radius: 8/CGFloat(board.id),
+                        x: 12/CGFloat(board.id), y: 12/CGFloat(board.id)
+                    )
                 }
                 .opacity(sessionVM.isPlayerShift || sessionVM.gameFlowParameters.winner != nil ? 1 : 0.2)
                 .disabled(!sessionVM.gameFlowParameters.gameStarted || sessionVM.gameFlowParameters.winner != nil)
@@ -142,6 +149,17 @@ struct GameView: View {
         }
         .padding([.horizontal], 16)
         .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct GameView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        GameView(
+            server: try! TicTacToeServer(port: 8080),
+            client: TicTacToeClient()
+        )
+        .environmentObject(SessionViewModel())
     }
 }
 
