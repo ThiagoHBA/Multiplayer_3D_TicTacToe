@@ -78,47 +78,60 @@ final class TicTacToeSession: Session {
         let vertexPatterns = GameFlowParameters.vertexPatterns
         var winningTiles: [TilePosition] = []
         
+        func verifyWinner(
+            inputTiles: [TilePosition],
+            pattern: [TilePosition],
+            completion: ([TilePosition]?) -> Void
+        ) {
+            let allCases = pattern.compactMap { pattern in
+                if inputTiles.contains(pattern) {
+                    return pattern
+                }
+                return nil
+            }
+            if allCases.count > 2 { completion(pattern) }
+        }
+        
         for player in gameFlowParameters.players {
-            print("Player \(player.name) tiles: \(player.tiles)")
             if player.tiles.count < 3 { continue }
             
             rowPatterns.forEach {
-                let allCases = $0.compactMap { pattern in
-                    if player.tiles.contains(pattern) {
-                        return pattern
+                verifyWinner(
+                    inputTiles: player.tiles,
+                    pattern: $0,
+                    completion: { tiles in
+                        if let tiles = tiles {
+                            winningTiles = tiles
+                            gameFlowParameters.winner = player
+                        }
                     }
-                    return nil
-                }
-                if allCases.count > 2 {
-                    winningTiles = $0
-                    gameFlowParameters.winner = player
-                }
+                )
             }
             
             colPatterns.forEach {
-                let allCases = $0.compactMap { pattern in
-                    if player.tiles.contains(pattern) {
-                        return pattern
+                verifyWinner(
+                    inputTiles: player.tiles,
+                    pattern: $0,
+                    completion: { tiles in
+                        if let tiles = tiles {
+                            winningTiles = tiles
+                            gameFlowParameters.winner = player
+                        }
                     }
-                    return nil
-                }
-                if allCases.count > 2 {
-                    winningTiles = $0
-                    gameFlowParameters.winner = player
-                }
+                )
             }
             
             vertexPatterns.forEach {
-                let allCases = $0.compactMap { pattern in
-                    if player.tiles.contains(pattern) {
-                        return pattern
+                verifyWinner(
+                    inputTiles: player.tiles,
+                    pattern: $0,
+                    completion: { tiles in
+                        if let tiles = tiles {
+                            winningTiles = tiles
+                            gameFlowParameters.winner = player
+                        }
                     }
-                    return nil
-                }
-                if allCases.count > 2 {
-                    winningTiles = $0
-                    gameFlowParameters.winner = player
-                }
+                )
             }
             
             if !winningTiles.isEmpty { break }
