@@ -123,8 +123,14 @@ struct GameView: View {
                 }
                 
                 Button("Desistir") {
-                    guard let player = sessionVM.playerIdentifier else { return }
-                    client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
+                    confirmationAlert = ConfirmationAlert(
+                        showAlert: true,
+                        description: "Você confirma a sua desistência?",
+                        action: {
+                            guard let player = sessionVM.playerIdentifier else { return }
+                            client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
+                        }
+                    )
                 }
             }
         }

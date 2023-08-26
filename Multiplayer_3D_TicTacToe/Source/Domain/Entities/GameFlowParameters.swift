@@ -56,4 +56,16 @@ extension GameFlowParameters {
             TilePosition(row: 2, column: 2, depth: 3),
         ],
     ]
+
+    static let vertexPatterns: [[TilePosition]] = {
+        var list: [[TilePosition]] = []
+        for i in 0..<9 {
+            var pattern: [TilePosition] = []
+            for j in 1...3 {
+                pattern.append(TilePosition(row: i, column: i, depth: j))
+            }
+            list.append(pattern)
+        }
+        return list
+    }()
 }
