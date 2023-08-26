@@ -11,11 +11,12 @@ struct GameFlowParameters: DTO {
     var players: [Player]
     var shiftPlayerId: Int
     var gameStarted: Bool
+    var gameEnded: Bool
     var boards: [Board] = Board.generateBoards()
     var winner: Player? = nil
     
     static let initialState: GameFlowParameters = {
-        let parameters = GameFlowParameters(players: [], shiftPlayerId: 0, gameStarted: false)
+        let parameters = GameFlowParameters(players: [], shiftPlayerId: 0, gameStarted: false, gameEnded: false)
         return parameters
     }()
 }

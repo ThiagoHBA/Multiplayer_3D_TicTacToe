@@ -108,4 +108,11 @@ extension TransferMessage {
             data: ChatMessageDTO(message: messageToSend).encodeToTransfer()
         )
     }
+    
+    static func getPlayAgainMessage() -> TransferMessage {
+        return TransferMessage(
+            type: .client(.gameFlow(.playAgain)),
+            data: BooleanMessageDTO(value: true).encodeToTransfer()
+        )
+    }
 }

@@ -241,6 +241,9 @@ final class TicTacToeServer: Server {
                         newState: gameSession.gameFlowParameters
                     )
                 )
+            case .playAgain:
+                gameSession.restartGame()
+                self.startGame()
         }
     }
 }

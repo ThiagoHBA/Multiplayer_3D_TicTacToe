@@ -34,19 +34,13 @@ extension SessionViewModel: ClientOutput {
         DispatchQueue.main.async { [weak self] in
             if let playerIdentifier = self?.playerIdentifier {
                 if playerIdentifier.id == winner.id {
-                    if surrender {
-                        self?.serverStatus = .playerWinningFromSurrender
-                        self?.winningTiles = winningTiles
-                        return
-                    }
+                    self?.winningTiles = winningTiles
                     self?.serverStatus = .playerWinner
+                    if surrender { self?.serverStatus = .playerWinningFromSurrender }
                 } else {
-                    if surrender {
-                        self?.serverStatus = .playerSurrender
-                        self?.winningTiles = winningTiles
-                        return
-                    }
+                    self?.winningTiles = winningTiles
                     self?.serverStatus = .playerLoser
+                    if surrender { self?.serverStatus = .playerSurrender }
                 }
             }
         }

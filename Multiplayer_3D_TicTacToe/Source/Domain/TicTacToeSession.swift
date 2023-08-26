@@ -63,6 +63,7 @@ final class TicTacToeSession: Session {
         for sessionPlayer in gameFlowParameters.players {
             if sessionPlayer.id != player.id {
                 gameFlowParameters.winner = sessionPlayer
+                gameFlowParameters.gameEnded = true
                 break
             }
         }
@@ -134,9 +135,34 @@ final class TicTacToeSession: Session {
                 )
             }
             
-            if !winningTiles.isEmpty { break }
+            if !winningTiles.isEmpty {
+                gameFlowParameters.gameEnded = true
+                break
+            }
         }
         
         return winningTiles
+    }
+    
+    func restartGame() {
+        func resetPlayersTiles() {
+            for i in 0..<gameFlowParameters.players.count {
+                gameFlowParameters.players[i].tiles = []
+            }
+        }
+        func resetBoardsTiles() {
+            for i in 0..<gameFlowParameters.boards.count {
+                gameFlowParameters.boards[i].tiles = []
+            }
+        }
+        func resetGameParameters() {
+            gameFlowParameters.winner = nil
+            gameFlowParameters.gameStarted = false
+            gameFlowParameters.gameEnded = false
+        }
+        
+        resetPlayersTiles()
+        resetBoardsTiles()
+        resetGameParameters()
     }
 }

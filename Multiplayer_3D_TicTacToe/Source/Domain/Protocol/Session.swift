@@ -22,5 +22,6 @@ protocol Session {
     func playerSurrender(_ player: Player)
     func addChatMessage(_ message: ChatMessage)
     func didHaveAWinner() -> WinningTiles
+    func restartGame()
 }
 

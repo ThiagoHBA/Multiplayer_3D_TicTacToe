@@ -18,6 +18,7 @@ enum MessageType: Codable {
         enum ClientGameFlow: String, Codable {
             case playerMove = "#playerMove"
             case playerSurrender = "#playerSurrender"
+            case playAgain = "#playAgain"
         }
         
         enum ClientChat: String, Codable {

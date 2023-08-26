@@ -122,15 +122,21 @@ struct GameView: View {
                     showChatSheet.toggle()
                 }
                 
-                Button("Desistir") {
-                    confirmationAlert = ConfirmationAlert(
-                        showAlert: true,
-                        description: "Você confirma a sua desistência?",
-                        action: {
-                            guard let player = sessionVM.playerIdentifier else { return }
-                            client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
-                        }
-                    )
+                if !sessionVM.gameFlowParameters.gameEnded {
+                    Button("Desistir") {
+                        confirmationAlert = ConfirmationAlert(
+                            showAlert: true,
+                            description: "Você confirma a sua desistência?",
+                            action: {
+                                guard let player = sessionVM.playerIdentifier else { return }
+                                client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
+                            }
+                        )
+                    }
+                } else {
+                    Button("Jogar Novamente") {
+                        client.sendMessage(TransferMessage.getPlayAgainMessage())
+                    }
                 }
             }
         }
