@@ -65,18 +65,18 @@ final class TicTacToeSessionTests: XCTestCase {
             Tile(boardId: 1, style: .cross, position: TilePosition(row: 0, column: 0, depth: 1)),
             Tile(boardId: 1, style: .cross, position: TilePosition(row: 0, column: 1, depth: 1)),
             Tile(boardId: 2, style: .cross, position: TilePosition(row: 0, column: 0, depth: 2)),
-            Tile(boardId: 3, style: .cross, position: TilePosition(row: 0, column: 0, depth: 3)),
+            Tile(boardId: 3, style: .cross, position: TilePosition(row: 0, column: 1, depth: 2)),
             Tile(boardId: 1, style: .cross, position: TilePosition(row: 1, column: 1, depth: 2)),
-            Tile(boardId: 3, style: .cross, position: TilePosition(row: 2, column: 0, depth: 3))
+            Tile(boardId: 3, style: .cross, position: TilePosition(row: 0, column: 1, depth: 3))
         ]
         player1Tiles.forEach { sut.addTileToPlayer(player: player1, tile: $0) }
         
         XCTAssertEqual(
             sut.didHaveAWinner(),
             [
-                .init(row: 0, column: 0, depth: 1),
-                .init(row: 0, column: 0, depth: 2),
-                .init(row: 0, column: 0, depth: 3)
+                .init(row: 0, column: 1, depth: 1),
+                .init(row: 0, column: 1, depth: 2),
+                .init(row: 0, column: 1, depth: 3)
             ]
         )
     }
