@@ -32,7 +32,7 @@ struct TicTacToeBoard: View {
                                 .bold()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .aspectRatio(1, contentMode: .fit)
-                                .background(board.color.toSwiftUIColor())
+                                .background(defineTileColor(tile))
                                 .onTapGesture {
                                     if tile == nil {
                                         tileTapped?(
@@ -56,6 +56,15 @@ struct TicTacToeBoard: View {
         }
         .frame(height: 180)
         .cornerRadius(12)
+    }
+    
+    func defineTileColor(_ tile: Tile?) -> Color {
+        if  let tile = tile, let position = tile.position {
+            if highlightTiles.contains(position) {
+                return .yellow
+            }
+        }
+        return board.color.toSwiftUIColor()
     }
 }
 
