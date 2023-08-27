@@ -13,5 +13,6 @@ enum ServerMessages: String {
     case otherPlayerTurn = "Turno do outro jogador!"
     case playerWinner = "Você venceu!"
     case playerLoser = "Você perdeu!"
+    case playerWinningFromSurrender = "O outro jogador desistiu, você venceu!"
     case playerSurrender = "Você desistiu"
 }

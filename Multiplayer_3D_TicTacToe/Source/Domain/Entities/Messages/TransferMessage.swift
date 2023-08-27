@@ -39,10 +39,14 @@ extension TransferMessage {
         )
     }
     
-    static func getEndPlayerMoveMessage(boardId: Int, tile: Tile) -> TransferMessage {
+    static func getEndPlayerMoveMessage(player: Player, boardId: Int, tile: Tile) -> TransferMessage {
         return TransferMessage(
             type: .server(.gameFlow(.playerMove)),
-            data: PlayerMoveDTO(boardId: boardId, addedTile: tile).encodeToTransfer()
+            data: PlayerMoveDTO(
+                player: player,
+                boardId: boardId,
+                addedTile: tile
+            ).encodeToTransfer()
         )
     }
     
@@ -53,10 +57,19 @@ extension TransferMessage {
         )
     }
     
-    static func getGameEndMessage(_ winner: Player) -> TransferMessage {
+    static func getGameEndMessage(
+        winner: Player,
+        surrender: Bool = false,
+        winningTiles: [TilePosition]
+    ) -> TransferMessage {
         return TransferMessage(
             type: .server(.gameFlow(.gameEnd)),
-            data: GameEndDTO(winner: winner).encodeToTransfer()
+            data: GameEndDTO(
+                winner: winner,
+                surrender: surrender,
+                winningTiles: winningTiles
+            )
+            .encodeToTransfer()
         )
     }
     
@@ -71,10 +84,14 @@ extension TransferMessage {
 // MARK: - Client Default Messages
 
 extension TransferMessage {
-    static func getPlayerDidEndTheMoveMessage(on board: Int, _ tile: Tile) -> TransferMessage {
+    static func getPlayerDidEndTheMoveMessage(from player: Player, on board: Int, _ tile: Tile) -> TransferMessage {
         return TransferMessage(
             type: .client(.gameFlow(.playerMove)),
-            data: PlayerMoveDTO(boardId: board, addedTile: tile).encodeToTransfer()
+            data: PlayerMoveDTO(
+                player: player,
+                boardId: board,
+                addedTile: tile
+            ).encodeToTransfer()
         )
     }
     
@@ -89,6 +106,13 @@ extension TransferMessage {
         return TransferMessage(
             type: .client(.chat(.sendChatMessage)),
             data: ChatMessageDTO(message: messageToSend).encodeToTransfer()
+        )
+    }
+    
+    static func getPlayAgainMessage() -> TransferMessage {
+        return TransferMessage(
+            type: .client(.gameFlow(.playAgain)),
+            data: BooleanMessageDTO(value: true).encodeToTransfer()
         )
     }
 }

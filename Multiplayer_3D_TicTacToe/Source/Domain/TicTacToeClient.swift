@@ -113,7 +113,11 @@ extension TicTacToeClient {
                 clientOutput?.didChangeShift(dto.shiftPlayerId)
             case .gameEnd:
                 let dto = GameEndDTO.decodeFromMessage(message.data)
-                clientOutput?.didEndGame(dto.winner)
+                clientOutput?.didEndGame(
+                    dto.winner,
+                    surrender: dto.surrender,
+                    winningTiles: dto.winningTiles
+                )
         }
     }
     

@@ -11,4 +11,5 @@ import SwiftUI
 struct TilePosition: Equatable, Codable {
     var row: Int
     var column: Int
+    var depth: Int
 }

@@ -10,7 +10,7 @@ import Foundation
 final class TicTacToeSession: Session {
     private(set) var chatParameters: ChatParameters = ChatParameters(messages: [])
     private(set) var gameFlowParameters: GameFlowParameters = GameFlowParameters.initialState
-     
+    
     func addPlayerInSession() -> Player {
         var newPlayerStyle = TileStyle.randomStyle()
         
@@ -44,6 +44,15 @@ final class TicTacToeSession: Session {
         gameFlowParameters.boards[boardIndex].tiles.append(tile)
     }
     
+    func addTileToPlayer(player: Player, tile: Tile) {
+        guard let position = tile.position else { return }
+        guard let playerIndex = gameFlowParameters.players.firstIndex(where: { $0.id == player.id} )
+        else { return }
+        
+        gameFlowParameters.players[playerIndex].tiles.append(position)
+        gameFlowParameters.players[playerIndex].tiles.sort(by: { $0.depth < $1.depth })
+    }
+    
     func changePlayerShift() {
         let currentPlayerId = gameFlowParameters.shiftPlayerId
         guard let nextPlayer = gameFlowParameters.players.first(where: { $0.id != currentPlayerId } ) else { return }
@@ -54,6 +63,7 @@ final class TicTacToeSession: Session {
         for sessionPlayer in gameFlowParameters.players {
             if sessionPlayer.id != player.id {
                 gameFlowParameters.winner = sessionPlayer
+                gameFlowParameters.gameEnded = true
                 break
             }
         }
@@ -62,8 +72,97 @@ final class TicTacToeSession: Session {
     func addChatMessage(_ message: ChatMessage) {
         chatParameters.messages.append(message)
     }
+
+    func didHaveAWinner() -> [TilePosition] {
+        let rowPatterns = GameFlowParameters.rowWinPatterns
+        let colPatterns = GameFlowParameters.colWinPatters
+        let vertexPatterns = GameFlowParameters.vertexPatterns
+        var winningTiles: [TilePosition] = []
+        
+        func verifyWinner(
+            inputTiles: [TilePosition],
+            pattern: [TilePosition],
+            completion: ([TilePosition]?) -> Void
+        ) {
+            let allCases = pattern.compactMap { pattern in
+                if inputTiles.contains(pattern) {
+                    return pattern
+                }
+                return nil
+            }
+            if allCases.count > 2 { completion(pattern) }
+        }
+        
+        for player in gameFlowParameters.players {
+            if player.tiles.count < 3 { continue }
+            
+            rowPatterns.forEach {
+                verifyWinner(
+                    inputTiles: player.tiles,
+                    pattern: $0,
+                    completion: { tiles in
+                        if let tiles = tiles {
+                            winningTiles = tiles
+                            gameFlowParameters.winner = player
+                        }
+                    }
+                )
+            }
+            
+            colPatterns.forEach {
+                verifyWinner(
+                    inputTiles: player.tiles,
+                    pattern: $0,
+                    completion: { tiles in
+                        if let tiles = tiles {
+                            winningTiles = tiles
+                            gameFlowParameters.winner = player
+                        }
+                    }
+                )
+            }
+            
+            vertexPatterns.forEach {
+                verifyWinner(
+                    inputTiles: player.tiles,
+                    pattern: $0,
+                    completion: { tiles in
+                        if let tiles = tiles {
+                            winningTiles = tiles
+                            gameFlowParameters.winner = player
+                        }
+                    }
+                )
+            }
+            
+            if !winningTiles.isEmpty {
+                gameFlowParameters.gameEnded = true
+                break
+            }
+        }
+        
+        return winningTiles
+    }
     
-    func didHaveAWinner() -> Bool {
-        return false
+    func restartGame() {
+        func resetPlayersTiles() {
+            for i in 0..<gameFlowParameters.players.count {
+                gameFlowParameters.players[i].tiles = []
+            }
+        }
+        func resetBoardsTiles() {
+            for i in 0..<gameFlowParameters.boards.count {
+                gameFlowParameters.boards[i].tiles = []
+            }
+        }
+        func resetGameParameters() {
+            gameFlowParameters.winner = nil
+            gameFlowParameters.gameStarted = false
+            gameFlowParameters.gameEnded = false
+        }
+        
+        resetPlayersTiles()
+        resetBoardsTiles()
+        resetGameParameters()
     }
 }

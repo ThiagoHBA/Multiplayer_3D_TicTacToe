@@ -15,6 +15,7 @@ final class SessionViewModel: ObservableObject {
     @Published var showJoinGameSheet: Bool = false
     
     @Published var serverStatus: ServerMessages = .waitingPlayer
+    @Published var winningTiles: [TilePosition] = []
     @Published var isHost = false
     @Published var playerIdentifier: Player? = nil
     @Published var isConnected = false
@@ -29,23 +30,28 @@ final class SessionViewModel: ObservableObject {
 }
 // MARK: - Client
 extension SessionViewModel: ClientOutput {
+    func didEndGame(_ winner: Player, surrender: Bool, winningTiles: [TilePosition]) {
+        DispatchQueue.main.async { [weak self] in
+            if let playerIdentifier = self?.playerIdentifier {
+                if playerIdentifier.id == winner.id {
+                    self?.winningTiles = winningTiles
+                    self?.serverStatus = .playerWinner
+                    if surrender { self?.serverStatus = .playerWinningFromSurrender }
+                } else {
+                    self?.winningTiles = winningTiles
+                    self?.serverStatus = .playerLoser
+                    if surrender { self?.serverStatus = .playerSurrender }
+                }
+            }
+        }
+    }
+    
     func didReceiveAChatMessage(_ message: ChatMessage) {
         DispatchQueue.main.async { [weak self] in
             self?.chatParameters.messages.append(message)
         }
     }
     
-    func didEndGame(_ winner: Player) {
-        DispatchQueue.main.async { [weak self] in
-            if let playerIdentifier = self?.playerIdentifier {
-                if playerIdentifier.id == winner.id {
-                    self?.serverStatus = .playerWinner
-                } else {
-                    self?.serverStatus = .playerLoser
-                }
-            }
-        }
-    }
     func didFinishPlayerMove(on boardId: Int, in tile: Tile) { }
     
     func didChangeShift(_ newShiftPlayer: Int) {
@@ -72,6 +78,11 @@ extension SessionViewModel: ClientOutput {
     func didUpdateSessionParameters(_ newState: GameFlowParameters) {
         DispatchQueue.main.async { [weak self] in
             self?.gameFlowParameters = newState
+            guard let playerIndex = newState.players.firstIndex(where: {
+                $0.id == self?.playerIdentifier?.id
+            }) else { return }
+            
+            self?.playerIdentifier = newState.players[playerIndex]
         }
     }
     

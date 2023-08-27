@@ -30,6 +30,7 @@ struct GameView: View {
                 ForEach($sessionVM.gameFlowParameters.boards) { board in
                     TicTacToeBoard(
                         board: board,
+                        highlightTiles: sessionVM.winningTiles,
                         inputedStyle: sessionVM.playerIdentifier?.tileStyle ?? .cross,
                         tileTapped: { tile in
                             if !sessionVM.isPlayerShift { return }
@@ -40,6 +41,7 @@ struct GameView: View {
                                 action: {
                                     client.sendMessage(
                                         TransferMessage.getPlayerDidEndTheMoveMessage(
+                                            from: sessionVM.playerIdentifier!,
                                             on: tile.boardId,
                                             tile
                                         )
@@ -47,6 +49,13 @@ struct GameView: View {
                                 }
                             )
                         }
+                    )
+                    .padding([.top], 75 * CGFloat(board.id - 1))
+                    .padding([.horizontal], 8)
+                    .shadow(
+                        color: .black,
+                        radius: 8/CGFloat(board.id),
+                        x: 12/CGFloat(board.id), y: 12/CGFloat(board.id)
                     )
                 }
                 .opacity(sessionVM.isPlayerShift || sessionVM.gameFlowParameters.winner != nil ? 1 : 0.2)
@@ -113,9 +122,21 @@ struct GameView: View {
                     showChatSheet.toggle()
                 }
                 
-                Button("Desistir") {
-                    guard let player = sessionVM.playerIdentifier else { return }
-                    client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
+                if !sessionVM.gameFlowParameters.gameEnded {
+                    Button("Desistir") {
+                        confirmationAlert = ConfirmationAlert(
+                            showAlert: true,
+                            description: "Você confirma a sua desistência?",
+                            action: {
+                                guard let player = sessionVM.playerIdentifier else { return }
+                                client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
+                            }
+                        )
+                    }
+                } else {
+                    Button("Jogar Novamente") {
+                        client.sendMessage(TransferMessage.getPlayAgainMessage())
+                    }
                 }
             }
         }
@@ -141,6 +162,17 @@ struct GameView: View {
         }
         .padding([.horizontal], 16)
         .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct GameView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        GameView(
+            server: try! TicTacToeServer(port: 8080),
+            client: TicTacToeClient()
+        )
+        .environmentObject(SessionViewModel())
     }
 }
 

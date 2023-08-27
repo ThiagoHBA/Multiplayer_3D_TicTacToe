@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TicTacToeBoard: View {
     @Binding var board: Board
+    var highlightTiles: [TilePosition]
     var inputedStyle: TileStyle
     var tileTapped: ((Tile) -> ())?
     
@@ -19,7 +20,11 @@ struct TicTacToeBoard: View {
                     HStack(spacing: 10.0) {
                         ForEach(0...2, id: \.self) { column in
                             let tile = board.tiles.first( where: {
-                                $0.position == TilePosition(row: row, column: column)
+                                $0.position == TilePosition(
+                                    row: row,
+                                    column: column,
+                                    depth: board.id
+                                )
                             })
                             Text(tile?.style.rawValue ?? "")
                                 .font(.system(size: 24))
@@ -27,14 +32,18 @@ struct TicTacToeBoard: View {
                                 .bold()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .aspectRatio(1, contentMode: .fit)
-                                .background(board.color.toSwiftUIColor())
+                                .background(defineTileColor(tile))
                                 .onTapGesture {
                                     if tile == nil {
                                         tileTapped?(
                                             Tile(
                                                 boardId: board.id,
                                                 style: inputedStyle,
-                                                position: TilePosition(row: row, column: column)
+                                                position: TilePosition(
+                                                    row: row,
+                                                    column: column,
+                                                    depth: board.id
+                                                )
                                             )
                                         )
                                     }
@@ -44,10 +53,18 @@ struct TicTacToeBoard: View {
                 }
             }
             .background(.clear)
-            .padding(12)
         }
         .frame(height: 180)
         .cornerRadius(12)
+    }
+    
+    func defineTileColor(_ tile: Tile?) -> Color {
+        if  let tile = tile, let position = tile.position {
+            if highlightTiles.contains(position) {
+                return .yellow
+            }
+        }
+        return board.color.toSwiftUIColor()
     }
 }
 
@@ -57,6 +74,7 @@ struct TicTacToeBoard_Previews: PreviewProvider {
     static var previews: some View {
         TicTacToeBoard(
             board: .constant(Board(id: 1, color: .blue, tiles: [])),
+            highlightTiles: [],
             inputedStyle: .circle
         )
     }

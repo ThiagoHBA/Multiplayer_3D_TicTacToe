@@ -8,6 +8,7 @@
 import Foundation
 
 struct PlayerMoveDTO: DTO {
+    var player: Player
     var boardId: Int
     var addedTile: Tile
 }
