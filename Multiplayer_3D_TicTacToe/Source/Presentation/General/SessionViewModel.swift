@@ -72,6 +72,7 @@ extension SessionViewModel: ClientOutput {
             guard let self = self else { return }
             self.goToGameView = true
             self.showJoinGameSheet = false
+            self.winningTiles = []
         }
     }
     
