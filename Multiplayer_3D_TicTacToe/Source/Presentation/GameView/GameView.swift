@@ -61,6 +61,16 @@ struct GameView: View {
                 .opacity(sessionVM.isPlayerShift || sessionVM.gameFlowParameters.winner != nil ? 1 : 0.2)
                 .disabled(!sessionVM.gameFlowParameters.gameStarted || sessionVM.gameFlowParameters.winner != nil)
             }
+            
+            if sessionVM.gameFlowParameters.gameStarted {
+                HStack {
+                    Text("Pontos: \(sessionVM.playerIdentifier!.tileStyle.rawValue)")
+                        .font(.title)
+                        .padding([.leading], 60)
+                    Spacer()
+                }
+                .padding([.top], 80)
+            }
         }
         .onAppear {
             if sessionVM.isHost {
