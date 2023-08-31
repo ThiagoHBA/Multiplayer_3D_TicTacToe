@@ -21,17 +21,30 @@ struct JoinGameSheet: View {
                     .foregroundColor(.black)
                     .padding([.bottom], 18)
                 
-                TextField(
-                    "Hostname da sessão",
-                    text: $sessionCode
-                )
-                .autocorrectionDisabled(true)
-                .textInputAutocapitalization(.never)
-                .padding(12)
-                .frame(maxWidth: 300)
-                .background(.white)
-                .foregroundColor(.black)
-                .cornerRadius(12)
+                #if os(macOS)
+                    TextField(
+                        "Hostname da sessão",
+                        text: $sessionCode
+                    )
+                    .autocorrectionDisabled(true)
+                    .padding(12)
+                    .frame(maxWidth: 300)
+                    .background(.white)
+                    .foregroundColor(.black)
+                    .cornerRadius(12)
+                #else
+                    TextField(
+                        "Hostname da sessão",
+                        text: $sessionCode
+                    )
+                    .autocorrectionDisabled(true)
+                    .textInputAutocapitalization(.never)
+                    .padding(12)
+                    .frame(maxWidth: 300)
+                    .background(.white)
+                    .foregroundColor(.black)
+                    .cornerRadius(12)
+                #endif
                 
                 Button("Conectar") {
                     connectButtonTapped?()
