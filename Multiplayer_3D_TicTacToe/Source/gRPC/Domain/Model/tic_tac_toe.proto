@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.tictactoe";
+option java_outer_classname = "TicTacToeProto";
+option objc_class_prefix = "HLW";
+
+package tictactoe;
+    
+//// The greeting service definition.
+//service Greeter {
+//  // Sends a greeting.
+//  rpc SayHello (HelloRequest) returns (HelloReply) {}
+//  // Sends another greeting.
+//  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {}
+//}
+//
+//// The request message containing the user's name.
+//message HelloRequest {
+//  string name = 1;
+//}
+//
+//// The response message containing the greetings.
+//message HelloReply {
+//  string message = 1;
+//}
+
+service TicTacToe {
+    rpc AddPlayerInSession(AddPlayerInSessionRequest) returns (Player) {}
+    rpc SelectStarterPlayer(SelectStarterPlayerRequest) returns (SelectStarterPlayerResponse) {}
+    rpc StartGame(StartGameRequest) returns (StartGameResponse) {}
+    rpc AddTileOnBoard(AddTileRequest) returns (AddTileOnBoardResponse) {}
+    rpc AddTileToPlayer(AddTileToPlayerRequest) returns (AddTileToPlayerResponse) {}
+    rpc ChangePlayerShift(ChangePlayerShiftRequest) returns (ChangePlayerShiftResponse) {}
+    rpc PlayerSurrender(PlayerSurrenderRequest) returns (PlayerSurrenderResponse) {}
+    rpc AddChatMessage(ChatMessageRequest) returns (AddChatMessageResponse) {}
+    rpc DidHaveAWinner(DidHaveAWinnerRequest) returns (WinningTiles) {}
+    rpc RestartGame(RestartGameRequest) returns (RestartGameResponse) {}
+}
+
+// Entities
+
+enum TileStyle {
+    cross = 0;
+    circle = 1;
+}
+
+message TilePosition {
+    int64 row = 1;
+    int64 column = 2;
+    int64 depth = 3;
+}
+
+message Player {
+    int64 id = 1;
+    string name = 2;
+    TileStyle tileStyle = 3;
+    repeated TilePosition tiles = 4;
+}
+
+message Tile {
+    int64 boardId = 1;
+    TileStyle style = 2;
+    optional TilePosition position = 3;
+}
+
+message WinningTiles {
+    repeated TilePosition tiles = 1;
+}
+
+// Requests
+
+message AddPlayerInSessionRequest {}
+
+message SelectStarterPlayerRequest {}
+
+message StartGameRequest {}
+
+message ChangePlayerShiftRequest {}
+
+message DidHaveAWinnerRequest {}
+
+message RestartGameRequest {}
+
+message AddTileRequest {
+    int64 id = 1;
+    Tile tile = 2;
+}
+
+message AddTileToPlayerRequest {
+    Player player = 1;
+    Tile tile = 2;
+}
+
+message PlayerSurrenderRequest {
+    Player player = 1;
+}
+
+message ChatMessageRequest {
+    int64 id = 1;
+    Player sender = 2;
+    string incomingMessage = 3;
+    string sendedDate = 4;
+}
+
+// Response
+
+message SelectStarterPlayerResponse {}
+
+message StartGameResponse {}
+
+message AddTileOnBoardResponse {}
+
+message AddTileToPlayerResponse {}
+
+message ChangePlayerShiftResponse {}
+
+message PlayerSurrenderResponse {}
+
+message AddChatMessageResponse {}
+
+message RestartGameResponse {}

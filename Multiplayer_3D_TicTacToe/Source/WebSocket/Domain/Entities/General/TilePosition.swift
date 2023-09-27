@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct TilePosition: Equatable, Codable {
-    var row: Int
-    var column: Int
-    var depth: Int
+public struct TilePosition: Equatable, Codable {
+    public var row: Int
+    public var column: Int
+    public var depth: Int
 }

@@ -56,6 +56,15 @@
 		003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */; };
 		003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403632A7D81DD00265AF3 /* WebSocketError.swift */; };
 		0093242E2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */; };
+		00D8DDC92AC23A1E007F5F74 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 00D8DDC82AC23A1E007F5F74 /* Makefile */; };
+		00D9C9DC2ABCBF9E00F66421 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 00D9C9DB2ABCBF9E00F66421 /* GRPC */; };
+		00D9C9DE2ABCBF9E00F66421 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 00D9C9DD2ABCBF9E00F66421 /* protoc-gen-grpc-swift */; };
+		00D9C9E12ABCC02700F66421 /* tic_tac_toe.proto in Sources */ = {isa = PBXBuildFile; fileRef = 00D9C9E02ABCC02700F66421 /* tic_tac_toe.proto */; };
+		00FFA62F2AC256E10092E203 /* tic_tac_toe.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA62D2AC256E10092E203 /* tic_tac_toe.grpc.swift */; };
+		00FFA6302AC256E10092E203 /* tic_tac_toe.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA62E2AC256E10092E203 /* tic_tac_toe.pb.swift */; };
+		00FFA6322AC259280092E203 /* TicTacToeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA6312AC259280092E203 /* TicTacToeProvider.swift */; };
+		00FFA6342AC25A1C0092E203 /* TicTacToeRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA6332AC25A1C0092E203 /* TicTacToeRPCClient.swift */; };
+		00FFA6362AC25A390092E203 /* TicTacToeRPCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA6352AC25A390092E203 /* TicTacToeRPCServer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +138,13 @@
 		003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeServer.swift; sourceTree = "<group>"; };
 		003403632A7D81DD00265AF3 /* WebSocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketError.swift; sourceTree = "<group>"; };
 		0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanMessageDTO.swift; sourceTree = "<group>"; };
+		00D8DDC82AC23A1E007F5F74 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		00D9C9E02ABCC02700F66421 /* tic_tac_toe.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; path = tic_tac_toe.proto; sourceTree = "<group>"; };
+		00FFA62D2AC256E10092E203 /* tic_tac_toe.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tic_tac_toe.grpc.swift; sourceTree = "<group>"; };
+		00FFA62E2AC256E10092E203 /* tic_tac_toe.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tic_tac_toe.pb.swift; sourceTree = "<group>"; };
+		00FFA6312AC259280092E203 /* TicTacToeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeProvider.swift; sourceTree = "<group>"; };
+		00FFA6332AC25A1C0092E203 /* TicTacToeRPCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeRPCClient.swift; sourceTree = "<group>"; };
+		00FFA6352AC25A390092E203 /* TicTacToeRPCServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeRPCServer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D9C9DE2ABCBF9E00F66421 /* protoc-gen-grpc-swift in Frameworks */,
+				00D9C9DC2ABCBF9E00F66421 /* GRPC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,8 +265,8 @@
 		001B70B42A81619300C16B23 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				001B70BA2A81636400C16B23 /* Entities */,
 				001B70B72A8161B300C16B23 /* Protocol */,
+				001B70BA2A81636400C16B23 /* Entities */,
 				001B70B52A8161A800C16B23 /* TicTacToeClient.swift */,
 				003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */,
 				001B70D92A82A80400C16B23 /* TicTacToeSession.swift */,
@@ -345,6 +363,7 @@
 		0034031D2A7D7CA500265AF3 = {
 			isa = PBXGroup;
 			children = (
+				00D8DDC82AC23A1E007F5F74 /* Makefile */,
 				003403282A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe */,
 				0034033A2A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeTests */,
 				003403442A7D7CA600265AF3 /* Multiplayer_3D_TicTacToeUITests */,
@@ -421,7 +440,8 @@
 		003403562A7D7CE100265AF3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				001B70B42A81619300C16B23 /* Domain */,
+				00D9C9D92ABCBEFD00F66421 /* gRPC */,
+				00D9C9D82ABCBEED00F66421 /* WebSocket */,
 				003403572A7D7CFB00265AF3 /* Presentation */,
 			);
 			path = Source;
@@ -447,6 +467,43 @@
 			path = GameView;
 			sourceTree = "<group>";
 		};
+		00D9C9D82ABCBEED00F66421 /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				001B70B42A81619300C16B23 /* Domain */,
+			);
+			path = WebSocket;
+			sourceTree = "<group>";
+		};
+		00D9C9D92ABCBEFD00F66421 /* gRPC */ = {
+			isa = PBXGroup;
+			children = (
+				00D9C9DF2ABCBFCA00F66421 /* Domain */,
+			);
+			path = gRPC;
+			sourceTree = "<group>";
+		};
+		00D9C9DF2ABCBFCA00F66421 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				00D9C9E22ABCC60A00F66421 /* Model */,
+				00FFA6312AC259280092E203 /* TicTacToeProvider.swift */,
+				00FFA6332AC25A1C0092E203 /* TicTacToeRPCClient.swift */,
+				00FFA6352AC25A390092E203 /* TicTacToeRPCServer.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		00D9C9E22ABCC60A00F66421 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00FFA62D2AC256E10092E203 /* tic_tac_toe.grpc.swift */,
+				00FFA62E2AC256E10092E203 /* tic_tac_toe.pb.swift */,
+				00D9C9E02ABCC02700F66421 /* tic_tac_toe.proto */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -463,6 +520,10 @@
 			dependencies = (
 			);
 			name = Multiplayer_3D_TicTacToe;
+			packageProductDependencies = (
+				00D9C9DB2ABCBF9E00F66421 /* GRPC */,
+				00D9C9DD2ABCBF9E00F66421 /* protoc-gen-grpc-swift */,
+			);
 			productName = Multiplayer_3D_TicTacToe;
 			productReference = 003403262A7D7CA500265AF3 /* Multiplayer_3D_TicTacToe.app */;
 			productType = "com.apple.product-type.application";
@@ -535,6 +596,9 @@
 				Base,
 			);
 			mainGroup = 0034031D2A7D7CA500265AF3;
+			packageReferences = (
+				00D9C9DA2ABCBF9E00F66421 /* XCRemoteSwiftPackageReference "grpc-swift" */,
+			);
 			productRefGroup = 003403272A7D7CA500265AF3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -577,10 +641,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D8DDC92AC23A1E007F5F74 /* Makefile in Sources */,
 				00050A032A8E91F8008AA0EB /* ChatMessageBaloon.swift in Sources */,
 				000509EA2A8D7E7A008AA0EB /* ScreenPosition.swift in Sources */,
 				0034032C2A7D7CA500265AF3 /* GameView.swift in Sources */,
 				0019A5A32A8B0CD2008A2930 /* SessionViewModel.swift in Sources */,
+				00FFA6362AC25A390092E203 /* TicTacToeRPCServer.swift in Sources */,
 				001B70D42A82A25000C16B23 /* Tile.swift in Sources */,
 				0019A5B42A8C2F78008A2930 /* PlayerMoveDTO.swift in Sources */,
 				003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */,
@@ -594,6 +660,9 @@
 				000509FD2A8E816C008AA0EB /* DTOProtocol.swift in Sources */,
 				001B70E02A82CD1B00C16B23 /* JoinGameSheet.swift in Sources */,
 				0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */,
+				00FFA6342AC25A1C0092E203 /* TicTacToeRPCClient.swift in Sources */,
+				00D9C9E12ABCC02700F66421 /* tic_tac_toe.proto in Sources */,
+				00FFA6302AC256E10092E203 /* tic_tac_toe.pb.swift in Sources */,
 				000509EF2A8D83A7008AA0EB /* ServerMessages.swift in Sources */,
 				000509FF2A8E8522008AA0EB /* ChatMessageDTO.swift in Sources */,
 				000509E82A8D7C94008AA0EB /* ServerStatusLabel.swift in Sources */,
@@ -610,6 +679,7 @@
 				001B70C72A81AC9000C16B23 /* StartViewAssembler.swift in Sources */,
 				000509F32A8D8BAE008AA0EB /* GameEndDTO.swift in Sources */,
 				0034032A2A7D7CA500265AF3 /* Multiplayer_3D_TicTacToeApp.swift in Sources */,
+				00FFA62F2AC256E10092E203 /* tic_tac_toe.grpc.swift in Sources */,
 				0019A5B02A8C2AEA008A2930 /* ConfirmationAlert.swift in Sources */,
 				0019A5B92A8C399D008A2930 /* ChangeShiftDTO.swift in Sources */,
 				001B70D62A82A46900C16B23 /* TileStyle.swift in Sources */,
@@ -618,6 +688,7 @@
 				001B70DA2A82A80400C16B23 /* TicTacToeSession.swift in Sources */,
 				001B70B62A8161A800C16B23 /* TicTacToeClient.swift in Sources */,
 				0019A5B22A8C2E23008A2930 /* MessageSource.swift in Sources */,
+				00FFA6322AC259280092E203 /* TicTacToeProvider.swift in Sources */,
 				001B70B92A8161B900C16B23 /* Client.swift in Sources */,
 				000509F52A8E79AF008AA0EB /* ChatParameters.swift in Sources */,
 			);
@@ -972,6 +1043,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		00D9C9DA2ABCBF9E00F66421 /* XCRemoteSwiftPackageReference "grpc-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grpc/grpc-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		00D9C9DB2ABCBF9E00F66421 /* GRPC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D9C9DA2ABCBF9E00F66421 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPC;
+		};
+		00D9C9DD2ABCBF9E00F66421 /* protoc-gen-grpc-swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D9C9DA2ABCBF9E00F66421 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = "protoc-gen-grpc-swift";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0034031E2A7D7CA500265AF3 /* Project object */;
 }
