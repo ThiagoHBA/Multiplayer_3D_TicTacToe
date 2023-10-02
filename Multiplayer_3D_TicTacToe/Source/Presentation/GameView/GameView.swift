@@ -12,8 +12,6 @@ struct GameView: View {
     @State private var errorAlert: AlertError = AlertError()
     @State private var confirmationAlert: ConfirmationAlert = ConfirmationAlert()
     @State private var showChatSheet: Bool = false
-    @State var server: any Server
-    var client: any Client
     
     var body: some View {
         VStack {
@@ -39,13 +37,15 @@ struct GameView: View {
                                 showAlert: true,
                                 description: "Você confirma a colocação do ponto?",
                                 action: {
-                                    client.sendMessage(
-                                        TransferMessage.getPlayerDidEndTheMoveMessage(
-                                            from: sessionVM.playerIdentifier!,
-                                            on: tile.boardId,
-                                            tile
-                                        )
-                                    )
+//                                    Task {
+//                                        await client.sendMessage(
+//                                            TransferMessage.getPlayerDidEndTheMoveMessage(
+//                                                from: sessionVM.playerIdentifier!,
+//                                                on: tile.boardId,
+//                                                tile
+//                                            )
+//                                        )
+//                                    }
                                 }
                             )
                         }
@@ -73,18 +73,19 @@ struct GameView: View {
             }
         }
         .onAppear {
-            if sessionVM.isHost {
-                server.startServer { error in
-                    if let error = error {
-                        errorAlert = AlertError(
-                            showAlert: true,
-                            errorMessage: "Não foi possível inicializar o servidor: \(error.localizedDescription)"
-                        )
-                        return
-                    }
-                }
-                client.connectToServer(url: server.serverURL)
-            }
+            print(sessionVM.gameFlowParameters.gameStarted)
+//            if sessionVM.isHost {
+//                server.startServer { error in
+//                    if let error = error {
+//                        errorAlert = AlertError(
+//                            showAlert: true,
+//                            errorMessage: "Não foi possível inicializar o servidor: \(error.localizedDescription)"
+//                        )
+//                        return
+//                    }
+//                    client.connectToServer(path: server.serverPath) { _ in }
+//                }
+//            }
         }
         .alert(isPresented: $confirmationAlert.showAlert) {
             Alert(
@@ -96,35 +97,35 @@ struct GameView: View {
         }
         .opacity(sessionVM.showConnectionSheet ? 0.05 : 1)
         .overlay {
-            if sessionVM.showConnectionSheet {
-                VStack {
-                    ProgressView()
-                        .padding(16)
-                    
-                    VStack(spacing: 24) {
-                        Text("Código da sessão: \(ProcessInfo().hostName)")
-                            .lineLimit(nil)
-                            .multilineTextAlignment(.center)
-                            .font(.title)
-                            .bold()
-                            .frame(height: 100)
-                        
-                        Text(sessionVM.serverStatus.rawValue)
-                            .multilineTextAlignment(.center)
-                            .font(.title2)
-                    }
-                    .padding(18)
-                    
-                    if sessionVM.gameFlowParameters.players.count >= 2 {
-                        Button {
-                            server.startGame()
-                        } label: {
-                            Text("Iniciar Jogo")
-                                .bold()
-                        }
-                    }
-                }
-            }
+//            if sessionVM.showConnectionSheet {
+//                VStack {
+//                    ProgressView()
+//                        .padding(16)
+//                    
+//                    VStack(spacing: 24) {
+//                        Text("Código da sessão: \(server.serverPath)")
+//                            .lineLimit(nil)
+//                            .multilineTextAlignment(.center)
+//                            .font(.title)
+//                            .bold()
+//                            .frame(height: 100)
+//                        
+//                        Text(sessionVM.serverStatus.rawValue)
+//                            .multilineTextAlignment(.center)
+//                            .font(.title2)
+//                    }
+//                    .padding(18)
+//                    
+//                    if sessionVM.gameFlowParameters.players.count >= 2 {
+//                        Button {
+//                            server.startGame()
+//                        } label: {
+//                            Text("Iniciar Jogo")
+//                                .bold()
+//                        }
+//                    }
+//                }
+//            }
         }
         .toolbar {
             if sessionVM.gameFlowParameters.gameStarted {
@@ -139,13 +140,17 @@ struct GameView: View {
                             description: "Você confirma a sua desistência?",
                             action: {
                                 guard let player = sessionVM.playerIdentifier else { return }
-                                client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
+//                                Task {
+//                                    await client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
+//                                }
                             }
                         )
                     }
                 } else {
                     Button("Jogar Novamente") {
-                        client.sendMessage(TransferMessage.getPlayAgainMessage())
+//                        Task {
+//                            await client.sendMessage(TransferMessage.getPlayAgainMessage())
+//                        }
                     }
                 }
             }
@@ -156,15 +161,17 @@ struct GameView: View {
                     identifier: playerIdentifier,
                     messages: sessionVM.chatParameters.messages,
                     sendMessageOnTap: { message in
-                        client.sendMessage(
-                            TransferMessage.getSendChatMessage_Message(
-                                ChatMessage(
-                                    sender: playerIdentifier,
-                                    message: message,
-                                    sendedDate: Date.now
-                                )
-                            )
-                        )
+                        Task {
+//                            await client.sendMessage(
+//                                TransferMessage.getSendChatMessage_Message(
+//                                    ChatMessage(
+//                                        sender: playerIdentifier,
+//                                        message: message,
+//                                        sendedDate: Date.now
+//                                    )
+//                                )
+//                            )
+                        }
                     }
                 )
                 
@@ -178,10 +185,7 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     
     static var previews: some View {
-        GameView(
-            server: try! TicTacToeServer(port: 8080),
-            client: TicTacToeClient()
-        )
+        GameView()
         .environmentObject(SessionViewModel())
     }
 }

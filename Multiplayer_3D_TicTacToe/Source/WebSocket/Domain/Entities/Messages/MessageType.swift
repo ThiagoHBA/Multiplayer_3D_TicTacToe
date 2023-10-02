@@ -12,8 +12,13 @@ enum MessageType: Codable {
     case server(ServerMessages)
     
     enum ClientMessages: Codable {
+        case connection(ClientConnection)
         case gameFlow(ClientGameFlow)
         case chat(ClientChat)
+        
+        enum ClientConnection: String, Codable {
+            case clientConnection = "#clientConnection"
+        }
         
         enum ClientGameFlow: String, Codable {
             case playerMove = "#playerMove"

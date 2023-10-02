@@ -19,8 +19,8 @@ final class TicTacToeClient: NSObject, Client {
     
     weak var clientOutput: ClientOutput?
     
-    func connectToServer(url: URL) {
-        if !opened { openWebSocket(url) }
+    func connectToServer(path: String, completion: @escaping (Bool) -> ()) {
+        if !opened { openWebSocket(URL(string: path)!) }
         guard let webSocket = webSocket else { return }
         
         webSocket.receive(
@@ -32,7 +32,7 @@ final class TicTacToeClient: NSObject, Client {
                 case .success(let message):
                     self?.decodeServerMessage(message)
                 }
-                self?.connectToServer(url: url)
+                self?.connectToServer(path: path, completion: completion)
             }
         )
     }

@@ -8,9 +8,10 @@
 import Foundation
 
 final class SessionViewModel: ObservableObject {
-    @Published var gameFlowParameters: GameFlowParameters = GameFlowParameters.initialState
+    @Published var gameFlowParameters: GameFlowParameters! = GameFlowParameters.initialState
     @Published var chatParameters: ChatParameters = ChatParameters(messages: [])
     
+    @Published var showStartGameButton = false
     @Published var goToGameView: Bool = false
     @Published var showJoinGameSheet: Bool = false
     
@@ -19,6 +20,14 @@ final class SessionViewModel: ObservableObject {
     @Published var isHost = false
     @Published var playerIdentifier: Player? = nil
     @Published var isConnected = false
+    @Published var port: Int = Int()
+    
+    var manager: RPCManager!
+    
+    init() {
+        manager = RPCManager.shared
+        manager.clientOutput = self
+    }
     
     var showConnectionSheet: Bool {
         return isHost && !gameFlowParameters.gameStarted
@@ -28,8 +37,17 @@ final class SessionViewModel: ObservableObject {
         gameFlowParameters.shiftPlayerId == playerIdentifier?.id
     }
 }
+
 // MARK: - Client
 extension SessionViewModel: ClientOutput {
+    func didConnectAPlayer(with port: Int) {
+        DispatchQueue.main.async { [weak self] in
+            self?.manager.client.connectToService(port: port, completion: {
+                self?.showStartGameButton = true
+            })
+        }
+    }
+    
     func didEndGame(_ winner: Player, surrender: Bool, winningTiles: [TilePosition]) {
         DispatchQueue.main.async { [weak self] in
             if let playerIdentifier = self?.playerIdentifier {

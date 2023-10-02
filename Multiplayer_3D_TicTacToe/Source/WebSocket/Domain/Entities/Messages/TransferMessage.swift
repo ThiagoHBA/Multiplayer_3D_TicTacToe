@@ -84,6 +84,12 @@ extension TransferMessage {
 // MARK: - Client Default Messages
 
 extension TransferMessage {
+    static func getConnectionMessage() -> TransferMessage {
+        return TransferMessage(
+            type: .client(.connection(.clientConnection)),
+            data: Data()
+        )
+    }
     static func getPlayerDidEndTheMoveMessage(from player: Player, on board: Int, _ tile: Tile) -> TransferMessage {
         return TransferMessage(
             type: .client(.gameFlow(.playerMove)),

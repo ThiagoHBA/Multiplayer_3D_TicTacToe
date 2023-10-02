@@ -10,9 +10,8 @@ import SwiftUI
 struct StartView: View {
     @EnvironmentObject var sessionVM: SessionViewModel
     @State private var errorAlert: AlertError = AlertError()
+    @State private var loading: Bool = false
     @State var gameSessionCode: String = ""
-    @State var client: any Client
-    var server: any Server
     
     var body: some View {
         NavigationStack {
@@ -26,14 +25,46 @@ struct StartView: View {
                     .font(.largeTitle)
                     .bold()
                 
+                if sessionVM.isHost {
+                    Text("Compartilhe Seu código: \(gameSessionCode)")
+                        .font(.title)
+                        .bold()
+                        .padding(16)
+                    
+                    Text("Aguardando jogador se conectar...")
+                        .font(.title2)
+                        .padding([.bottom], 12)
+                    
+                    if sessionVM.gameFlowParameters.players.count > 0 {
+                        Text("Jogador conectado")
+                            .font(.title3)
+                            .padding([.bottom], 12)
+                    }
+                }
+                
+                if sessionVM.showStartGameButton {
+                    LargeColoredButton(
+                        title: "Iniciar Jogo",
+                        color: .yellow,
+                        onPressed: {
+                            sessionVM.goToGameView = true
+                            Task {
+                                await sessionVM.manager.sendStartGameMessage(.init())
+                            }
+                        }
+                    )
+                }
+                
                 LargeColoredButton(
                     title: "Iniciar Sessão",
                     color: .red,
                     onPressed: {
+                        gameSessionCode = "\(sessionVM.port)"
                         sessionVM.isHost = true
-                        sessionVM.goToGameView = true
                     }
                 )
+                .opacity(sessionVM.isHost ? 0.5 : 1)
+                .disabled(loading || sessionVM.isHost)
                 
                 LargeColoredButton(
                     title: "Entrar",
@@ -43,15 +74,23 @@ struct StartView: View {
                         sessionVM.showJoinGameSheet = true
                     }
                 )
+                .opacity(sessionVM.isHost ? 0.5 : 1)
+                .disabled(loading || sessionVM.isHost)
             }
-            .onAppear{
-                client.clientOutput = sessionVM
+            .overlay {
+                if loading {
+                    ProgressView()
+                        .frame(width: 60, height: 60)
+                }
+            }
+            .onAppear {
+                sessionVM.manager.run(handler: { port in
+                    self.sessionVM.port = port
+                })
+                sessionVM.manager.server.provider.output = sessionVM
             }
             .navigationDestination(isPresented: $sessionVM.goToGameView) {
-                GameView(
-                    server: server,
-                    client: client
-                )
+                GameView()
             }
             .alert(isPresented: $errorAlert.showAlert) {
                 Alert(
@@ -61,17 +100,19 @@ struct StartView: View {
             }
             .sheet(isPresented: $sessionVM.showJoinGameSheet) {
                 JoinGameSheet(
-                    sessionCode: gameSessionCode,
+                    sessionCode: $gameSessionCode,
                     connected: $sessionVM.isConnected,
                     connectButtonTapped: {
-                        guard let serverURL = URL(
-                            string: "ws://\(gameSessionCode):8080"
-                        ) else {
-                            errorAlert.errorMessage = "Não foi possível localizar a sessão. Tente novamente"
-                            errorAlert.showAlert = true
-                            return
-                        }
-                        client.connectToServer(url: serverURL)
+                        loading = true
+                        self.sessionVM.manager.client.connectToService(
+                            port:  Int(gameSessionCode)!,
+                            completion: {
+                                Task {
+                                    await sessionVM.manager.sendConnectedMessage(port: sessionVM.port)
+                                }
+                            }
+                        )
+                        loading = false
                     }
                 )
                 .padding([.horizontal], 12)

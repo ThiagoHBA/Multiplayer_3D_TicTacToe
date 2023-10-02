@@ -57,12 +57,17 @@
 		003403642A7D81DD00265AF3 /* WebSocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003403632A7D81DD00265AF3 /* WebSocketError.swift */; };
 		0093242E2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */; };
 		00D8DDC92AC23A1E007F5F74 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 00D8DDC82AC23A1E007F5F74 /* Makefile */; };
+		00D97F8C2AC8C15F00B65A4A /* RPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D97F8B2AC8C15F00B65A4A /* RPCManager.swift */; };
+		00D97F8F2AC8C7C200B65A4A /* RPCProviderOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D97F8E2AC8C7C200B65A4A /* RPCProviderOutput.swift */; };
+		00D97F922AC9E9D500B65A4A /* Entity+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D97F912AC9E9D500B65A4A /* Entity+Ext.swift */; };
+		00D97F942ACA03A800B65A4A /* TicTacToeRPCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D97F932ACA03A800B65A4A /* TicTacToeRPCSession.swift */; };
 		00D9C9DC2ABCBF9E00F66421 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 00D9C9DB2ABCBF9E00F66421 /* GRPC */; };
 		00D9C9DE2ABCBF9E00F66421 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 00D9C9DD2ABCBF9E00F66421 /* protoc-gen-grpc-swift */; };
 		00D9C9E12ABCC02700F66421 /* tic_tac_toe.proto in Sources */ = {isa = PBXBuildFile; fileRef = 00D9C9E02ABCC02700F66421 /* tic_tac_toe.proto */; };
+		00EE2D4D2AC3B4F300611138 /* RPCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EE2D4C2AC3B4F300611138 /* RPCView.swift */; };
 		00FFA62F2AC256E10092E203 /* tic_tac_toe.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA62D2AC256E10092E203 /* tic_tac_toe.grpc.swift */; };
 		00FFA6302AC256E10092E203 /* tic_tac_toe.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA62E2AC256E10092E203 /* tic_tac_toe.pb.swift */; };
-		00FFA6322AC259280092E203 /* TicTacToeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA6312AC259280092E203 /* TicTacToeProvider.swift */; };
+		00FFA6322AC259280092E203 /* TicTacToeRPCProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA6312AC259280092E203 /* TicTacToeRPCProvider.swift */; };
 		00FFA6342AC25A1C0092E203 /* TicTacToeRPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA6332AC25A1C0092E203 /* TicTacToeRPCClient.swift */; };
 		00FFA6362AC25A390092E203 /* TicTacToeRPCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA6352AC25A390092E203 /* TicTacToeRPCServer.swift */; };
 /* End PBXBuildFile section */
@@ -139,10 +144,15 @@
 		003403632A7D81DD00265AF3 /* WebSocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketError.swift; sourceTree = "<group>"; };
 		0093242D2A87ED7D00DD2DA6 /* BooleanMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanMessageDTO.swift; sourceTree = "<group>"; };
 		00D8DDC82AC23A1E007F5F74 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		00D97F8B2AC8C15F00B65A4A /* RPCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCManager.swift; sourceTree = "<group>"; };
+		00D97F8E2AC8C7C200B65A4A /* RPCProviderOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCProviderOutput.swift; sourceTree = "<group>"; };
+		00D97F912AC9E9D500B65A4A /* Entity+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Ext.swift"; sourceTree = "<group>"; };
+		00D97F932ACA03A800B65A4A /* TicTacToeRPCSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeRPCSession.swift; sourceTree = "<group>"; };
 		00D9C9E02ABCC02700F66421 /* tic_tac_toe.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; path = tic_tac_toe.proto; sourceTree = "<group>"; };
+		00EE2D4C2AC3B4F300611138 /* RPCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCView.swift; sourceTree = "<group>"; };
 		00FFA62D2AC256E10092E203 /* tic_tac_toe.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tic_tac_toe.grpc.swift; sourceTree = "<group>"; };
 		00FFA62E2AC256E10092E203 /* tic_tac_toe.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tic_tac_toe.pb.swift; sourceTree = "<group>"; };
-		00FFA6312AC259280092E203 /* TicTacToeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeProvider.swift; sourceTree = "<group>"; };
+		00FFA6312AC259280092E203 /* TicTacToeRPCProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeRPCProvider.swift; sourceTree = "<group>"; };
 		00FFA6332AC25A1C0092E203 /* TicTacToeRPCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeRPCClient.swift; sourceTree = "<group>"; };
 		00FFA6352AC25A390092E203 /* TicTacToeRPCServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeRPCServer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -265,7 +275,6 @@
 		001B70B42A81619300C16B23 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				001B70B72A8161B300C16B23 /* Protocol */,
 				001B70BA2A81636400C16B23 /* Entities */,
 				001B70B52A8161A800C16B23 /* TicTacToeClient.swift */,
 				003403602A7D7E5B00265AF3 /* TicTacToeServer.swift */,
@@ -440,6 +449,7 @@
 		003403562A7D7CE100265AF3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				001B70B72A8161B300C16B23 /* Protocol */,
 				00D9C9D92ABCBEFD00F66421 /* gRPC */,
 				00D9C9D82ABCBEED00F66421 /* WebSocket */,
 				003403572A7D7CFB00265AF3 /* Presentation */,
@@ -453,6 +463,7 @@
 				0019A5A12A8B0CBD008A2930 /* General */,
 				001B70BF2A81A7EA00C16B23 /* StartView */,
 				003403582A7D7D0500265AF3 /* GameView */,
+				00EE2D4C2AC3B4F300611138 /* RPCView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -465,6 +476,22 @@
 				0034032B2A7D7CA500265AF3 /* GameView.swift */,
 			);
 			path = GameView;
+			sourceTree = "<group>";
+		};
+		00D97F8D2AC8C7B300B65A4A /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				00D97F8E2AC8C7C200B65A4A /* RPCProviderOutput.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		00D97F902AC9E9CB00B65A4A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				00D97F912AC9E9D500B65A4A /* Entity+Ext.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		00D9C9D82ABCBEED00F66421 /* WebSocket */ = {
@@ -486,10 +513,14 @@
 		00D9C9DF2ABCBFCA00F66421 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				00D97F902AC9E9CB00B65A4A /* Extension */,
+				00D97F8D2AC8C7B300B65A4A /* Protocol */,
 				00D9C9E22ABCC60A00F66421 /* Model */,
-				00FFA6312AC259280092E203 /* TicTacToeProvider.swift */,
+				00FFA6312AC259280092E203 /* TicTacToeRPCProvider.swift */,
 				00FFA6332AC25A1C0092E203 /* TicTacToeRPCClient.swift */,
 				00FFA6352AC25A390092E203 /* TicTacToeRPCServer.swift */,
+				00D97F932ACA03A800B65A4A /* TicTacToeRPCSession.swift */,
+				00D97F8B2AC8C15F00B65A4A /* RPCManager.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -572,7 +603,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					003403252A7D7CA500265AF3 = {
 						CreatedOnToolsVersion = 14.3;
@@ -644,6 +675,7 @@
 				00D8DDC92AC23A1E007F5F74 /* Makefile in Sources */,
 				00050A032A8E91F8008AA0EB /* ChatMessageBaloon.swift in Sources */,
 				000509EA2A8D7E7A008AA0EB /* ScreenPosition.swift in Sources */,
+				00EE2D4D2AC3B4F300611138 /* RPCView.swift in Sources */,
 				0034032C2A7D7CA500265AF3 /* GameView.swift in Sources */,
 				0019A5A32A8B0CD2008A2930 /* SessionViewModel.swift in Sources */,
 				00FFA6362AC25A390092E203 /* TicTacToeRPCServer.swift in Sources */,
@@ -655,9 +687,11 @@
 				001B70C12A81A7F300C16B23 /* StartView.swift in Sources */,
 				000509F12A8D8A72008AA0EB /* PlayerSurrenderDTO.swift in Sources */,
 				001B70D02A81B7BF00C16B23 /* Board.swift in Sources */,
+				00D97F942ACA03A800B65A4A /* TicTacToeRPCSession.swift in Sources */,
 				0019A5AB2A8BF858008A2930 /* GameFlowParameters.swift in Sources */,
 				001B70CA2A81B02700C16B23 /* AlertError.swift in Sources */,
 				000509FD2A8E816C008AA0EB /* DTOProtocol.swift in Sources */,
+				00D97F922AC9E9D500B65A4A /* Entity+Ext.swift in Sources */,
 				001B70E02A82CD1B00C16B23 /* JoinGameSheet.swift in Sources */,
 				0034035C2A7D7DCB00265AF3 /* Server.swift in Sources */,
 				00FFA6342AC25A1C0092E203 /* TicTacToeRPCClient.swift in Sources */,
@@ -669,6 +703,7 @@
 				001B70D22A81B93100C16B23 /* TilePosition.swift in Sources */,
 				001B70CD2A81B25500C16B23 /* TicTacToeBoard.swift in Sources */,
 				001B70C42A81A94100C16B23 /* LargeColoredButton.swift in Sources */,
+				00D97F8F2AC8C7C200B65A4A /* RPCProviderOutput.swift in Sources */,
 				0019A5AD2A8BFF3F008A2930 /* ConnectedMessageDTO.swift in Sources */,
 				003403612A7D7E5B00265AF3 /* TicTacToeServer.swift in Sources */,
 				001B70D82A82A7C900C16B23 /* Session.swift in Sources */,
@@ -683,12 +718,13 @@
 				0019A5B02A8C2AEA008A2930 /* ConfirmationAlert.swift in Sources */,
 				0019A5B92A8C399D008A2930 /* ChangeShiftDTO.swift in Sources */,
 				001B70D62A82A46900C16B23 /* TileStyle.swift in Sources */,
+				00D97F8C2AC8C15F00B65A4A /* RPCManager.swift in Sources */,
 				00050A012A8E8C75008AA0EB /* ChatSheet.swift in Sources */,
 				000509FA2A8E800C008AA0EB /* MessageType.swift in Sources */,
 				001B70DA2A82A80400C16B23 /* TicTacToeSession.swift in Sources */,
 				001B70B62A8161A800C16B23 /* TicTacToeClient.swift in Sources */,
 				0019A5B22A8C2E23008A2930 /* MessageSource.swift in Sources */,
-				00FFA6322AC259280092E203 /* TicTacToeProvider.swift in Sources */,
+				00FFA6322AC259280092E203 /* TicTacToeRPCProvider.swift in Sources */,
 				001B70B92A8161B900C16B23 /* Client.swift in Sources */,
 				000509F52A8E79AF008AA0EB /* ChatParameters.swift in Sources */,
 			);
@@ -761,9 +797,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -819,9 +857,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -845,6 +885,7 @@
 				CODE_SIGN_ENTITLEMENTS = Multiplayer_3D_TicTacToe/Multiplayer_3D_TicTacToe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Multiplayer_3D_TicTacToe/Preview Content\"";
 				DEVELOPMENT_TEAM = 685GVH2XJC;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -883,6 +924,7 @@
 				CODE_SIGN_ENTITLEMENTS = Multiplayer_3D_TicTacToe/Multiplayer_3D_TicTacToe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Multiplayer_3D_TicTacToe/Preview Content\"";
 				DEVELOPMENT_TEAM = 685GVH2XJC;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -920,6 +962,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 685GVH2XJC;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -943,6 +986,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 685GVH2XJC;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -965,6 +1009,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 685GVH2XJC;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -987,6 +1032,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 685GVH2XJC;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;

@@ -12,9 +12,9 @@ final class TicTacToeServer: Server {
     var listener: NWListener
     var connectedClients: [NWConnection] = []
     var gameSession: Session = TicTacToeSession()
-    var serverURL: URL {
+    var serverPath: String {
         let processInfo = ProcessInfo()
-        return URL(string: "ws://\(processInfo.hostName):8080")!
+        return "ws://\(processInfo.hostName):8080"
     }
     
     init(port: UInt16 = 8080) throws {
@@ -163,6 +163,8 @@ final class TicTacToeServer: Server {
                         handleGameFlowMessages(transferMessage, gameFlowMessage)
                     case .chat(_):
                         handleChatMessages(transferMessage)
+                    case .connection(_):
+                        break
                 }
         }
     }

@@ -16,55 +16,15 @@ public protocol Tictactoe_TicTacToeClientProtocol: GRPCClient {
   var serviceName: String { get }
   var interceptors: Tictactoe_TicTacToeClientInterceptorFactoryProtocol? { get }
 
-  func addPlayerInSession(
-    _ request: Tictactoe_AddPlayerInSessionRequest,
+  func connectedMessage(
+    _ request: Tictactoe_ConnectMessageRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Tictactoe_AddPlayerInSessionRequest, Tictactoe_Player>
-
-  func selectStarterPlayer(
-    _ request: Tictactoe_SelectStarterPlayerRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Tictactoe_SelectStarterPlayerRequest, Tictactoe_SelectStarterPlayerResponse>
+  ) -> UnaryCall<Tictactoe_ConnectMessageRequest, Tictactoe_ConnectMessageResponse>
 
   func startGame(
     _ request: Tictactoe_StartGameRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Tictactoe_StartGameRequest, Tictactoe_StartGameResponse>
-
-  func addTileOnBoard(
-    _ request: Tictactoe_AddTileRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Tictactoe_AddTileRequest, Tictactoe_AddTileOnBoardResponse>
-
-  func addTileToPlayer(
-    _ request: Tictactoe_AddTileToPlayerRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Tictactoe_AddTileToPlayerRequest, Tictactoe_AddTileToPlayerResponse>
-
-  func changePlayerShift(
-    _ request: Tictactoe_ChangePlayerShiftRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Tictactoe_ChangePlayerShiftRequest, Tictactoe_ChangePlayerShiftResponse>
-
-  func playerSurrender(
-    _ request: Tictactoe_PlayerSurrenderRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Tictactoe_PlayerSurrenderRequest, Tictactoe_PlayerSurrenderResponse>
-
-  func addChatMessage(
-    _ request: Tictactoe_ChatMessageRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_AddChatMessageResponse>
-
-  func didHaveAWinner(
-    _ request: Tictactoe_DidHaveAWinnerRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Tictactoe_DidHaveAWinnerRequest, Tictactoe_WinningTiles>
-
-  func restartGame(
-    _ request: Tictactoe_RestartGameRequest,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Tictactoe_RestartGameRequest, Tictactoe_RestartGameResponse>
 }
 
 extension Tictactoe_TicTacToeClientProtocol {
@@ -72,39 +32,21 @@ extension Tictactoe_TicTacToeClientProtocol {
     return "tictactoe.TicTacToe"
   }
 
-  /// Unary call to AddPlayerInSession
+  /// Unary call to ConnectedMessage
   ///
   /// - Parameters:
-  ///   - request: Request to send to AddPlayerInSession.
+  ///   - request: Request to send to ConnectedMessage.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func addPlayerInSession(
-    _ request: Tictactoe_AddPlayerInSessionRequest,
+  public func connectedMessage(
+    _ request: Tictactoe_ConnectMessageRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Tictactoe_AddPlayerInSessionRequest, Tictactoe_Player> {
+  ) -> UnaryCall<Tictactoe_ConnectMessageRequest, Tictactoe_ConnectMessageResponse> {
     return self.makeUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addPlayerInSession.path,
+      path: Tictactoe_TicTacToeClientMetadata.Methods.connectedMessage.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddPlayerInSessionInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to SelectStarterPlayer
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to SelectStarterPlayer.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func selectStarterPlayer(
-    _ request: Tictactoe_SelectStarterPlayerRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Tictactoe_SelectStarterPlayerRequest, Tictactoe_SelectStarterPlayerResponse> {
-    return self.makeUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.selectStarterPlayer.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeSelectStarterPlayerInterceptors() ?? []
+      interceptors: self.interceptors?.makeConnectedMessageInterceptors() ?? []
     )
   }
 
@@ -123,132 +65,6 @@ extension Tictactoe_TicTacToeClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeStartGameInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to AddTileOnBoard
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to AddTileOnBoard.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func addTileOnBoard(
-    _ request: Tictactoe_AddTileRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Tictactoe_AddTileRequest, Tictactoe_AddTileOnBoardResponse> {
-    return self.makeUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addTileOnBoard.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddTileOnBoardInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to AddTileToPlayer
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to AddTileToPlayer.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func addTileToPlayer(
-    _ request: Tictactoe_AddTileToPlayerRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Tictactoe_AddTileToPlayerRequest, Tictactoe_AddTileToPlayerResponse> {
-    return self.makeUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addTileToPlayer.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddTileToPlayerInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to ChangePlayerShift
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to ChangePlayerShift.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func changePlayerShift(
-    _ request: Tictactoe_ChangePlayerShiftRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Tictactoe_ChangePlayerShiftRequest, Tictactoe_ChangePlayerShiftResponse> {
-    return self.makeUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.changePlayerShift.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeChangePlayerShiftInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to PlayerSurrender
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to PlayerSurrender.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func playerSurrender(
-    _ request: Tictactoe_PlayerSurrenderRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Tictactoe_PlayerSurrenderRequest, Tictactoe_PlayerSurrenderResponse> {
-    return self.makeUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.playerSurrender.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makePlayerSurrenderInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to AddChatMessage
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to AddChatMessage.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func addChatMessage(
-    _ request: Tictactoe_ChatMessageRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_AddChatMessageResponse> {
-    return self.makeUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addChatMessage.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to DidHaveAWinner
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to DidHaveAWinner.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func didHaveAWinner(
-    _ request: Tictactoe_DidHaveAWinnerRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Tictactoe_DidHaveAWinnerRequest, Tictactoe_WinningTiles> {
-    return self.makeUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.didHaveAWinner.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeDidHaveAWinnerInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to RestartGame
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to RestartGame.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  public func restartGame(
-    _ request: Tictactoe_RestartGameRequest,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Tictactoe_RestartGameRequest, Tictactoe_RestartGameResponse> {
-    return self.makeUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.restartGame.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeRestartGameInterceptors() ?? []
     )
   }
 }
@@ -315,55 +131,15 @@ public protocol Tictactoe_TicTacToeAsyncClientProtocol: GRPCClient {
   static var serviceDescriptor: GRPCServiceDescriptor { get }
   var interceptors: Tictactoe_TicTacToeClientInterceptorFactoryProtocol? { get }
 
-  func makeAddPlayerInSessionCall(
-    _ request: Tictactoe_AddPlayerInSessionRequest,
+  func makeConnectedMessageCall(
+    _ request: Tictactoe_ConnectMessageRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Tictactoe_AddPlayerInSessionRequest, Tictactoe_Player>
-
-  func makeSelectStarterPlayerCall(
-    _ request: Tictactoe_SelectStarterPlayerRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Tictactoe_SelectStarterPlayerRequest, Tictactoe_SelectStarterPlayerResponse>
+  ) -> GRPCAsyncUnaryCall<Tictactoe_ConnectMessageRequest, Tictactoe_ConnectMessageResponse>
 
   func makeStartGameCall(
     _ request: Tictactoe_StartGameRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Tictactoe_StartGameRequest, Tictactoe_StartGameResponse>
-
-  func makeAddTileOnBoardCall(
-    _ request: Tictactoe_AddTileRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Tictactoe_AddTileRequest, Tictactoe_AddTileOnBoardResponse>
-
-  func makeAddTileToPlayerCall(
-    _ request: Tictactoe_AddTileToPlayerRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Tictactoe_AddTileToPlayerRequest, Tictactoe_AddTileToPlayerResponse>
-
-  func makeChangePlayerShiftCall(
-    _ request: Tictactoe_ChangePlayerShiftRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Tictactoe_ChangePlayerShiftRequest, Tictactoe_ChangePlayerShiftResponse>
-
-  func makePlayerSurrenderCall(
-    _ request: Tictactoe_PlayerSurrenderRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Tictactoe_PlayerSurrenderRequest, Tictactoe_PlayerSurrenderResponse>
-
-  func makeAddChatMessageCall(
-    _ request: Tictactoe_ChatMessageRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_AddChatMessageResponse>
-
-  func makeDidHaveAwinnerCall(
-    _ request: Tictactoe_DidHaveAWinnerRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Tictactoe_DidHaveAWinnerRequest, Tictactoe_WinningTiles>
-
-  func makeRestartGameCall(
-    _ request: Tictactoe_RestartGameRequest,
-    callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Tictactoe_RestartGameRequest, Tictactoe_RestartGameResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -376,27 +152,15 @@ extension Tictactoe_TicTacToeAsyncClientProtocol {
     return nil
   }
 
-  public func makeAddPlayerInSessionCall(
-    _ request: Tictactoe_AddPlayerInSessionRequest,
+  public func makeConnectedMessageCall(
+    _ request: Tictactoe_ConnectMessageRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Tictactoe_AddPlayerInSessionRequest, Tictactoe_Player> {
+  ) -> GRPCAsyncUnaryCall<Tictactoe_ConnectMessageRequest, Tictactoe_ConnectMessageResponse> {
     return self.makeAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addPlayerInSession.path,
+      path: Tictactoe_TicTacToeClientMetadata.Methods.connectedMessage.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddPlayerInSessionInterceptors() ?? []
-    )
-  }
-
-  public func makeSelectStarterPlayerCall(
-    _ request: Tictactoe_SelectStarterPlayerRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Tictactoe_SelectStarterPlayerRequest, Tictactoe_SelectStarterPlayerResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.selectStarterPlayer.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeSelectStarterPlayerInterceptors() ?? []
+      interceptors: self.interceptors?.makeConnectedMessageInterceptors() ?? []
     )
   }
 
@@ -411,115 +175,19 @@ extension Tictactoe_TicTacToeAsyncClientProtocol {
       interceptors: self.interceptors?.makeStartGameInterceptors() ?? []
     )
   }
-
-  public func makeAddTileOnBoardCall(
-    _ request: Tictactoe_AddTileRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Tictactoe_AddTileRequest, Tictactoe_AddTileOnBoardResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addTileOnBoard.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddTileOnBoardInterceptors() ?? []
-    )
-  }
-
-  public func makeAddTileToPlayerCall(
-    _ request: Tictactoe_AddTileToPlayerRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Tictactoe_AddTileToPlayerRequest, Tictactoe_AddTileToPlayerResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addTileToPlayer.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddTileToPlayerInterceptors() ?? []
-    )
-  }
-
-  public func makeChangePlayerShiftCall(
-    _ request: Tictactoe_ChangePlayerShiftRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Tictactoe_ChangePlayerShiftRequest, Tictactoe_ChangePlayerShiftResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.changePlayerShift.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeChangePlayerShiftInterceptors() ?? []
-    )
-  }
-
-  public func makePlayerSurrenderCall(
-    _ request: Tictactoe_PlayerSurrenderRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Tictactoe_PlayerSurrenderRequest, Tictactoe_PlayerSurrenderResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.playerSurrender.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makePlayerSurrenderInterceptors() ?? []
-    )
-  }
-
-  public func makeAddChatMessageCall(
-    _ request: Tictactoe_ChatMessageRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_AddChatMessageResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addChatMessage.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? []
-    )
-  }
-
-  public func makeDidHaveAwinnerCall(
-    _ request: Tictactoe_DidHaveAWinnerRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Tictactoe_DidHaveAWinnerRequest, Tictactoe_WinningTiles> {
-    return self.makeAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.didHaveAWinner.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeDidHaveAWinnerInterceptors() ?? []
-    )
-  }
-
-  public func makeRestartGameCall(
-    _ request: Tictactoe_RestartGameRequest,
-    callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Tictactoe_RestartGameRequest, Tictactoe_RestartGameResponse> {
-    return self.makeAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.restartGame.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeRestartGameInterceptors() ?? []
-    )
-  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
 extension Tictactoe_TicTacToeAsyncClientProtocol {
-  public func addPlayerInSession(
-    _ request: Tictactoe_AddPlayerInSessionRequest,
+  public func connectedMessage(
+    _ request: Tictactoe_ConnectMessageRequest,
     callOptions: CallOptions? = nil
-  ) async throws -> Tictactoe_Player {
+  ) async throws -> Tictactoe_ConnectMessageResponse {
     return try await self.performAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addPlayerInSession.path,
+      path: Tictactoe_TicTacToeClientMetadata.Methods.connectedMessage.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddPlayerInSessionInterceptors() ?? []
-    )
-  }
-
-  public func selectStarterPlayer(
-    _ request: Tictactoe_SelectStarterPlayerRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Tictactoe_SelectStarterPlayerResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.selectStarterPlayer.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeSelectStarterPlayerInterceptors() ?? []
+      interceptors: self.interceptors?.makeConnectedMessageInterceptors() ?? []
     )
   }
 
@@ -532,90 +200,6 @@ extension Tictactoe_TicTacToeAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeStartGameInterceptors() ?? []
-    )
-  }
-
-  public func addTileOnBoard(
-    _ request: Tictactoe_AddTileRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Tictactoe_AddTileOnBoardResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addTileOnBoard.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddTileOnBoardInterceptors() ?? []
-    )
-  }
-
-  public func addTileToPlayer(
-    _ request: Tictactoe_AddTileToPlayerRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Tictactoe_AddTileToPlayerResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addTileToPlayer.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddTileToPlayerInterceptors() ?? []
-    )
-  }
-
-  public func changePlayerShift(
-    _ request: Tictactoe_ChangePlayerShiftRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Tictactoe_ChangePlayerShiftResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.changePlayerShift.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeChangePlayerShiftInterceptors() ?? []
-    )
-  }
-
-  public func playerSurrender(
-    _ request: Tictactoe_PlayerSurrenderRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Tictactoe_PlayerSurrenderResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.playerSurrender.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makePlayerSurrenderInterceptors() ?? []
-    )
-  }
-
-  public func addChatMessage(
-    _ request: Tictactoe_ChatMessageRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Tictactoe_AddChatMessageResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.addChatMessage.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? []
-    )
-  }
-
-  public func didHaveAWinner(
-    _ request: Tictactoe_DidHaveAWinnerRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Tictactoe_WinningTiles {
-    return try await self.performAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.didHaveAWinner.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeDidHaveAWinnerInterceptors() ?? []
-    )
-  }
-
-  public func restartGame(
-    _ request: Tictactoe_RestartGameRequest,
-    callOptions: CallOptions? = nil
-  ) async throws -> Tictactoe_RestartGameResponse {
-    return try await self.performAsyncUnaryCall(
-      path: Tictactoe_TicTacToeClientMetadata.Methods.restartGame.path,
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeRestartGameInterceptors() ?? []
     )
   }
 }
@@ -639,35 +223,11 @@ public struct Tictactoe_TicTacToeAsyncClient: Tictactoe_TicTacToeAsyncClientProt
 
 public protocol Tictactoe_TicTacToeClientInterceptorFactoryProtocol: Sendable {
 
-  /// - Returns: Interceptors to use when invoking 'addPlayerInSession'.
-  func makeAddPlayerInSessionInterceptors() -> [ClientInterceptor<Tictactoe_AddPlayerInSessionRequest, Tictactoe_Player>]
-
-  /// - Returns: Interceptors to use when invoking 'selectStarterPlayer'.
-  func makeSelectStarterPlayerInterceptors() -> [ClientInterceptor<Tictactoe_SelectStarterPlayerRequest, Tictactoe_SelectStarterPlayerResponse>]
+  /// - Returns: Interceptors to use when invoking 'connectedMessage'.
+  func makeConnectedMessageInterceptors() -> [ClientInterceptor<Tictactoe_ConnectMessageRequest, Tictactoe_ConnectMessageResponse>]
 
   /// - Returns: Interceptors to use when invoking 'startGame'.
   func makeStartGameInterceptors() -> [ClientInterceptor<Tictactoe_StartGameRequest, Tictactoe_StartGameResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'addTileOnBoard'.
-  func makeAddTileOnBoardInterceptors() -> [ClientInterceptor<Tictactoe_AddTileRequest, Tictactoe_AddTileOnBoardResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'addTileToPlayer'.
-  func makeAddTileToPlayerInterceptors() -> [ClientInterceptor<Tictactoe_AddTileToPlayerRequest, Tictactoe_AddTileToPlayerResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'changePlayerShift'.
-  func makeChangePlayerShiftInterceptors() -> [ClientInterceptor<Tictactoe_ChangePlayerShiftRequest, Tictactoe_ChangePlayerShiftResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'playerSurrender'.
-  func makePlayerSurrenderInterceptors() -> [ClientInterceptor<Tictactoe_PlayerSurrenderRequest, Tictactoe_PlayerSurrenderResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'addChatMessage'.
-  func makeAddChatMessageInterceptors() -> [ClientInterceptor<Tictactoe_ChatMessageRequest, Tictactoe_AddChatMessageResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'didHaveAWinner'.
-  func makeDidHaveAWinnerInterceptors() -> [ClientInterceptor<Tictactoe_DidHaveAWinnerRequest, Tictactoe_WinningTiles>]
-
-  /// - Returns: Interceptors to use when invoking 'restartGame'.
-  func makeRestartGameInterceptors() -> [ClientInterceptor<Tictactoe_RestartGameRequest, Tictactoe_RestartGameResponse>]
 }
 
 public enum Tictactoe_TicTacToeClientMetadata {
@@ -675,77 +235,21 @@ public enum Tictactoe_TicTacToeClientMetadata {
     name: "TicTacToe",
     fullName: "tictactoe.TicTacToe",
     methods: [
-      Tictactoe_TicTacToeClientMetadata.Methods.addPlayerInSession,
-      Tictactoe_TicTacToeClientMetadata.Methods.selectStarterPlayer,
+      Tictactoe_TicTacToeClientMetadata.Methods.connectedMessage,
       Tictactoe_TicTacToeClientMetadata.Methods.startGame,
-      Tictactoe_TicTacToeClientMetadata.Methods.addTileOnBoard,
-      Tictactoe_TicTacToeClientMetadata.Methods.addTileToPlayer,
-      Tictactoe_TicTacToeClientMetadata.Methods.changePlayerShift,
-      Tictactoe_TicTacToeClientMetadata.Methods.playerSurrender,
-      Tictactoe_TicTacToeClientMetadata.Methods.addChatMessage,
-      Tictactoe_TicTacToeClientMetadata.Methods.didHaveAWinner,
-      Tictactoe_TicTacToeClientMetadata.Methods.restartGame,
     ]
   )
 
   public enum Methods {
-    public static let addPlayerInSession = GRPCMethodDescriptor(
-      name: "AddPlayerInSession",
-      path: "/tictactoe.TicTacToe/AddPlayerInSession",
-      type: GRPCCallType.unary
-    )
-
-    public static let selectStarterPlayer = GRPCMethodDescriptor(
-      name: "SelectStarterPlayer",
-      path: "/tictactoe.TicTacToe/SelectStarterPlayer",
+    public static let connectedMessage = GRPCMethodDescriptor(
+      name: "ConnectedMessage",
+      path: "/tictactoe.TicTacToe/ConnectedMessage",
       type: GRPCCallType.unary
     )
 
     public static let startGame = GRPCMethodDescriptor(
       name: "StartGame",
       path: "/tictactoe.TicTacToe/StartGame",
-      type: GRPCCallType.unary
-    )
-
-    public static let addTileOnBoard = GRPCMethodDescriptor(
-      name: "AddTileOnBoard",
-      path: "/tictactoe.TicTacToe/AddTileOnBoard",
-      type: GRPCCallType.unary
-    )
-
-    public static let addTileToPlayer = GRPCMethodDescriptor(
-      name: "AddTileToPlayer",
-      path: "/tictactoe.TicTacToe/AddTileToPlayer",
-      type: GRPCCallType.unary
-    )
-
-    public static let changePlayerShift = GRPCMethodDescriptor(
-      name: "ChangePlayerShift",
-      path: "/tictactoe.TicTacToe/ChangePlayerShift",
-      type: GRPCCallType.unary
-    )
-
-    public static let playerSurrender = GRPCMethodDescriptor(
-      name: "PlayerSurrender",
-      path: "/tictactoe.TicTacToe/PlayerSurrender",
-      type: GRPCCallType.unary
-    )
-
-    public static let addChatMessage = GRPCMethodDescriptor(
-      name: "AddChatMessage",
-      path: "/tictactoe.TicTacToe/AddChatMessage",
-      type: GRPCCallType.unary
-    )
-
-    public static let didHaveAWinner = GRPCMethodDescriptor(
-      name: "DidHaveAWinner",
-      path: "/tictactoe.TicTacToe/DidHaveAWinner",
-      type: GRPCCallType.unary
-    )
-
-    public static let restartGame = GRPCMethodDescriptor(
-      name: "RestartGame",
-      path: "/tictactoe.TicTacToe/RestartGame",
       type: GRPCCallType.unary
     )
   }
@@ -755,25 +259,9 @@ public enum Tictactoe_TicTacToeClientMetadata {
 public protocol Tictactoe_TicTacToeProvider: CallHandlerProvider {
   var interceptors: Tictactoe_TicTacToeServerInterceptorFactoryProtocol? { get }
 
-  func addPlayerInSession(request: Tictactoe_AddPlayerInSessionRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_Player>
-
-  func selectStarterPlayer(request: Tictactoe_SelectStarterPlayerRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_SelectStarterPlayerResponse>
+  func connectedMessage(request: Tictactoe_ConnectMessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_ConnectMessageResponse>
 
   func startGame(request: Tictactoe_StartGameRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_StartGameResponse>
-
-  func addTileOnBoard(request: Tictactoe_AddTileRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_AddTileOnBoardResponse>
-
-  func addTileToPlayer(request: Tictactoe_AddTileToPlayerRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_AddTileToPlayerResponse>
-
-  func changePlayerShift(request: Tictactoe_ChangePlayerShiftRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_ChangePlayerShiftResponse>
-
-  func playerSurrender(request: Tictactoe_PlayerSurrenderRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_PlayerSurrenderResponse>
-
-  func addChatMessage(request: Tictactoe_ChatMessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_AddChatMessageResponse>
-
-  func didHaveAWinner(request: Tictactoe_DidHaveAWinnerRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_WinningTiles>
-
-  func restartGame(request: Tictactoe_RestartGameRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_RestartGameResponse>
 }
 
 extension Tictactoe_TicTacToeProvider {
@@ -788,22 +276,13 @@ extension Tictactoe_TicTacToeProvider {
     context: CallHandlerContext
   ) -> GRPCServerHandlerProtocol? {
     switch name {
-    case "AddPlayerInSession":
+    case "ConnectedMessage":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_AddPlayerInSessionRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_Player>(),
-        interceptors: self.interceptors?.makeAddPlayerInSessionInterceptors() ?? [],
-        userFunction: self.addPlayerInSession(request:context:)
-      )
-
-    case "SelectStarterPlayer":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_SelectStarterPlayerRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_SelectStarterPlayerResponse>(),
-        interceptors: self.interceptors?.makeSelectStarterPlayerInterceptors() ?? [],
-        userFunction: self.selectStarterPlayer(request:context:)
+        requestDeserializer: ProtobufDeserializer<Tictactoe_ConnectMessageRequest>(),
+        responseSerializer: ProtobufSerializer<Tictactoe_ConnectMessageResponse>(),
+        interceptors: self.interceptors?.makeConnectedMessageInterceptors() ?? [],
+        userFunction: self.connectedMessage(request:context:)
       )
 
     case "StartGame":
@@ -813,69 +292,6 @@ extension Tictactoe_TicTacToeProvider {
         responseSerializer: ProtobufSerializer<Tictactoe_StartGameResponse>(),
         interceptors: self.interceptors?.makeStartGameInterceptors() ?? [],
         userFunction: self.startGame(request:context:)
-      )
-
-    case "AddTileOnBoard":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_AddTileRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_AddTileOnBoardResponse>(),
-        interceptors: self.interceptors?.makeAddTileOnBoardInterceptors() ?? [],
-        userFunction: self.addTileOnBoard(request:context:)
-      )
-
-    case "AddTileToPlayer":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_AddTileToPlayerRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_AddTileToPlayerResponse>(),
-        interceptors: self.interceptors?.makeAddTileToPlayerInterceptors() ?? [],
-        userFunction: self.addTileToPlayer(request:context:)
-      )
-
-    case "ChangePlayerShift":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_ChangePlayerShiftRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_ChangePlayerShiftResponse>(),
-        interceptors: self.interceptors?.makeChangePlayerShiftInterceptors() ?? [],
-        userFunction: self.changePlayerShift(request:context:)
-      )
-
-    case "PlayerSurrender":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_PlayerSurrenderRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_PlayerSurrenderResponse>(),
-        interceptors: self.interceptors?.makePlayerSurrenderInterceptors() ?? [],
-        userFunction: self.playerSurrender(request:context:)
-      )
-
-    case "AddChatMessage":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_ChatMessageRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_AddChatMessageResponse>(),
-        interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? [],
-        userFunction: self.addChatMessage(request:context:)
-      )
-
-    case "DidHaveAWinner":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_DidHaveAWinnerRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_WinningTiles>(),
-        interceptors: self.interceptors?.makeDidHaveAWinnerInterceptors() ?? [],
-        userFunction: self.didHaveAWinner(request:context:)
-      )
-
-    case "RestartGame":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_RestartGameRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_RestartGameResponse>(),
-        interceptors: self.interceptors?.makeRestartGameInterceptors() ?? [],
-        userFunction: self.restartGame(request:context:)
       )
 
     default:
@@ -890,55 +306,15 @@ public protocol Tictactoe_TicTacToeAsyncProvider: CallHandlerProvider, Sendable 
   static var serviceDescriptor: GRPCServiceDescriptor { get }
   var interceptors: Tictactoe_TicTacToeServerInterceptorFactoryProtocol? { get }
 
-  func addPlayerInSession(
-    request: Tictactoe_AddPlayerInSessionRequest,
+  func connectedMessage(
+    request: Tictactoe_ConnectMessageRequest,
     context: GRPCAsyncServerCallContext
-  ) async throws -> Tictactoe_Player
-
-  func selectStarterPlayer(
-    request: Tictactoe_SelectStarterPlayerRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Tictactoe_SelectStarterPlayerResponse
+  ) async throws -> Tictactoe_ConnectMessageResponse
 
   func startGame(
     request: Tictactoe_StartGameRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Tictactoe_StartGameResponse
-
-  func addTileOnBoard(
-    request: Tictactoe_AddTileRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Tictactoe_AddTileOnBoardResponse
-
-  func addTileToPlayer(
-    request: Tictactoe_AddTileToPlayerRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Tictactoe_AddTileToPlayerResponse
-
-  func changePlayerShift(
-    request: Tictactoe_ChangePlayerShiftRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Tictactoe_ChangePlayerShiftResponse
-
-  func playerSurrender(
-    request: Tictactoe_PlayerSurrenderRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Tictactoe_PlayerSurrenderResponse
-
-  func addChatMessage(
-    request: Tictactoe_ChatMessageRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Tictactoe_AddChatMessageResponse
-
-  func didHaveAWinner(
-    request: Tictactoe_DidHaveAWinnerRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Tictactoe_WinningTiles
-
-  func restartGame(
-    request: Tictactoe_RestartGameRequest,
-    context: GRPCAsyncServerCallContext
-  ) async throws -> Tictactoe_RestartGameResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -960,22 +336,13 @@ extension Tictactoe_TicTacToeAsyncProvider {
     context: CallHandlerContext
   ) -> GRPCServerHandlerProtocol? {
     switch name {
-    case "AddPlayerInSession":
+    case "ConnectedMessage":
       return GRPCAsyncServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_AddPlayerInSessionRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_Player>(),
-        interceptors: self.interceptors?.makeAddPlayerInSessionInterceptors() ?? [],
-        wrapping: { try await self.addPlayerInSession(request: $0, context: $1) }
-      )
-
-    case "SelectStarterPlayer":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_SelectStarterPlayerRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_SelectStarterPlayerResponse>(),
-        interceptors: self.interceptors?.makeSelectStarterPlayerInterceptors() ?? [],
-        wrapping: { try await self.selectStarterPlayer(request: $0, context: $1) }
+        requestDeserializer: ProtobufDeserializer<Tictactoe_ConnectMessageRequest>(),
+        responseSerializer: ProtobufSerializer<Tictactoe_ConnectMessageResponse>(),
+        interceptors: self.interceptors?.makeConnectedMessageInterceptors() ?? [],
+        wrapping: { try await self.connectedMessage(request: $0, context: $1) }
       )
 
     case "StartGame":
@@ -987,69 +354,6 @@ extension Tictactoe_TicTacToeAsyncProvider {
         wrapping: { try await self.startGame(request: $0, context: $1) }
       )
 
-    case "AddTileOnBoard":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_AddTileRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_AddTileOnBoardResponse>(),
-        interceptors: self.interceptors?.makeAddTileOnBoardInterceptors() ?? [],
-        wrapping: { try await self.addTileOnBoard(request: $0, context: $1) }
-      )
-
-    case "AddTileToPlayer":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_AddTileToPlayerRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_AddTileToPlayerResponse>(),
-        interceptors: self.interceptors?.makeAddTileToPlayerInterceptors() ?? [],
-        wrapping: { try await self.addTileToPlayer(request: $0, context: $1) }
-      )
-
-    case "ChangePlayerShift":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_ChangePlayerShiftRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_ChangePlayerShiftResponse>(),
-        interceptors: self.interceptors?.makeChangePlayerShiftInterceptors() ?? [],
-        wrapping: { try await self.changePlayerShift(request: $0, context: $1) }
-      )
-
-    case "PlayerSurrender":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_PlayerSurrenderRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_PlayerSurrenderResponse>(),
-        interceptors: self.interceptors?.makePlayerSurrenderInterceptors() ?? [],
-        wrapping: { try await self.playerSurrender(request: $0, context: $1) }
-      )
-
-    case "AddChatMessage":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_ChatMessageRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_AddChatMessageResponse>(),
-        interceptors: self.interceptors?.makeAddChatMessageInterceptors() ?? [],
-        wrapping: { try await self.addChatMessage(request: $0, context: $1) }
-      )
-
-    case "DidHaveAWinner":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_DidHaveAWinnerRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_WinningTiles>(),
-        interceptors: self.interceptors?.makeDidHaveAWinnerInterceptors() ?? [],
-        wrapping: { try await self.didHaveAWinner(request: $0, context: $1) }
-      )
-
-    case "RestartGame":
-      return GRPCAsyncServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Tictactoe_RestartGameRequest>(),
-        responseSerializer: ProtobufSerializer<Tictactoe_RestartGameResponse>(),
-        interceptors: self.interceptors?.makeRestartGameInterceptors() ?? [],
-        wrapping: { try await self.restartGame(request: $0, context: $1) }
-      )
-
     default:
       return nil
     }
@@ -1058,45 +362,13 @@ extension Tictactoe_TicTacToeAsyncProvider {
 
 public protocol Tictactoe_TicTacToeServerInterceptorFactoryProtocol: Sendable {
 
-  /// - Returns: Interceptors to use when handling 'addPlayerInSession'.
+  /// - Returns: Interceptors to use when handling 'connectedMessage'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeAddPlayerInSessionInterceptors() -> [ServerInterceptor<Tictactoe_AddPlayerInSessionRequest, Tictactoe_Player>]
-
-  /// - Returns: Interceptors to use when handling 'selectStarterPlayer'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeSelectStarterPlayerInterceptors() -> [ServerInterceptor<Tictactoe_SelectStarterPlayerRequest, Tictactoe_SelectStarterPlayerResponse>]
+  func makeConnectedMessageInterceptors() -> [ServerInterceptor<Tictactoe_ConnectMessageRequest, Tictactoe_ConnectMessageResponse>]
 
   /// - Returns: Interceptors to use when handling 'startGame'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeStartGameInterceptors() -> [ServerInterceptor<Tictactoe_StartGameRequest, Tictactoe_StartGameResponse>]
-
-  /// - Returns: Interceptors to use when handling 'addTileOnBoard'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeAddTileOnBoardInterceptors() -> [ServerInterceptor<Tictactoe_AddTileRequest, Tictactoe_AddTileOnBoardResponse>]
-
-  /// - Returns: Interceptors to use when handling 'addTileToPlayer'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeAddTileToPlayerInterceptors() -> [ServerInterceptor<Tictactoe_AddTileToPlayerRequest, Tictactoe_AddTileToPlayerResponse>]
-
-  /// - Returns: Interceptors to use when handling 'changePlayerShift'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeChangePlayerShiftInterceptors() -> [ServerInterceptor<Tictactoe_ChangePlayerShiftRequest, Tictactoe_ChangePlayerShiftResponse>]
-
-  /// - Returns: Interceptors to use when handling 'playerSurrender'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makePlayerSurrenderInterceptors() -> [ServerInterceptor<Tictactoe_PlayerSurrenderRequest, Tictactoe_PlayerSurrenderResponse>]
-
-  /// - Returns: Interceptors to use when handling 'addChatMessage'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeAddChatMessageInterceptors() -> [ServerInterceptor<Tictactoe_ChatMessageRequest, Tictactoe_AddChatMessageResponse>]
-
-  /// - Returns: Interceptors to use when handling 'didHaveAWinner'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeDidHaveAWinnerInterceptors() -> [ServerInterceptor<Tictactoe_DidHaveAWinnerRequest, Tictactoe_WinningTiles>]
-
-  /// - Returns: Interceptors to use when handling 'restartGame'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeRestartGameInterceptors() -> [ServerInterceptor<Tictactoe_RestartGameRequest, Tictactoe_RestartGameResponse>]
 }
 
 public enum Tictactoe_TicTacToeServerMetadata {
@@ -1104,77 +376,21 @@ public enum Tictactoe_TicTacToeServerMetadata {
     name: "TicTacToe",
     fullName: "tictactoe.TicTacToe",
     methods: [
-      Tictactoe_TicTacToeServerMetadata.Methods.addPlayerInSession,
-      Tictactoe_TicTacToeServerMetadata.Methods.selectStarterPlayer,
+      Tictactoe_TicTacToeServerMetadata.Methods.connectedMessage,
       Tictactoe_TicTacToeServerMetadata.Methods.startGame,
-      Tictactoe_TicTacToeServerMetadata.Methods.addTileOnBoard,
-      Tictactoe_TicTacToeServerMetadata.Methods.addTileToPlayer,
-      Tictactoe_TicTacToeServerMetadata.Methods.changePlayerShift,
-      Tictactoe_TicTacToeServerMetadata.Methods.playerSurrender,
-      Tictactoe_TicTacToeServerMetadata.Methods.addChatMessage,
-      Tictactoe_TicTacToeServerMetadata.Methods.didHaveAWinner,
-      Tictactoe_TicTacToeServerMetadata.Methods.restartGame,
     ]
   )
 
   public enum Methods {
-    public static let addPlayerInSession = GRPCMethodDescriptor(
-      name: "AddPlayerInSession",
-      path: "/tictactoe.TicTacToe/AddPlayerInSession",
-      type: GRPCCallType.unary
-    )
-
-    public static let selectStarterPlayer = GRPCMethodDescriptor(
-      name: "SelectStarterPlayer",
-      path: "/tictactoe.TicTacToe/SelectStarterPlayer",
+    public static let connectedMessage = GRPCMethodDescriptor(
+      name: "ConnectedMessage",
+      path: "/tictactoe.TicTacToe/ConnectedMessage",
       type: GRPCCallType.unary
     )
 
     public static let startGame = GRPCMethodDescriptor(
       name: "StartGame",
       path: "/tictactoe.TicTacToe/StartGame",
-      type: GRPCCallType.unary
-    )
-
-    public static let addTileOnBoard = GRPCMethodDescriptor(
-      name: "AddTileOnBoard",
-      path: "/tictactoe.TicTacToe/AddTileOnBoard",
-      type: GRPCCallType.unary
-    )
-
-    public static let addTileToPlayer = GRPCMethodDescriptor(
-      name: "AddTileToPlayer",
-      path: "/tictactoe.TicTacToe/AddTileToPlayer",
-      type: GRPCCallType.unary
-    )
-
-    public static let changePlayerShift = GRPCMethodDescriptor(
-      name: "ChangePlayerShift",
-      path: "/tictactoe.TicTacToe/ChangePlayerShift",
-      type: GRPCCallType.unary
-    )
-
-    public static let playerSurrender = GRPCMethodDescriptor(
-      name: "PlayerSurrender",
-      path: "/tictactoe.TicTacToe/PlayerSurrender",
-      type: GRPCCallType.unary
-    )
-
-    public static let addChatMessage = GRPCMethodDescriptor(
-      name: "AddChatMessage",
-      path: "/tictactoe.TicTacToe/AddChatMessage",
-      type: GRPCCallType.unary
-    )
-
-    public static let didHaveAWinner = GRPCMethodDescriptor(
-      name: "DidHaveAWinner",
-      path: "/tictactoe.TicTacToe/DidHaveAWinner",
-      type: GRPCCallType.unary
-    )
-
-    public static let restartGame = GRPCMethodDescriptor(
-      name: "RestartGame",
-      path: "/tictactoe.TicTacToe/RestartGame",
       type: GRPCCallType.unary
     )
   }

@@ -13,8 +13,12 @@ struct Multiplayer_3D_TicTacToeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            StartViewAssembler.make()
+            StartView()
                 .environmentObject(sessionViewModel)
+//            StartViewAssembler.make()
+//            StartViewAssembler.makeGRPC()
+//                            .environmentObject(sessionViewModel)
+            /*EmptyView*/
         }
     }
 }

@@ -16,4 +16,5 @@ protocol ClientOutput: AnyObject {
     func didChangeShift(_ newShiftPlayer: Int)
     func didEndGame(_ winner: Player, surrender: Bool, winningTiles: [TilePosition])
     func didReceiveAChatMessage(_ message: ChatMessage)
+    func didConnectAPlayer(with port: Int)
 }

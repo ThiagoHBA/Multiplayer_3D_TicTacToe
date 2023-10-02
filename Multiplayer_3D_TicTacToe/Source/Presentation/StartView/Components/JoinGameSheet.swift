@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct JoinGameSheet: View {
-    @State var sessionCode: String
+    @Binding var sessionCode: String
     @Binding var connected: Bool
     var connectButtonTapped: (() -> ())?
     

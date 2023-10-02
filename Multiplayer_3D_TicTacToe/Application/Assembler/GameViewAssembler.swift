@@ -6,16 +6,16 @@
 //
 
 import Foundation
-
-final class GameViewAssembler {
-    static func make(
-        server: any Server = try! TicTacToeServer(),
-        client: any Client = TicTacToeClient.shared
-    ) -> GameView {
-        let gameView = GameView(
-            server: server,
-            client: client
-        )
-        return gameView
-    }
-}
+//
+//final class GameViewAssembler {
+//    static func make(
+//        server: any Server = try! TicTacToeServer(),
+//        client: any Client = TicTacToeClient.shared
+//    ) -> GameView {
+//        let gameView = GameView(
+//            server: server,
+//            client: client
+//        )
+//        return gameView
+//    }
+//}

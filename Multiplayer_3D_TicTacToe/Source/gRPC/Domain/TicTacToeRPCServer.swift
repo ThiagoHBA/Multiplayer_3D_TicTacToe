@@ -10,9 +10,11 @@ import GRPC
 import NIO
 
 class TicTacToeRPCServer {
-    var gameSession = TicTacToeProvider()
+    let port: Int = 0
+    var isRunning: Bool = false
+    let provider = TicTacToeProvider()
     
-    func run() {
+    func run(completion: @escaping (Int) -> ()) {
         // Create an event loop group for the server to run on.
         let group = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
         defer {
@@ -20,9 +22,9 @@ class TicTacToeRPCServer {
         }
         
         let configuration: GRPC.Server.Configuration = .default(
-            target: .hostAndPort("localhost", 8080),
+            target: ConnectionTarget.hostAndPort("localhost", port),
             eventLoopGroup: group,
-            serviceProviders: [gameSession]
+            serviceProviders: [provider]
         )
 
         // Start the server and print its address once it has started.
@@ -32,8 +34,9 @@ class TicTacToeRPCServer {
           $0.channel.localAddress
         }.whenSuccess { address in
           print("server started on port \(address!.port!)")
+          self.isRunning = true
+          completion(address!.port!)
         }
-
         // Wait on the server's `onClose` future to stop the program from exiting.
         try? server.flatMap{ $0.onClose }.wait()
     }
