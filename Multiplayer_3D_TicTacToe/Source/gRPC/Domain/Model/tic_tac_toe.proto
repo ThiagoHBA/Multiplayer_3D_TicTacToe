@@ -13,6 +13,7 @@ service TicTacToe {
     rpc PlayerMove(PlayerMoveRequest) returns (PlayerMoveResponse) {}
     rpc ChatMessage(ChatMessageRequest) returns (ChatMessageResponse) {}
     rpc Surrender(SurrenderRequest) returns (SurrenderResponse) {}
+    rpc RestartGame(RestartGameRequest) returns (StartGameResponse) {}
 }
 
 // Entities
@@ -98,6 +99,10 @@ message ChatMessageRequest {
     ChatMessage chatMessage = 1;
 }
 
+message RestartGameRequest {
+    
+}
+
 // MARK:  Response
 
 message SurrenderResponse {
@@ -127,21 +132,3 @@ message PlayerMoveResponse {
     repeated TilePosition winningTiles = 2;
     GameflowParameters parameters = 3;
 }
-
-
-//
-//message SelectStarterPlayerResponse {}
-//
-//message StartGameResponse {}
-//
-//message AddTileOnBoardResponse {}
-//
-//message AddTileToPlayerResponse {}
-//
-//message ChangePlayerShiftResponse {}
-//
-//message PlayerSurrenderResponse {}
-//
-//message AddChatMessageResponse {}
-//
-//message RestartGameResponse {}

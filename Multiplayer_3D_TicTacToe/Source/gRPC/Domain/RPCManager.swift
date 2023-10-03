@@ -107,5 +107,17 @@ class RPCManager {
         }
     }
 
+    func sendRestartMessage() async {
+        do {
+            let response = try await client.service.restartGame(.init()).response.get()
+            let parameters = GameFlowParameters(from: response.parameters)
+            server.provider.session.updateGameFlowParameters(parameters)
+            clientOutput?.didUpdateSessionParameters(parameters)
+            clientOutput?.didGameStart()
+            clientOutput?.didChangeShift(Int(response.parameters.shiftPlayerID))
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
     

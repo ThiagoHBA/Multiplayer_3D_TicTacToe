@@ -356,6 +356,16 @@ public struct Tictactoe_ChatMessageRequest {
   fileprivate var _chatMessage: Tictactoe_ChatMessage? = nil
 }
 
+public struct Tictactoe_RestartGameRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Tictactoe_SurrenderResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -518,6 +528,7 @@ extension Tictactoe_ConnectMessageRequest: @unchecked Sendable {}
 extension Tictactoe_StartGameRequest: @unchecked Sendable {}
 extension Tictactoe_PlayerMoveRequest: @unchecked Sendable {}
 extension Tictactoe_ChatMessageRequest: @unchecked Sendable {}
+extension Tictactoe_RestartGameRequest: @unchecked Sendable {}
 extension Tictactoe_SurrenderResponse: @unchecked Sendable {}
 extension Tictactoe_ChatMessageResponse: @unchecked Sendable {}
 extension Tictactoe_ConnectMessageResponse: @unchecked Sendable {}
@@ -1074,6 +1085,25 @@ extension Tictactoe_ChatMessageRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public static func ==(lhs: Tictactoe_ChatMessageRequest, rhs: Tictactoe_ChatMessageRequest) -> Bool {
     if lhs._chatMessage != rhs._chatMessage {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Tictactoe_RestartGameRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RestartGameRequest"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Tictactoe_RestartGameRequest, rhs: Tictactoe_RestartGameRequest) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

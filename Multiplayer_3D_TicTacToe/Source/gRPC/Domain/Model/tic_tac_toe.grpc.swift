@@ -40,6 +40,11 @@ public protocol Tictactoe_TicTacToeClientProtocol: GRPCClient {
     _ request: Tictactoe_SurrenderRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse>
+
+  func restartGame(
+    _ request: Tictactoe_RestartGameRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Tictactoe_RestartGameRequest, Tictactoe_StartGameResponse>
 }
 
 extension Tictactoe_TicTacToeClientProtocol {
@@ -136,6 +141,24 @@ extension Tictactoe_TicTacToeClientProtocol {
       interceptors: self.interceptors?.makeSurrenderInterceptors() ?? []
     )
   }
+
+  /// Unary call to RestartGame
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to RestartGame.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  public func restartGame(
+    _ request: Tictactoe_RestartGameRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Tictactoe_RestartGameRequest, Tictactoe_StartGameResponse> {
+    return self.makeUnaryCall(
+      path: Tictactoe_TicTacToeClientMetadata.Methods.restartGame.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRestartGameInterceptors() ?? []
+    )
+  }
 }
 
 @available(*, deprecated)
@@ -224,6 +247,11 @@ public protocol Tictactoe_TicTacToeAsyncClientProtocol: GRPCClient {
     _ request: Tictactoe_SurrenderRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse>
+
+  func makeRestartGameCall(
+    _ request: Tictactoe_RestartGameRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Tictactoe_RestartGameRequest, Tictactoe_StartGameResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -295,6 +323,18 @@ extension Tictactoe_TicTacToeAsyncClientProtocol {
       interceptors: self.interceptors?.makeSurrenderInterceptors() ?? []
     )
   }
+
+  public func makeRestartGameCall(
+    _ request: Tictactoe_RestartGameRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Tictactoe_RestartGameRequest, Tictactoe_StartGameResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Tictactoe_TicTacToeClientMetadata.Methods.restartGame.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRestartGameInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -358,6 +398,18 @@ extension Tictactoe_TicTacToeAsyncClientProtocol {
       interceptors: self.interceptors?.makeSurrenderInterceptors() ?? []
     )
   }
+
+  public func restartGame(
+    _ request: Tictactoe_RestartGameRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Tictactoe_StartGameResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Tictactoe_TicTacToeClientMetadata.Methods.restartGame.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRestartGameInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -393,6 +445,9 @@ public protocol Tictactoe_TicTacToeClientInterceptorFactoryProtocol: Sendable {
 
   /// - Returns: Interceptors to use when invoking 'surrender'.
   func makeSurrenderInterceptors() -> [ClientInterceptor<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'restartGame'.
+  func makeRestartGameInterceptors() -> [ClientInterceptor<Tictactoe_RestartGameRequest, Tictactoe_StartGameResponse>]
 }
 
 public enum Tictactoe_TicTacToeClientMetadata {
@@ -405,6 +460,7 @@ public enum Tictactoe_TicTacToeClientMetadata {
       Tictactoe_TicTacToeClientMetadata.Methods.playerMove,
       Tictactoe_TicTacToeClientMetadata.Methods.chatMessage,
       Tictactoe_TicTacToeClientMetadata.Methods.surrender,
+      Tictactoe_TicTacToeClientMetadata.Methods.restartGame,
     ]
   )
 
@@ -438,6 +494,12 @@ public enum Tictactoe_TicTacToeClientMetadata {
       path: "/tictactoe.TicTacToe/Surrender",
       type: GRPCCallType.unary
     )
+
+    public static let restartGame = GRPCMethodDescriptor(
+      name: "RestartGame",
+      path: "/tictactoe.TicTacToe/RestartGame",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -454,6 +516,8 @@ public protocol Tictactoe_TicTacToeProvider: CallHandlerProvider {
   func chatMessage(request: Tictactoe_ChatMessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_ChatMessageResponse>
 
   func surrender(request: Tictactoe_SurrenderRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_SurrenderResponse>
+
+  func restartGame(request: Tictactoe_RestartGameRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_StartGameResponse>
 }
 
 extension Tictactoe_TicTacToeProvider {
@@ -513,6 +577,15 @@ extension Tictactoe_TicTacToeProvider {
         userFunction: self.surrender(request:context:)
       )
 
+    case "RestartGame":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Tictactoe_RestartGameRequest>(),
+        responseSerializer: ProtobufSerializer<Tictactoe_StartGameResponse>(),
+        interceptors: self.interceptors?.makeRestartGameInterceptors() ?? [],
+        userFunction: self.restartGame(request:context:)
+      )
+
     default:
       return nil
     }
@@ -549,6 +622,11 @@ public protocol Tictactoe_TicTacToeAsyncProvider: CallHandlerProvider, Sendable 
     request: Tictactoe_SurrenderRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Tictactoe_SurrenderResponse
+
+  func restartGame(
+    request: Tictactoe_RestartGameRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Tictactoe_StartGameResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -615,6 +693,15 @@ extension Tictactoe_TicTacToeAsyncProvider {
         wrapping: { try await self.surrender(request: $0, context: $1) }
       )
 
+    case "RestartGame":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Tictactoe_RestartGameRequest>(),
+        responseSerializer: ProtobufSerializer<Tictactoe_StartGameResponse>(),
+        interceptors: self.interceptors?.makeRestartGameInterceptors() ?? [],
+        wrapping: { try await self.restartGame(request: $0, context: $1) }
+      )
+
     default:
       return nil
     }
@@ -642,6 +729,10 @@ public protocol Tictactoe_TicTacToeServerInterceptorFactoryProtocol: Sendable {
   /// - Returns: Interceptors to use when handling 'surrender'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeSurrenderInterceptors() -> [ServerInterceptor<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse>]
+
+  /// - Returns: Interceptors to use when handling 'restartGame'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeRestartGameInterceptors() -> [ServerInterceptor<Tictactoe_RestartGameRequest, Tictactoe_StartGameResponse>]
 }
 
 public enum Tictactoe_TicTacToeServerMetadata {
@@ -654,6 +745,7 @@ public enum Tictactoe_TicTacToeServerMetadata {
       Tictactoe_TicTacToeServerMetadata.Methods.playerMove,
       Tictactoe_TicTacToeServerMetadata.Methods.chatMessage,
       Tictactoe_TicTacToeServerMetadata.Methods.surrender,
+      Tictactoe_TicTacToeServerMetadata.Methods.restartGame,
     ]
   )
 
@@ -685,6 +777,12 @@ public enum Tictactoe_TicTacToeServerMetadata {
     public static let surrender = GRPCMethodDescriptor(
       name: "Surrender",
       path: "/tictactoe.TicTacToe/Surrender",
+      type: GRPCCallType.unary
+    )
+
+    public static let restartGame = GRPCMethodDescriptor(
+      name: "RestartGame",
+      path: "/tictactoe.TicTacToe/RestartGame",
       type: GRPCCallType.unary
     )
   }

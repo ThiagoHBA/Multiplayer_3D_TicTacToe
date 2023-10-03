@@ -126,5 +126,12 @@ final class TicTacToeProvider: Tictactoe_TicTacToeProvider {
         
         return context.eventLoop.makeSucceededFuture(response)
     }
-
+    
+    func restartGame(
+        request: Tictactoe_RestartGameRequest,
+        context: GRPC.StatusOnlyCallContext
+    ) -> NIOCore.EventLoopFuture<Tictactoe_StartGameResponse> {
+        session.restartGame()
+        return self.startGame(request: .init(), context: context)
+    }
 }

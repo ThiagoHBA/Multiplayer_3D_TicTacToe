@@ -104,9 +104,9 @@ struct GameView: View {
                     }
                 } else {
                     Button("Jogar Novamente") {
-//                        Task {
-//                            await client.sendMessage(TransferMessage.getPlayAgainMessage())
-//                        }
+                        Task {
+                            await sessionVM.manager.sendRestartMessage()
+                        }
                     }
                 }
             }
