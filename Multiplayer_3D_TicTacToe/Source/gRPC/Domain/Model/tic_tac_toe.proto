@@ -12,6 +12,7 @@ service TicTacToe {
     rpc StartGame(StartGameRequest) returns (StartGameResponse) {}
     rpc PlayerMove(PlayerMoveRequest) returns (PlayerMoveResponse) {}
     rpc ChatMessage(ChatMessageRequest) returns (ChatMessageResponse) {}
+    rpc Surrender(SurrenderRequest) returns (SurrenderResponse) {}
 }
 
 // Entities
@@ -77,6 +78,10 @@ message ChatParameters {
 
 // MARK: Requests
 
+message SurrenderRequest {
+    Player player = 1;
+}
+
 message ConnectMessageRequest {
     int64 port = 1;
 }
@@ -94,6 +99,11 @@ message ChatMessageRequest {
 }
 
 // MARK:  Response
+
+message SurrenderResponse {
+    Player winner = 1;
+    GameflowParameters parameters = 2;
+}
 
 message ChatMessageResponse {
     bool success = 1;

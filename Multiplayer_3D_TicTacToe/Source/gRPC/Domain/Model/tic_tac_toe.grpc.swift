@@ -35,6 +35,11 @@ public protocol Tictactoe_TicTacToeClientProtocol: GRPCClient {
     _ request: Tictactoe_ChatMessageRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse>
+
+  func surrender(
+    _ request: Tictactoe_SurrenderRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse>
 }
 
 extension Tictactoe_TicTacToeClientProtocol {
@@ -111,6 +116,24 @@ extension Tictactoe_TicTacToeClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeChatMessageInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to Surrender
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Surrender.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  public func surrender(
+    _ request: Tictactoe_SurrenderRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse> {
+    return self.makeUnaryCall(
+      path: Tictactoe_TicTacToeClientMetadata.Methods.surrender.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSurrenderInterceptors() ?? []
     )
   }
 }
@@ -196,6 +219,11 @@ public protocol Tictactoe_TicTacToeAsyncClientProtocol: GRPCClient {
     _ request: Tictactoe_ChatMessageRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse>
+
+  func makeSurrenderCall(
+    _ request: Tictactoe_SurrenderRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -255,6 +283,18 @@ extension Tictactoe_TicTacToeAsyncClientProtocol {
       interceptors: self.interceptors?.makeChatMessageInterceptors() ?? []
     )
   }
+
+  public func makeSurrenderCall(
+    _ request: Tictactoe_SurrenderRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Tictactoe_TicTacToeClientMetadata.Methods.surrender.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSurrenderInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -306,6 +346,18 @@ extension Tictactoe_TicTacToeAsyncClientProtocol {
       interceptors: self.interceptors?.makeChatMessageInterceptors() ?? []
     )
   }
+
+  public func surrender(
+    _ request: Tictactoe_SurrenderRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Tictactoe_SurrenderResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Tictactoe_TicTacToeClientMetadata.Methods.surrender.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSurrenderInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -338,6 +390,9 @@ public protocol Tictactoe_TicTacToeClientInterceptorFactoryProtocol: Sendable {
 
   /// - Returns: Interceptors to use when invoking 'chatMessage'.
   func makeChatMessageInterceptors() -> [ClientInterceptor<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'surrender'.
+  func makeSurrenderInterceptors() -> [ClientInterceptor<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse>]
 }
 
 public enum Tictactoe_TicTacToeClientMetadata {
@@ -349,6 +404,7 @@ public enum Tictactoe_TicTacToeClientMetadata {
       Tictactoe_TicTacToeClientMetadata.Methods.startGame,
       Tictactoe_TicTacToeClientMetadata.Methods.playerMove,
       Tictactoe_TicTacToeClientMetadata.Methods.chatMessage,
+      Tictactoe_TicTacToeClientMetadata.Methods.surrender,
     ]
   )
 
@@ -376,6 +432,12 @@ public enum Tictactoe_TicTacToeClientMetadata {
       path: "/tictactoe.TicTacToe/ChatMessage",
       type: GRPCCallType.unary
     )
+
+    public static let surrender = GRPCMethodDescriptor(
+      name: "Surrender",
+      path: "/tictactoe.TicTacToe/Surrender",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -390,6 +452,8 @@ public protocol Tictactoe_TicTacToeProvider: CallHandlerProvider {
   func playerMove(request: Tictactoe_PlayerMoveRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_PlayerMoveResponse>
 
   func chatMessage(request: Tictactoe_ChatMessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_ChatMessageResponse>
+
+  func surrender(request: Tictactoe_SurrenderRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_SurrenderResponse>
 }
 
 extension Tictactoe_TicTacToeProvider {
@@ -440,6 +504,15 @@ extension Tictactoe_TicTacToeProvider {
         userFunction: self.chatMessage(request:context:)
       )
 
+    case "Surrender":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Tictactoe_SurrenderRequest>(),
+        responseSerializer: ProtobufSerializer<Tictactoe_SurrenderResponse>(),
+        interceptors: self.interceptors?.makeSurrenderInterceptors() ?? [],
+        userFunction: self.surrender(request:context:)
+      )
+
     default:
       return nil
     }
@@ -471,6 +544,11 @@ public protocol Tictactoe_TicTacToeAsyncProvider: CallHandlerProvider, Sendable 
     request: Tictactoe_ChatMessageRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Tictactoe_ChatMessageResponse
+
+  func surrender(
+    request: Tictactoe_SurrenderRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Tictactoe_SurrenderResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -528,6 +606,15 @@ extension Tictactoe_TicTacToeAsyncProvider {
         wrapping: { try await self.chatMessage(request: $0, context: $1) }
       )
 
+    case "Surrender":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Tictactoe_SurrenderRequest>(),
+        responseSerializer: ProtobufSerializer<Tictactoe_SurrenderResponse>(),
+        interceptors: self.interceptors?.makeSurrenderInterceptors() ?? [],
+        wrapping: { try await self.surrender(request: $0, context: $1) }
+      )
+
     default:
       return nil
     }
@@ -551,6 +638,10 @@ public protocol Tictactoe_TicTacToeServerInterceptorFactoryProtocol: Sendable {
   /// - Returns: Interceptors to use when handling 'chatMessage'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeChatMessageInterceptors() -> [ServerInterceptor<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse>]
+
+  /// - Returns: Interceptors to use when handling 'surrender'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeSurrenderInterceptors() -> [ServerInterceptor<Tictactoe_SurrenderRequest, Tictactoe_SurrenderResponse>]
 }
 
 public enum Tictactoe_TicTacToeServerMetadata {
@@ -562,6 +653,7 @@ public enum Tictactoe_TicTacToeServerMetadata {
       Tictactoe_TicTacToeServerMetadata.Methods.startGame,
       Tictactoe_TicTacToeServerMetadata.Methods.playerMove,
       Tictactoe_TicTacToeServerMetadata.Methods.chatMessage,
+      Tictactoe_TicTacToeServerMetadata.Methods.surrender,
     ]
   )
 
@@ -587,6 +679,12 @@ public enum Tictactoe_TicTacToeServerMetadata {
     public static let chatMessage = GRPCMethodDescriptor(
       name: "ChatMessage",
       path: "/tictactoe.TicTacToe/ChatMessage",
+      type: GRPCCallType.unary
+    )
+
+    public static let surrender = GRPCMethodDescriptor(
+      name: "Surrender",
+      path: "/tictactoe.TicTacToe/Surrender",
       type: GRPCCallType.unary
     )
   }

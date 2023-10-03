@@ -86,8 +86,8 @@ struct StartView: View {
             .onAppear {
                 sessionVM.manager.run(handler: { port in
                     self.sessionVM.port = port
+                    sessionVM.manager.server.provider.output = sessionVM
                 })
-                sessionVM.manager.server.provider.output = sessionVM
             }
             .navigationDestination(isPresented: $sessionVM.goToGameView) {
                 GameView()

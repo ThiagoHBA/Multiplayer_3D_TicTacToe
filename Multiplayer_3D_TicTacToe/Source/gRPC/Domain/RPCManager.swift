@@ -91,6 +91,21 @@ class RPCManager {
             print(error.localizedDescription)
         }
     }
+    
+    func sendSurrenderMessage(_ request: Tictactoe_SurrenderRequest) async {
+        do {
+            let response = try await client.service.surrender(request).response.get()
+            let parameters = GameFlowParameters(from: response.parameters)
+            clientOutput?.didEndGame(
+                Player(from: response.winner),
+                surrender: true,
+                winningTiles: []
+            )
+            clientOutput?.didUpdateSessionParameters(parameters)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 
 }
     

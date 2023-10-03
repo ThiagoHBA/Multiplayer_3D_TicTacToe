@@ -105,4 +105,26 @@ final class TicTacToeProvider: Tictactoe_TicTacToeProvider {
         
         return context.eventLoop.makeSucceededFuture(response)
     }
+    
+    func surrender(
+        request: Tictactoe_SurrenderRequest,
+        context: GRPC.StatusOnlyCallContext
+    ) -> NIOCore.EventLoopFuture<Tictactoe_SurrenderResponse> {
+        session.playerSurrender(Player(from: request.player))
+        let winner = session.gameFlowParameters.winner!
+        output?.didEndGame(
+            winner,
+            surrender: true,
+            winningTiles: []
+        )
+        output?.didUpdateSessionParameters(session.gameFlowParameters)
+        
+        let response = Tictactoe_SurrenderResponse.with {
+            $0.winner = winner.toGRPCEntity()
+            $0.parameters = session.gameFlowParameters.toGRPCEntity()
+        }
+        
+        return context.eventLoop.makeSucceededFuture(response)
+    }
+
 }

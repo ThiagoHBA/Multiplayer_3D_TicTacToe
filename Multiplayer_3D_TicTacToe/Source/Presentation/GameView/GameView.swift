@@ -44,13 +44,6 @@ struct GameView: View {
                                     }
                                     Task {
                                         await sessionVM.manager.sendPlayerMoveMessage(request)
-//                                        await client.sendMessage(
-//                                            TransferMessage.getPlayerDidEndTheMoveMessage(
-//                                                from: sessionVM.playerIdentifier!,
-//                                                on: tile.boardId,
-//                                                tile
-//                                            )
-//                                        )
                                     }
                                 }
                             )
@@ -78,21 +71,6 @@ struct GameView: View {
                 .padding([.top], 80)
             }
         }
-        .onAppear {
-            print(sessionVM.gameFlowParameters.gameStarted)
-//            if sessionVM.isHost {
-//                server.startServer { error in
-//                    if let error = error {
-//                        errorAlert = AlertError(
-//                            showAlert: true,
-//                            errorMessage: "Não foi possível inicializar o servidor: \(error.localizedDescription)"
-//                        )
-//                        return
-//                    }
-//                    client.connectToServer(path: server.serverPath) { _ in }
-//                }
-//            }
-        }
         .alert(isPresented: $confirmationAlert.showAlert) {
             Alert(
                 title: Text("Ação"),
@@ -102,37 +80,6 @@ struct GameView: View {
             )
         }
         .opacity(sessionVM.showConnectionSheet ? 0.05 : 1)
-        .overlay {
-//            if sessionVM.showConnectionSheet {
-//                VStack {
-//                    ProgressView()
-//                        .padding(16)
-//                    
-//                    VStack(spacing: 24) {
-//                        Text("Código da sessão: \(server.serverPath)")
-//                            .lineLimit(nil)
-//                            .multilineTextAlignment(.center)
-//                            .font(.title)
-//                            .bold()
-//                            .frame(height: 100)
-//                        
-//                        Text(sessionVM.serverStatus.rawValue)
-//                            .multilineTextAlignment(.center)
-//                            .font(.title2)
-//                    }
-//                    .padding(18)
-//                    
-//                    if sessionVM.gameFlowParameters.players.count >= 2 {
-//                        Button {
-//                            server.startGame()
-//                        } label: {
-//                            Text("Iniciar Jogo")
-//                                .bold()
-//                        }
-//                    }
-//                }
-//            }
-        }
         .toolbar {
             if sessionVM.gameFlowParameters.gameStarted {
                 Button("Chat") {
@@ -145,10 +92,13 @@ struct GameView: View {
                             showAlert: true,
                             description: "Você confirma a sua desistência?",
                             action: {
-//                                guard let player = sessionVM.playerIdentifier else { return }
-//                                Task {
-//                                    await client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
-//                                }
+                                guard let player = sessionVM.playerIdentifier else { return }
+                                Task {
+                                    let surrenderRequest = Tictactoe_SurrenderRequest.with {
+                                        $0.player = player.toGRPCEntity()
+                                    }
+                                    await sessionVM.manager.sendSurrenderMessage(surrenderRequest)
+                                }
                             }
                         )
                     }
@@ -176,15 +126,6 @@ struct GameView: View {
                                 ).toGRPCEntity()
                             }
                             await sessionVM.manager.sendChatMessage(request)
-//                            await client.sendMessage(
-//                                TransferMessage.getSendChatMessage_Message(
-//                                    ChatMessage(
-//                                        sender: playerIdentifier,
-//                                        message: message,
-//                                        sendedDate: Date.now
-//                                    )
-//                                )
-//                            )
                         }
                     }
                 )
