@@ -37,7 +37,13 @@ struct GameView: View {
                                 showAlert: true,
                                 description: "Você confirma a colocação do ponto?",
                                 action: {
-//                                    Task {
+                                    let request = Tictactoe_PlayerMoveRequest.with {
+                                        $0.player = sessionVM.playerIdentifier!.toGRPCEntity()
+                                        $0.boardID = Int64(tile.boardId)
+                                        $0.addedTile = tile.toGRPCEntity()
+                                    }
+                                    Task {
+                                        await sessionVM.manager.sendPlayerMoveMessage(request)
 //                                        await client.sendMessage(
 //                                            TransferMessage.getPlayerDidEndTheMoveMessage(
 //                                                from: sessionVM.playerIdentifier!,
@@ -45,7 +51,7 @@ struct GameView: View {
 //                                                tile
 //                                            )
 //                                        )
-//                                    }
+                                    }
                                 }
                             )
                         }
@@ -139,7 +145,7 @@ struct GameView: View {
                             showAlert: true,
                             description: "Você confirma a sua desistência?",
                             action: {
-                                guard let player = sessionVM.playerIdentifier else { return }
+//                                guard let player = sessionVM.playerIdentifier else { return }
 //                                Task {
 //                                    await client.sendMessage(TransferMessage.getPlayerSurrenderMessage(player))
 //                                }

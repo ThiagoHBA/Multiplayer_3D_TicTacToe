@@ -1,14 +1,7 @@
-//
-//  SessionViewModel.swift
-//  Multiplayer_3D_TicTacToe
-//
-//  Created by Thiago Henrique on 14/08/23.
-//
-
 import Foundation
 
 final class SessionViewModel: ObservableObject {
-    @Published var gameFlowParameters: GameFlowParameters! = GameFlowParameters.initialState
+    @Published var gameFlowParameters: GameFlowParameters = GameFlowParameters.initialState
     @Published var chatParameters: ChatParameters = ChatParameters(messages: [])
     
     @Published var showStartGameButton = false
@@ -73,8 +66,7 @@ extension SessionViewModel: ClientOutput {
     func didFinishPlayerMove(on boardId: Int, in tile: Tile) { }
     
     func didChangeShift(_ newShiftPlayer: Int) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+        DispatchQueue.main.async {
             if let playerIdentifier = self.playerIdentifier {
                 if newShiftPlayer == playerIdentifier.id {
                     self.serverStatus = .playersTurn
@@ -95,13 +87,13 @@ extension SessionViewModel: ClientOutput {
     }
     
     func didUpdateSessionParameters(_ newState: GameFlowParameters) {
-        DispatchQueue.main.async { [weak self] in
-            self?.gameFlowParameters = newState
+        DispatchQueue.main.async {
+            self.gameFlowParameters = newState
             guard let playerIndex = newState.players.firstIndex(where: {
-                $0.id == self?.playerIdentifier?.id
+                $0.id == self.playerIdentifier?.id
             }) else { return }
             
-            self?.playerIdentifier = newState.players[playerIndex]
+            self.playerIdentifier = newState.players[playerIndex]
         }
     }
     

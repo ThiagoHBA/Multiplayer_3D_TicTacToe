@@ -133,7 +133,7 @@ extension GameFlowParameters {
             gameStarted: grpcParameters.gameStarted,
             gameEnded: grpcParameters.gameEnded,
             boards: grpcParameters.boards.compactMap { Board(from: $0) },
-            winner: Player(from: grpcParameters.winner)
+            winner: grpcParameters.hasWinner ? Player(from: grpcParameters.winner) : nil
         )
     }
     

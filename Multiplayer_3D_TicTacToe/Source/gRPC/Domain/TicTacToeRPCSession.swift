@@ -11,6 +11,10 @@ final class TicTacToeRPCSession: Session {
     private(set) var chatParameters: ChatParameters = ChatParameters(messages: [])
     private(set) var gameFlowParameters: GameFlowParameters = GameFlowParameters.initialState
     
+    func updateGameFlowParameters(_ newState: GameFlowParameters) {
+        self.gameFlowParameters = newState
+    }
+    
     func addPlayerInSession() -> Player {
         var newPlayerStyle = TileStyle.randomStyle()
         

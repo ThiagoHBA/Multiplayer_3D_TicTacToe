@@ -39,8 +39,10 @@ class RPCManager {
         do {
             let request = Tictactoe_ConnectMessageRequest.with { $0.port = Int64(port) }
             let response = try await client.service.connectedMessage(request).response.get()
+            let parameters = GameFlowParameters(from: response.parameters)
+            server.provider.session.updateGameFlowParameters(parameters)
             clientOutput?.didConnectInServer(Player(from: response.identifier))
-            clientOutput?.didUpdateSessionParameters(GameFlowParameters(from: response.parameters))
+            clientOutput?.didUpdateSessionParameters(parameters)
         } catch {
             print(error.localizedDescription)
         }
@@ -49,8 +51,23 @@ class RPCManager {
     func sendStartGameMessage(_ request: Tictactoe_StartGameRequest) async {
         do {
             let response = try await client.service.startGame(request).response.get()
+            let parameters = GameFlowParameters(from: response.parameters)
+            server.provider.session.updateGameFlowParameters(parameters)
+            clientOutput?.didUpdateSessionParameters(parameters)
             clientOutput?.didGameStart()
-            clientOutput?.didUpdateSessionParameters(GameFlowParameters(from: response.parameters))
+            clientOutput?.didChangeShift(Int(response.parameters.shiftPlayerID))
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func sendPlayerMoveMessage(_ request: Tictactoe_PlayerMoveRequest) async {
+        do {
+            let response = try await client.service.playerMove(request).response.get()
+            let parameters = GameFlowParameters(from: response.parameters)
+            server.provider.session.updateGameFlowParameters(parameters)
+            clientOutput?.didChangeShift(Int(response.parameters.shiftPlayerID))
+            clientOutput?.didUpdateSessionParameters(parameters)
         } catch {
             print(error.localizedDescription)
         }

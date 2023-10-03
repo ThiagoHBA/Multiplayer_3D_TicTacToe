@@ -64,7 +64,6 @@
 		00D9C9DC2ABCBF9E00F66421 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 00D9C9DB2ABCBF9E00F66421 /* GRPC */; };
 		00D9C9DE2ABCBF9E00F66421 /* protoc-gen-grpc-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 00D9C9DD2ABCBF9E00F66421 /* protoc-gen-grpc-swift */; };
 		00D9C9E12ABCC02700F66421 /* tic_tac_toe.proto in Sources */ = {isa = PBXBuildFile; fileRef = 00D9C9E02ABCC02700F66421 /* tic_tac_toe.proto */; };
-		00EE2D4D2AC3B4F300611138 /* RPCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EE2D4C2AC3B4F300611138 /* RPCView.swift */; };
 		00FFA62F2AC256E10092E203 /* tic_tac_toe.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA62D2AC256E10092E203 /* tic_tac_toe.grpc.swift */; };
 		00FFA6302AC256E10092E203 /* tic_tac_toe.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA62E2AC256E10092E203 /* tic_tac_toe.pb.swift */; };
 		00FFA6322AC259280092E203 /* TicTacToeRPCProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FFA6312AC259280092E203 /* TicTacToeRPCProvider.swift */; };
@@ -149,7 +148,6 @@
 		00D97F912AC9E9D500B65A4A /* Entity+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Ext.swift"; sourceTree = "<group>"; };
 		00D97F932ACA03A800B65A4A /* TicTacToeRPCSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeRPCSession.swift; sourceTree = "<group>"; };
 		00D9C9E02ABCC02700F66421 /* tic_tac_toe.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; path = tic_tac_toe.proto; sourceTree = "<group>"; };
-		00EE2D4C2AC3B4F300611138 /* RPCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCView.swift; sourceTree = "<group>"; };
 		00FFA62D2AC256E10092E203 /* tic_tac_toe.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tic_tac_toe.grpc.swift; sourceTree = "<group>"; };
 		00FFA62E2AC256E10092E203 /* tic_tac_toe.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tic_tac_toe.pb.swift; sourceTree = "<group>"; };
 		00FFA6312AC259280092E203 /* TicTacToeRPCProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeRPCProvider.swift; sourceTree = "<group>"; };
@@ -463,7 +461,6 @@
 				0019A5A12A8B0CBD008A2930 /* General */,
 				001B70BF2A81A7EA00C16B23 /* StartView */,
 				003403582A7D7D0500265AF3 /* GameView */,
-				00EE2D4C2AC3B4F300611138 /* RPCView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -675,7 +672,6 @@
 				00D8DDC92AC23A1E007F5F74 /* Makefile in Sources */,
 				00050A032A8E91F8008AA0EB /* ChatMessageBaloon.swift in Sources */,
 				000509EA2A8D7E7A008AA0EB /* ScreenPosition.swift in Sources */,
-				00EE2D4D2AC3B4F300611138 /* RPCView.swift in Sources */,
 				0034032C2A7D7CA500265AF3 /* GameView.swift in Sources */,
 				0019A5A32A8B0CD2008A2930 /* SessionViewModel.swift in Sources */,
 				00FFA6362AC25A390092E203 /* TicTacToeRPCServer.swift in Sources */,
