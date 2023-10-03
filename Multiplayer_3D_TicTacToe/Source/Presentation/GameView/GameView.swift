@@ -168,6 +168,14 @@ struct GameView: View {
                     messages: sessionVM.chatParameters.messages,
                     sendMessageOnTap: { message in
                         Task {
+                            let request = Tictactoe_ChatMessageRequest.with {
+                                $0.chatMessage = ChatMessage(
+                                    sender: playerIdentifier,
+                                    message: message,
+                                    sendedDate: Date.now
+                                ).toGRPCEntity()
+                            }
+                            await sessionVM.manager.sendChatMessage(request)
 //                            await client.sendMessage(
 //                                TransferMessage.getSendChatMessage_Message(
 //                                    ChatMessage(

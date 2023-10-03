@@ -11,6 +11,7 @@ service TicTacToe {
     rpc ConnectedMessage(ConnectMessageRequest) returns (ConnectMessageResponse) {}
     rpc StartGame(StartGameRequest) returns (StartGameResponse) {}
     rpc PlayerMove(PlayerMoveRequest) returns (PlayerMoveResponse) {}
+    rpc ChatMessage(ChatMessageRequest) returns (ChatMessageResponse) {}
 }
 
 // Entities
@@ -64,6 +65,16 @@ message GameflowParameters {
     optional Player winner = 6;
 }
 
+message ChatMessage {
+    Player sender = 1;
+    string text = 2;
+    string sendedDate = 3;
+}
+
+message ChatParameters {
+    repeated ChatMessage messages = 1;
+}
+
 // MARK: Requests
 
 message ConnectMessageRequest {
@@ -78,7 +89,17 @@ message PlayerMoveRequest {
     Tile addedTile = 3;
 }
 
+message ChatMessageRequest {
+    ChatMessage chatMessage = 1;
+}
+
 // MARK:  Response
+
+message ChatMessageResponse {
+    bool success = 1;
+    ChatParameters chatParameters = 2;
+}
+
 message ConnectMessageResponse {
     bool connected = 1;
     Player identifier = 2;
@@ -96,6 +117,7 @@ message PlayerMoveResponse {
     repeated TilePosition winningTiles = 2;
     GameflowParameters parameters = 3;
 }
+
 
 //
 //message SelectStarterPlayerResponse {}

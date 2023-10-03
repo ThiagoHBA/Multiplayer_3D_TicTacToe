@@ -80,6 +80,17 @@ class RPCManager {
             print(error.localizedDescription)
         }
     }
+    
+    func sendChatMessage(_ request: Tictactoe_ChatMessageRequest) async {
+        do {
+            let response = try await client.service.chatMessage(request).response.get()
+            let parameters = ChatParameters(from: response.chatParameters)
+            server.provider.session.updateChatParameters(parameters)
+            clientOutput?.didUpdateChatParameters(parameters)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 
 }
     

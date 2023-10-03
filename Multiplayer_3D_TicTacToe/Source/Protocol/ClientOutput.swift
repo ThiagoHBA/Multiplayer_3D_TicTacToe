@@ -10,6 +10,7 @@ import Foundation
 protocol ClientOutput: AnyObject {
     func errorWhileReceivingMessage(_ error: Error)
     func didUpdateSessionParameters(_ newState: GameFlowParameters)
+    func didUpdateChatParameters(_ newState: ChatParameters)
     func didConnectInServer(_ identifier: Player)
     func didGameStart()
     func didFinishPlayerMove(on boardId: Int, in tile: Tile)

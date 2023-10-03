@@ -33,6 +33,12 @@ final class SessionViewModel: ObservableObject {
 
 // MARK: - Client
 extension SessionViewModel: ClientOutput {
+    func didUpdateChatParameters(_ newState: ChatParameters) {
+        DispatchQueue.main.async {
+            self.chatParameters = newState
+        }
+    }
+    
     func didConnectAPlayer(with port: Int) {
         DispatchQueue.main.async { [weak self] in
             self?.manager.client.connectToService(port: port, completion: {
@@ -58,8 +64,8 @@ extension SessionViewModel: ClientOutput {
     }
     
     func didReceiveAChatMessage(_ message: ChatMessage) {
-        DispatchQueue.main.async { [weak self] in
-            self?.chatParameters.messages.append(message)
+        DispatchQueue.main.async {
+            self.chatParameters.messages.append(message)
         }
     }
     

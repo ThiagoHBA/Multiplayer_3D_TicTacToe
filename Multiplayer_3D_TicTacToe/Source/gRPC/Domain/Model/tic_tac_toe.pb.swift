@@ -222,6 +222,43 @@ public struct Tictactoe_GameflowParameters {
   fileprivate var _winner: Tictactoe_Player? = nil
 }
 
+public struct Tictactoe_ChatMessage {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var sender: Tictactoe_Player {
+    get {return _sender ?? Tictactoe_Player()}
+    set {_sender = newValue}
+  }
+  /// Returns true if `sender` has been explicitly set.
+  public var hasSender: Bool {return self._sender != nil}
+  /// Clears the value of `sender`. Subsequent reads from it will return its default value.
+  public mutating func clearSender() {self._sender = nil}
+
+  public var text: String = String()
+
+  public var sendedDate: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _sender: Tictactoe_Player? = nil
+}
+
+public struct Tictactoe_ChatParameters {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var messages: [Tictactoe_ChatMessage] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Tictactoe_ConnectMessageRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -277,7 +314,50 @@ public struct Tictactoe_PlayerMoveRequest {
   fileprivate var _addedTile: Tictactoe_Tile? = nil
 }
 
-/// MARK:  Response
+public struct Tictactoe_ChatMessageRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var chatMessage: Tictactoe_ChatMessage {
+    get {return _chatMessage ?? Tictactoe_ChatMessage()}
+    set {_chatMessage = newValue}
+  }
+  /// Returns true if `chatMessage` has been explicitly set.
+  public var hasChatMessage: Bool {return self._chatMessage != nil}
+  /// Clears the value of `chatMessage`. Subsequent reads from it will return its default value.
+  public mutating func clearChatMessage() {self._chatMessage = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _chatMessage: Tictactoe_ChatMessage? = nil
+}
+
+public struct Tictactoe_ChatMessageResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var success: Bool = false
+
+  public var chatParameters: Tictactoe_ChatParameters {
+    get {return _chatParameters ?? Tictactoe_ChatParameters()}
+    set {_chatParameters = newValue}
+  }
+  /// Returns true if `chatParameters` has been explicitly set.
+  public var hasChatParameters: Bool {return self._chatParameters != nil}
+  /// Clears the value of `chatParameters`. Subsequent reads from it will return its default value.
+  public mutating func clearChatParameters() {self._chatParameters = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _chatParameters: Tictactoe_ChatParameters? = nil
+}
+
 public struct Tictactoe_ConnectMessageResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -379,9 +459,13 @@ extension Tictactoe_Tile: @unchecked Sendable {}
 extension Tictactoe_WinningTiles: @unchecked Sendable {}
 extension Tictactoe_Board: @unchecked Sendable {}
 extension Tictactoe_GameflowParameters: @unchecked Sendable {}
+extension Tictactoe_ChatMessage: @unchecked Sendable {}
+extension Tictactoe_ChatParameters: @unchecked Sendable {}
 extension Tictactoe_ConnectMessageRequest: @unchecked Sendable {}
 extension Tictactoe_StartGameRequest: @unchecked Sendable {}
 extension Tictactoe_PlayerMoveRequest: @unchecked Sendable {}
+extension Tictactoe_ChatMessageRequest: @unchecked Sendable {}
+extension Tictactoe_ChatMessageResponse: @unchecked Sendable {}
 extension Tictactoe_ConnectMessageResponse: @unchecked Sendable {}
 extension Tictactoe_StartGameResponse: @unchecked Sendable {}
 extension Tictactoe_PlayerMoveResponse: @unchecked Sendable {}
@@ -690,6 +774,86 @@ extension Tictactoe_GameflowParameters: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
+extension Tictactoe_ChatMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ChatMessage"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "sender"),
+    2: .same(proto: "text"),
+    3: .same(proto: "sendedDate"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._sender) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.text) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.sendedDate) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._sender {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if !self.text.isEmpty {
+      try visitor.visitSingularStringField(value: self.text, fieldNumber: 2)
+    }
+    if !self.sendedDate.isEmpty {
+      try visitor.visitSingularStringField(value: self.sendedDate, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Tictactoe_ChatMessage, rhs: Tictactoe_ChatMessage) -> Bool {
+    if lhs._sender != rhs._sender {return false}
+    if lhs.text != rhs.text {return false}
+    if lhs.sendedDate != rhs.sendedDate {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Tictactoe_ChatParameters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ChatParameters"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "messages"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.messages) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.messages.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.messages, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Tictactoe_ChatParameters, rhs: Tictactoe_ChatParameters) -> Bool {
+    if lhs.messages != rhs.messages {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Tictactoe_ConnectMessageRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".ConnectMessageRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -784,6 +948,84 @@ extension Tictactoe_PlayerMoveRequest: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if lhs._player != rhs._player {return false}
     if lhs.boardID != rhs.boardID {return false}
     if lhs._addedTile != rhs._addedTile {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Tictactoe_ChatMessageRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ChatMessageRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "chatMessage"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._chatMessage) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._chatMessage {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Tictactoe_ChatMessageRequest, rhs: Tictactoe_ChatMessageRequest) -> Bool {
+    if lhs._chatMessage != rhs._chatMessage {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Tictactoe_ChatMessageResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".ChatMessageResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "success"),
+    2: .same(proto: "chatParameters"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.success) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._chatParameters) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.success != false {
+      try visitor.visitSingularBoolField(value: self.success, fieldNumber: 1)
+    }
+    try { if let v = self._chatParameters {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Tictactoe_ChatMessageResponse, rhs: Tictactoe_ChatMessageResponse) -> Bool {
+    if lhs.success != rhs.success {return false}
+    if lhs._chatParameters != rhs._chatParameters {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

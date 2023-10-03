@@ -89,4 +89,20 @@ final class TicTacToeProvider: Tictactoe_TicTacToeProvider {
         
         return context.eventLoop.makeSucceededFuture(response)
     }
+    
+    func chatMessage(
+        request: Tictactoe_ChatMessageRequest,
+        context: GRPC.StatusOnlyCallContext
+    ) -> NIOCore.EventLoopFuture<Tictactoe_ChatMessageResponse> {
+        let message = ChatMessage(from: request.chatMessage)
+        session.addChatMessage(message)
+        output?.didReceiveAChatMessage(message)
+        
+        let response = Tictactoe_ChatMessageResponse.with {
+            $0.success = true
+            $0.chatParameters = session.chatParameters.toGRPCEntity()
+        }
+        
+        return context.eventLoop.makeSucceededFuture(response)
+    }
 }

@@ -30,6 +30,11 @@ public protocol Tictactoe_TicTacToeClientProtocol: GRPCClient {
     _ request: Tictactoe_PlayerMoveRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Tictactoe_PlayerMoveRequest, Tictactoe_PlayerMoveResponse>
+
+  func chatMessage(
+    _ request: Tictactoe_ChatMessageRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse>
 }
 
 extension Tictactoe_TicTacToeClientProtocol {
@@ -88,6 +93,24 @@ extension Tictactoe_TicTacToeClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makePlayerMoveInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to ChatMessage
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ChatMessage.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  public func chatMessage(
+    _ request: Tictactoe_ChatMessageRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse> {
+    return self.makeUnaryCall(
+      path: Tictactoe_TicTacToeClientMetadata.Methods.chatMessage.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeChatMessageInterceptors() ?? []
     )
   }
 }
@@ -168,6 +191,11 @@ public protocol Tictactoe_TicTacToeAsyncClientProtocol: GRPCClient {
     _ request: Tictactoe_PlayerMoveRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Tictactoe_PlayerMoveRequest, Tictactoe_PlayerMoveResponse>
+
+  func makeChatMessageCall(
+    _ request: Tictactoe_ChatMessageRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -215,6 +243,18 @@ extension Tictactoe_TicTacToeAsyncClientProtocol {
       interceptors: self.interceptors?.makePlayerMoveInterceptors() ?? []
     )
   }
+
+  public func makeChatMessageCall(
+    _ request: Tictactoe_ChatMessageRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Tictactoe_TicTacToeClientMetadata.Methods.chatMessage.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeChatMessageInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -254,6 +294,18 @@ extension Tictactoe_TicTacToeAsyncClientProtocol {
       interceptors: self.interceptors?.makePlayerMoveInterceptors() ?? []
     )
   }
+
+  public func chatMessage(
+    _ request: Tictactoe_ChatMessageRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Tictactoe_ChatMessageResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Tictactoe_TicTacToeClientMetadata.Methods.chatMessage.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeChatMessageInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -283,6 +335,9 @@ public protocol Tictactoe_TicTacToeClientInterceptorFactoryProtocol: Sendable {
 
   /// - Returns: Interceptors to use when invoking 'playerMove'.
   func makePlayerMoveInterceptors() -> [ClientInterceptor<Tictactoe_PlayerMoveRequest, Tictactoe_PlayerMoveResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'chatMessage'.
+  func makeChatMessageInterceptors() -> [ClientInterceptor<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse>]
 }
 
 public enum Tictactoe_TicTacToeClientMetadata {
@@ -293,6 +348,7 @@ public enum Tictactoe_TicTacToeClientMetadata {
       Tictactoe_TicTacToeClientMetadata.Methods.connectedMessage,
       Tictactoe_TicTacToeClientMetadata.Methods.startGame,
       Tictactoe_TicTacToeClientMetadata.Methods.playerMove,
+      Tictactoe_TicTacToeClientMetadata.Methods.chatMessage,
     ]
   )
 
@@ -314,6 +370,12 @@ public enum Tictactoe_TicTacToeClientMetadata {
       path: "/tictactoe.TicTacToe/PlayerMove",
       type: GRPCCallType.unary
     )
+
+    public static let chatMessage = GRPCMethodDescriptor(
+      name: "ChatMessage",
+      path: "/tictactoe.TicTacToe/ChatMessage",
+      type: GRPCCallType.unary
+    )
   }
 }
 
@@ -326,6 +388,8 @@ public protocol Tictactoe_TicTacToeProvider: CallHandlerProvider {
   func startGame(request: Tictactoe_StartGameRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_StartGameResponse>
 
   func playerMove(request: Tictactoe_PlayerMoveRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_PlayerMoveResponse>
+
+  func chatMessage(request: Tictactoe_ChatMessageRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Tictactoe_ChatMessageResponse>
 }
 
 extension Tictactoe_TicTacToeProvider {
@@ -367,6 +431,15 @@ extension Tictactoe_TicTacToeProvider {
         userFunction: self.playerMove(request:context:)
       )
 
+    case "ChatMessage":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Tictactoe_ChatMessageRequest>(),
+        responseSerializer: ProtobufSerializer<Tictactoe_ChatMessageResponse>(),
+        interceptors: self.interceptors?.makeChatMessageInterceptors() ?? [],
+        userFunction: self.chatMessage(request:context:)
+      )
+
     default:
       return nil
     }
@@ -393,6 +466,11 @@ public protocol Tictactoe_TicTacToeAsyncProvider: CallHandlerProvider, Sendable 
     request: Tictactoe_PlayerMoveRequest,
     context: GRPCAsyncServerCallContext
   ) async throws -> Tictactoe_PlayerMoveResponse
+
+  func chatMessage(
+    request: Tictactoe_ChatMessageRequest,
+    context: GRPCAsyncServerCallContext
+  ) async throws -> Tictactoe_ChatMessageResponse
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -441,6 +519,15 @@ extension Tictactoe_TicTacToeAsyncProvider {
         wrapping: { try await self.playerMove(request: $0, context: $1) }
       )
 
+    case "ChatMessage":
+      return GRPCAsyncServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Tictactoe_ChatMessageRequest>(),
+        responseSerializer: ProtobufSerializer<Tictactoe_ChatMessageResponse>(),
+        interceptors: self.interceptors?.makeChatMessageInterceptors() ?? [],
+        wrapping: { try await self.chatMessage(request: $0, context: $1) }
+      )
+
     default:
       return nil
     }
@@ -460,6 +547,10 @@ public protocol Tictactoe_TicTacToeServerInterceptorFactoryProtocol: Sendable {
   /// - Returns: Interceptors to use when handling 'playerMove'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makePlayerMoveInterceptors() -> [ServerInterceptor<Tictactoe_PlayerMoveRequest, Tictactoe_PlayerMoveResponse>]
+
+  /// - Returns: Interceptors to use when handling 'chatMessage'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeChatMessageInterceptors() -> [ServerInterceptor<Tictactoe_ChatMessageRequest, Tictactoe_ChatMessageResponse>]
 }
 
 public enum Tictactoe_TicTacToeServerMetadata {
@@ -470,6 +561,7 @@ public enum Tictactoe_TicTacToeServerMetadata {
       Tictactoe_TicTacToeServerMetadata.Methods.connectedMessage,
       Tictactoe_TicTacToeServerMetadata.Methods.startGame,
       Tictactoe_TicTacToeServerMetadata.Methods.playerMove,
+      Tictactoe_TicTacToeServerMetadata.Methods.chatMessage,
     ]
   )
 
@@ -489,6 +581,12 @@ public enum Tictactoe_TicTacToeServerMetadata {
     public static let playerMove = GRPCMethodDescriptor(
       name: "PlayerMove",
       path: "/tictactoe.TicTacToe/PlayerMove",
+      type: GRPCCallType.unary
+    )
+
+    public static let chatMessage = GRPCMethodDescriptor(
+      name: "ChatMessage",
+      path: "/tictactoe.TicTacToe/ChatMessage",
       type: GRPCCallType.unary
     )
   }

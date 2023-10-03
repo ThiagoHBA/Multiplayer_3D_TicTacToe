@@ -157,3 +157,31 @@ extension GameFlowParameters {
         }
     }
 }
+
+extension ChatMessage {
+    init(from grpcChatMessage: Tictactoe_ChatMessage) {
+        self.sender = Player(from: grpcChatMessage.sender)
+        self.message = grpcChatMessage.text
+        self.sendedDate = Date.now
+    }
+    
+    func toGRPCEntity() -> Tictactoe_ChatMessage {
+        return Tictactoe_ChatMessage.with {
+            $0.sender = self.sender.toGRPCEntity()
+            $0.sendedDate = String()
+            $0.text = self.message
+        }
+    }
+}
+
+extension ChatParameters {
+    init(from grpcChatParameters: Tictactoe_ChatParameters) {
+        self.messages = grpcChatParameters.messages.compactMap { ChatMessage(from: $0) }
+    }
+    
+    func toGRPCEntity() -> Tictactoe_ChatParameters {
+        return Tictactoe_ChatParameters.with {
+            $0.messages = self.messages.compactMap { $0.toGRPCEntity() }
+        }
+    }
+}
