@@ -93,7 +93,8 @@ message StartGameResponse {
 
 message PlayerMoveResponse {
     bool success = 1;
-    GameflowParameters parameters = 2;
+    repeated TilePosition winningTiles = 2;
+    GameflowParameters parameters = 3;
 }
 
 //

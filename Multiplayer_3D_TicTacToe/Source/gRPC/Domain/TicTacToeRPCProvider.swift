@@ -77,15 +77,16 @@ final class TicTacToeProvider: Tictactoe_TicTacToeProvider {
             }
         } else {
             session.changePlayerShift()
-            let response = Tictactoe_PlayerMoveResponse.with {
-                $0.success = true
-                $0.parameters = session.gameFlowParameters.toGRPCEntity()
-            }
             output?.didChangeShift(session.gameFlowParameters.shiftPlayerId)
             output?.didUpdateSessionParameters(session.gameFlowParameters)
-            return context.eventLoop.makeSucceededFuture(response)
         }
         
-        return context.eventLoop.makeSucceededFuture(.init())
+        let response = Tictactoe_PlayerMoveResponse.with {
+            $0.success = true
+            $0.winningTiles = winningTiles.compactMap { $0.toGRPCEntity() }
+            $0.parameters = session.gameFlowParameters.toGRPCEntity()
+        }
+        
+        return context.eventLoop.makeSucceededFuture(response)
     }
 }

@@ -66,7 +66,15 @@ class RPCManager {
             let response = try await client.service.playerMove(request).response.get()
             let parameters = GameFlowParameters(from: response.parameters)
             server.provider.session.updateGameFlowParameters(parameters)
-            clientOutput?.didChangeShift(Int(response.parameters.shiftPlayerID))
+            if !response.winningTiles.isEmpty {
+                clientOutput?.didEndGame(
+                    parameters.winner!,
+                    surrender: false,
+                    winningTiles: response.winningTiles.compactMap { TilePosition(from: $0) }
+                )
+            } else {
+                clientOutput?.didChangeShift(Int(response.parameters.shiftPlayerID))
+            }
             clientOutput?.didUpdateSessionParameters(parameters)
         } catch {
             print(error.localizedDescription)

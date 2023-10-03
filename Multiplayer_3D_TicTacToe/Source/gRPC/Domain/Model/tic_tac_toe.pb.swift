@@ -352,6 +352,8 @@ public struct Tictactoe_PlayerMoveResponse {
 
   public var success: Bool = false
 
+  public var winningTiles: [Tictactoe_TilePosition] = []
+
   public var parameters: Tictactoe_GameflowParameters {
     get {return _parameters ?? Tictactoe_GameflowParameters()}
     set {_parameters = newValue}
@@ -925,7 +927,8 @@ extension Tictactoe_PlayerMoveResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
   public static let protoMessageName: String = _protobuf_package + ".PlayerMoveResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "success"),
-    2: .same(proto: "parameters"),
+    2: .same(proto: "winningTiles"),
+    3: .same(proto: "parameters"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -935,7 +938,8 @@ extension Tictactoe_PlayerMoveResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularBoolField(value: &self.success) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._parameters) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.winningTiles) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._parameters) }()
       default: break
       }
     }
@@ -949,14 +953,18 @@ extension Tictactoe_PlayerMoveResponse: SwiftProtobuf.Message, SwiftProtobuf._Me
     if self.success != false {
       try visitor.visitSingularBoolField(value: self.success, fieldNumber: 1)
     }
+    if !self.winningTiles.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.winningTiles, fieldNumber: 2)
+    }
     try { if let v = self._parameters {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Tictactoe_PlayerMoveResponse, rhs: Tictactoe_PlayerMoveResponse) -> Bool {
     if lhs.success != rhs.success {return false}
+    if lhs.winningTiles != rhs.winningTiles {return false}
     if lhs._parameters != rhs._parameters {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
