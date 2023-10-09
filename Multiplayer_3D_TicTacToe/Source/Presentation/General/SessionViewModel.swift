@@ -29,6 +29,18 @@ final class SessionViewModel: ObservableObject {
     var isPlayerShift: Bool {
         gameFlowParameters.shiftPlayerId == playerIdentifier?.id
     }
+    
+    func checkIfTied() -> Bool {
+        var tilesCount = 0
+        
+        gameFlowParameters.boards.forEach {
+            $0.tiles.forEach { _ in
+                tilesCount += 1
+            }
+        }
+        
+        return tilesCount == (gameFlowParameters.boards.count * 9)
+    }
 }
 
 // MARK: - Client
@@ -100,6 +112,11 @@ extension SessionViewModel: ClientOutput {
             }) else { return }
             
             self.playerIdentifier = newState.players[playerIndex]
+            
+            if self.checkIfTied() {
+                self.serverStatus = .tied
+                self.gameFlowParameters.gameEnded = true
+            }
         }
     }
     
